@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "avaprodetailing-bot-1"
+version = "0.1.0"
+description = ""
+authors = ["Валерий <94367062+gugutsidze-vv@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+aiogram = "^3.4.1"
+fastapi = "^0.110.0"
+python-dotenv = "^1.0.1"
+
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^7.0.0"
+mypy = "^1.9.0"
+isort = "^5.13.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

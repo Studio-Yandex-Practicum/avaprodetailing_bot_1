@@ -6,7 +6,6 @@ from .external_functions import check_work_mode
 load_dotenv()
 
 APP_TITLE = 'Система лояльности AVA Pro Detailing'
-DATABASE = check_work_mode('TEST_MODE')
 
 
 class Settings(BaseSettings):

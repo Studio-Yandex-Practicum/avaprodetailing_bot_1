@@ -12,9 +12,11 @@ fastapi = "^0.110.0"
 python-dotenv = "^1.0.1"
 uvicorn = "^0.29.0"
 watchdog = "^4.0.0"
-fastapi-users = {extras = ["sqlalchemy2"], version = "^13.0.0"}
 sqlalchemy = "^2.0.29"
 alembic = "^1.13.1"
+asyncpg = "^0.29.0"
+aiosqlite = "^0.20.0"
+pydantic-settings = "^2.2.1"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -6,6 +6,8 @@ WORKDIR /tmp
 
 RUN curl -sSL https://install.python-poetry.org | python -
 
+RUN export PATH="/root/.local/bin:$PATH"
+
 COPY ./pyproject.toml ./poetry.lock* /tmp/
 
 RUN poetry export -f requirements.txt --output requirements.txt --without-hashes

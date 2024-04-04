@@ -6,8 +6,6 @@ WORKDIR /tmp
 
 RUN curl -sSL https://install.python-poetry.org | python -
 
-# RUN export PATH="/.local/bin:$PATH"
-
 COPY ./pyproject.toml ./poetry.lock* /tmp/
 
 RUN /root/.local/bin/poetry export -f requirements.txt --output requirements.txt --without-hashes
@@ -25,4 +23,5 @@ COPY backend .
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
 
 # RUN chmod +x entrypoint.sh
+
 # ENTRYPOINT ["sh", "/app/entrypoint.sh"]

@@ -2,13 +2,14 @@ from sqlalchemy import Column, Integer
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker, declarative_base, declared_attr
 
-from .config import settings
+from app.core.config import settings
 
 
 class preBase:
     @declared_attr
     def __tablename__(cls):
         return cls.__name__.lower()
+
     id = Column(Integer, primary_key=True)
 
 

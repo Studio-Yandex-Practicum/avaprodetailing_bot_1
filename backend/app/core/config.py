@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from pydantic_settings import BaseSettings
 
-from .external_functions import check_work_mode
+from app.core.external_functions import check_work_mode
 
 load_dotenv()
 

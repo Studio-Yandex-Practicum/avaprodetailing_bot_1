@@ -6,7 +6,7 @@ WORKDIR /tmp
 
 RUN curl -sSL https://install.python-poetry.org | python -
 
-RUN export PATH="/root/.local/bin:$PATH"
+RUN export PATH="/tmp/.local/bin:$PATH"
 
 COPY ./pyproject.toml ./poetry.lock* /tmp/
 

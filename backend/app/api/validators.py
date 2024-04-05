@@ -26,21 +26,36 @@ CAR_WITH_NUMBER_EXISTS = 'Автомобиль с таким номером уж
 USER_NOT_FOUND = 'Пользователь не найден.'
 
 NOT_ADMIN_OR_SUPERUSER = 'Действие доступно только администратору.'
-FOREIGN_CAR_ERROR = 'Вы не можете добавить, изменить или удалить чужой автомобиль.'
-LAST_ONE_CAR = 'Последний автомобиль нельзя удалить. Обратитесь к администратору.'
+FOREIGN_CAR_ERROR = (
+    'Вы не можете добавить, изменить или удалить чужой автомобиль.'
+)
+LAST_ONE_CAR = (
+    'Последний автомобиль нельзя удалить. Обратитесь к администратору.'
+)
 
 
 async def check_car_exists(car_id: int, session: AsyncSession) -> None:
     if not await cars_crud.get(car_id, session):
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail=CAR_NOT_FOUND)
+        raise HTTPException(
+            status_code=HTTPStatus.NOT_FOUND, detail=CAR_NOT_FOUND
+        )
 
 
 async def check_user_exists(telegram_id: str, session: AsyncSession) -> None:
     if not await user_crud.get_user_by_telegram_id(telegram_id, session):
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail=USER_NOT_FOUND)
+        raise HTTPException(
+            status_code=HTTPStatus.NOT_FOUND, detail=USER_NOT_FOUND
+        )
 
 
-async def check_length_user_car_list(telegram_id: str, session: AsyncSession) -> None:
+async def check_admin_user(telegram_id: str, session: AsyncSession) -> None:
+    await check_user_exists(telegram_id, session)
+    await check_user_is_admin_or_superuser(telegram_id, session)
+
+
+async def check_length_user_car_list(
+    telegram_id: str, session: AsyncSession
+) -> None:
     if len(await cars_crud.get_my_cars(telegram_id, session)) == 1:
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST,
@@ -76,7 +91,7 @@ async def check_car_data_before_create(
     await validate_car_fields(car_data)
     if car_data.number_plate:
         await validate_number_plate(car_data.number_plate)
-        await check_number_plate_duplicate((car_data.number_plate).upper(), session)
+        await check_number_plate_duplicate(car_data.number_plate, session)
 
 
 async def check_car_before_edit(
@@ -86,12 +101,15 @@ async def check_car_before_edit(
     await validate_car_fields(update_data)
     if update_data.number_plate:
         await validate_number_plate(update_data.number_plate)
-        number_plate = (update_data.number_plate).upper()
-        if number_plate != car_to_edit.number_plate:
-            await check_number_plate_duplicate(number_plate, session)
+        if update_data.number_plate != car_to_edit.number_plate:
+            await check_number_plate_duplicate(
+                update_data.number_plate, session
+            )
 
 
-async def check_number_plate_duplicate(number_plate, session: AsyncSession) -> None:
+async def check_number_plate_duplicate(
+    number_plate, session: AsyncSession
+) -> None:
     if await cars_crud.get_car_by_number(number_plate, session):
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST, detail=CAR_WITH_NUMBER_EXISTS
@@ -108,11 +126,13 @@ async def validate_field(data, field: str) -> None:
     if value:
         if len(value) < MIN_LENGTH_STR:
             raise HTTPException(
-                status_code=HTTPStatus.BAD_REQUEST, detail=MIN_LENGTH_BRAND_MODEL_ERROR
+                status_code=HTTPStatus.BAD_REQUEST,
+                detail=MIN_LENGTH_BRAND_MODEL_ERROR,
             )
         if len(value) > MAX_LENGTH_BRAND_MODEL:
             raise HTTPException(
-                status_code=HTTPStatus.BAD_REQUEST, detail=MAX_LENGTH_BRAND_MODEL_ERROR
+                status_code=HTTPStatus.BAD_REQUEST,
+                detail=MAX_LENGTH_BRAND_MODEL_ERROR,
             )
 
 
@@ -127,7 +147,7 @@ async def validate_number_plate(number_plate) -> None:
         )
     if not re.match(
         f'[{ALLOWED_CHARS}]{{1}}\\d{{3}}[{ALLOWED_CHARS}]{{2}}\\d{{2,3}}',
-        number_plate.upper(),
+        number_plate,
     ):
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST,

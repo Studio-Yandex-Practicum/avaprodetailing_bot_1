@@ -1,17 +1,13 @@
-# from typing import Union
-
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.models import Car  # , User
+from app.models import Car
 
 
 class CRUDBase:
 
     def __init__(self, model):
-        # Изменить по мере добавления других моделей
-        # self.model: Union[Car, User, PoS и тд] = model
         self.model: Car = model
 
     async def get(self, object_id: int, session: AsyncSession):

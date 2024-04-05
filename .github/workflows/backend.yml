@@ -43,8 +43,8 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             cd ~/avaprodetailing
-            sudo docker-compose stop
+            sudo docker compose stop
             sudo docker pull ${{ env.BACKEND_IMAGE }}
-            sudo docker-compose up -d
+            sudo docker compose up -d
             sudo docker image prune -f
 

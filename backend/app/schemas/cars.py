@@ -72,3 +72,9 @@ class CarCreate(CarUpdate):
     model: str
     number_plate: str
     owner_telegram_id: str
+
+
+class CarCreateUser(CarUpdate):
+    brand: str
+    model: str
+    number_plate: str

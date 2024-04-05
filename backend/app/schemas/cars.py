@@ -59,7 +59,8 @@ class CarUpdate(CarDB):
             case _ if len(value) < 8 or len(value) > 9:
                 raise ValueError(LENGTH_NUMBER_PLATE_ERROR)
             case value if not re.match(
-                f'[{ALLOWED_CHARS}]{{1}}\\d{{3}}[{ALLOWED_CHARS}]{{2}}\\d{{2,3}}',
+                f'[{ALLOWED_CHARS}]{{1}}\\d{{3}}'
+                f'[{ALLOWED_CHARS}]{{2}}\\d{{2,3}}',
                 value.upper(),
             ):
                 raise ValueError(NUMBER_PLATE_FORMAT_ERROR)

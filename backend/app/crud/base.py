@@ -2,13 +2,14 @@ from fastapi.encoders import jsonable_encoder
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.models import Car
+# from app.models import Car
 
 
 class CRUDBase:
 
     def __init__(self, model):
-        self.model: Car = model
+        # self.model: Car = model
+        self.model = model
 
     async def get(self, object_id: int, session: AsyncSession):
         return (

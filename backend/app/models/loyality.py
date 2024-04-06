@@ -12,10 +12,10 @@ class LoyalitySettings(Base):
 
 
 class Loyality(Base):
-    user_id: int = Column(
-        Integer,
-        ForeignKey('user.id', name='fk_loyality_user_id_user')
-    )
+    # user_id: int = Column(
+    #     Integer,
+    #     ForeignKey('user.id', name='fk_loyality_user_id_user')
+    # )
     amount: int = Column(Integer, nullable=False)
     edited: bool = Column(Boolean, nullable=False, default=False)
     date: DateTime = Column(DateTime, nullable=False, default=dt.now())
@@ -26,5 +26,12 @@ class Loyality(Base):
     )
 
     def __repr__(self):
-        if self.amount >0:
-            return f'Пользователю {} начислено {} '
+        action = 'начислено'
+        if self.amount < 0:
+            action = 'списано'
+        return (
+            f'Пользователю {action} {self.amount} баллов. '
+            # f'Пользователю {self.user_id} {action} {self.amount} баллов. '
+            f'Дата: {self.date.strftime("%d-%m-%Y")}. Истекает: '
+            f'{self.exp_date.strftime("%d-%m-%Y")}'
+        )

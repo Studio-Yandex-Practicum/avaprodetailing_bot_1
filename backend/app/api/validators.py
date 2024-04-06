@@ -16,7 +16,7 @@ from app.core.config import (
     NUMBER_PLATE_FORMAT_ERROR,
 )
 from app.crud.cars import cars_crud
-# from app.crud.user import user_crud
+from app.crud.user import user_crud
 from app.models import Car
 from app.schemas.cars import CarCreate, CarUpdate
 

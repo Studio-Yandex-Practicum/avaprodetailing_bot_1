@@ -1,6 +1,6 @@
 # https://fastapi.tiangolo.com/deployment/docker/#build-a-docker-image-for-fastapi
 
-FROM python:3.11 as requirements-stage
+FROM python:3.11-slim as requirements-stage
 
 WORKDIR /tmp
 
@@ -12,7 +12,7 @@ RUN /root/.local/bin/poetry export -f requirements.txt --output requirements.txt
 
 WORKDIR /app
 
-FROM python:3.11
+FROM python:3.11-slim
 
 COPY --from=requirements-stage /tmp/requirements.txt /app/requirements.txt
 

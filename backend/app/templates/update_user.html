@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Форма регистрации пользователя</h1>
+    <div>
+    <form action="/user" method="patch">
+        {% if not admin %}
+        <label for="phone_number">Номер телефона</label>
+        <input type="text" id="phone_number" name="phone_number" value ="{{ user.phone_number }}"><br>
+        {% elif admin %}
+        <label for="telegram_id" >Telegram ID</label>
+        <input type="text" id="telegram_id" name="telegram_id" value="{{ user.telegram_id }}"><br>
+        <label for="phone_number">Номер телефона</label>
+        <input type="text" id="phone_number" name="phone_number" value="{{ user.phone_number}}" ><br>
+        {% endif %}
+        <label for="first_name">Имя</label>
+        <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}"><br>
+        <label for="second_name">Отчество</label>
+        <input type="text" id="second_name" name="second_name" value="{{ user.second_name }}"><br>
+        <label for="last_name">Фамилия</label>
+        <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}"><br>
+        <label for="birth_date">Дата рождения</label>
+        <input type="date" id="birth_date" name="birth_date" value="{{ user.birth_date }}"><br>
+        {% if errors %}
+            {% for error in errors %}
+             {{ error }}<br>
+            {% endfor %}
+        {% endif %}
+        <input type="submit" value="Submit">
+
+    </form>
+    </div>
+{% endblock content %}

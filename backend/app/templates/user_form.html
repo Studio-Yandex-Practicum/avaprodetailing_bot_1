@@ -1,0 +1,13 @@
+
+<input type="text" id="telegram_id" name="telegram_id" hidden value="{{ request.path_params.telegram_id }}">
+<label for="phone_number">Номер телефона</label><br>
+<input type="text" id="phone_number" name="phone_number" {% if user%} value="{{user.phone_number}}" {% endif %}required>
+<label for="first_name">Имя</label><br>
+<input type="text" id="first_name" name="first_name"{% if user%} value='{{ user.first_name }}' {% endif %}>
+<label for="second_name">Отчество</label><br>
+<input type="text" id="second_name" name="second_name"{% if user%} value='{{ user.second_name }}' {% endif %}>
+<label for="last_name">Фамилия</label><br>
+<input type="text" id="last_name" name="last_name"{% if user%} value='{{ user.last_name }}' {% endif %}>
+<label for="birth_date">Дата рождения</label><br>
+<input type="datetime-local" id="birth_date" name="birth_date"{% if user%} value='{{ user.birth_date }}' {% endif %}>
+<input type="submit" {% if user %} value='Редактирова'{% else %}value="Зарегестрироваться" {% endif %}>

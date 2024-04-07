@@ -1,29 +1,26 @@
-import re
-from typing import Optional
-from datetime import date, datetime
-from pydantic import BaseModel, validator
+from datetime import datetime
+
 from fastapi import Form
+from pydantic import BaseModel
 
 
 class UserCreate(BaseModel):
-
     phone_number: str
-    telegram_id: Optional[str]
+    telegram_id: str
     first_name: str
     second_name: str
     last_name: str
-    birth_date: date
-    
+    birth_date: datetime
 
     @classmethod
     async def as_form(
         cls,
-        telegram_id: str = Form(...),
-        phone_number: str = Form(...),
-        first_name: str = Form(...),
-        second_name: str = Form(...),
-        last_name: str = Form(...),
-        birth_date: date = Form(...)
+        telegram_id: str = Form(..., title='Telegram ID'),
+        phone_number: str = Form(..., title='Номер телефона'),
+        first_name: str = Form(..., title='Имя'),
+        second_name: str = Form(..., title='Отчество'),
+        last_name: str = Form(..., title='Фамилия'),
+        birth_date: datetime = Form(..., title='Дата рождения')
     ):
         return cls(
             phone_number=phone_number,
@@ -33,19 +30,18 @@ class UserCreate(BaseModel):
             last_name=last_name,
             birth_date=birth_date
         )
-    
+
     def __repr__(self):
         return (
-            f'Пользователь {self.first_name} {self.second_name} {self.last_name} создан.'
+            'Пользователь: '
+            f'{self.first_name}'
+            f'{self.second_name}'
+            f'{self.last_name}'
+            'создан.'
         )
 
 
 class UserUpdate(UserCreate):
-    telegram_id: Optional[str]
-    first_name: Optional[str]
-    second_name: Optional[str]
-    last_name: Optional[str]
-    birth_date: Optional[date]
 
     def __repr__(self):
         return (
@@ -55,3 +51,9 @@ class UserUpdate(UserCreate):
             f'{self.last_name} '
             'обновлены'
         )
+
+
+class UserFromDB(UserCreate):
+
+    class Config:
+        from_attributes = True

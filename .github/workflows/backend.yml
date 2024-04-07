@@ -2,8 +2,8 @@ name: ava_pro_detealing_test_backend
 on: 
     push:
         branches:
-            development
-            feature/CI_CD
+            - development
+            - 'feature/CI_CD'
 env:
     BACKEND_IMAGE: ${{ secrets.DOCKER_USERNAME_TEST }}/ava_pro_detealing:latest
 jobs:

@@ -1,18 +1,16 @@
 from typing import Optional
 
-
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.crud.base import CRUDBase
-
 from app.models import User
 
 
 class CRUDUser(CRUDBase):
     async def get_user_by_telegram_id(
         self, telegram_id: str, session: AsyncSession
-    ) -> Optional[int]:
+    ) -> Optional[User]:
         return (
             (
                 await session.execute(
@@ -25,7 +23,7 @@ class CRUDUser(CRUDBase):
 
     async def get_user_by_phone_number(
         self, phone_number: str, session: AsyncSession
-    ) -> Optional[int]:
+    ) -> Optional[User]:
         return (
             (
                 await session.execute(

@@ -1,8 +1,9 @@
 from sqlalchemy import Boolean, Column, DateTime, Integer, String
 
 from app.core.config import (MAX_LENGTH_LAST_NAME,
-                             MAX_LENGTH_USER_INFO_FIELDS,
-                             MAX_LENGTH_PHONE)
+                             MAX_LENGTH_PHONE,
+                             MAX_LENGTH_USER_INFO_FIELDS
+                             )
 from app.core.db import Base
 
 

@@ -1,12 +1,10 @@
 from http import HTTPStatus
-from fastapi import APIRouter, Depends, Request, HTTPException
-from fastapi.responses import HTMLResponse, RedirectResponse
+
+from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.schemas.user import UserCreate, UserUpdate, UserFromDB
-from app.core.db import get_async_session
-from app.crud.user import user_crud
 from app.api.validators import (valid_phone_number,
                                 check_phone_dublicate,
                                 check_birth_date_less_current_data,
@@ -14,6 +12,12 @@ from app.api.validators import (valid_phone_number,
                                 check_user_exists,
                                 check_user_is_admin_or_superuser
                                 )
+
+from app.core.db import get_async_session
+from app.crud.user import user_crud
+
+from app.schemas.user import UserCreate, UserFromDB, UserUpdate
+
 
 router = APIRouter()
 
@@ -41,7 +45,7 @@ async def process_registration(
     request: Request,
     session: AsyncSession = Depends(get_async_session),
     form_data: UserCreate = Depends(UserCreate.as_form),
-) -> RedirectResponse:
+):
     context = {
         'request': request,
         'form': form_data,

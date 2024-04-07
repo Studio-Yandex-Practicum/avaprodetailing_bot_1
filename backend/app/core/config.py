@@ -22,6 +22,9 @@ NUMBER_PLATE_FORMAT_ERROR = (
     'Номер нужно вводить в формате А000АА00 или А000АА000. '
     'Пожалуйста, используйте кириллицу.'
 )
+MAX_LENGTH_PHONE = 16
+MAX_LENGTH_USER_INFO_FIELDS = 32
+MAX_LENGTH_LAST_NAME = 64
 
 
 class Settings(BaseSettings):

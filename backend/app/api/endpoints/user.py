@@ -5,18 +5,16 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.api.validators import (valid_phone_number,
-                                check_phone_dublicate,
-                                check_birth_date_less_current_data,
-                                check_telegram_id_dublicate,
-                                check_user_exists,
-                                check_user_is_admin_or_superuser
-                                )
+from app.api.validators import (
+    valid_phone_number, check_phone_dublicate,
+    check_birth_date_less_current_data, check_telegram_id_dublicate,
+    check_user_exists, check_user_is_admin_or_superuser
+)
 
 from app.core.db import get_async_session
 from app.crud.user import user_crud
 
-from app.schemas.user import UserCreate, UserFromDB, UserUpdate
+from app.schemas.user import UserCreate, UserFromDB, UserUpdate, CheckedUser
 
 
 router = APIRouter()
@@ -38,6 +36,15 @@ async def get_registration_form(
         "registration_form.html",
         context=context
     )
+
+
+@router.get("/check_user/{telegram_id}", response_model=CheckedUser)
+async def check_user(
+    telegram_id: str,
+    session: AsyncSession = Depends(get_async_session)
+):
+    await check_user_exists(telegram_id, session)
+    return await user_crud.get_user_by_telegram_id(telegram_id, session)
 
 
 @router.post("/")

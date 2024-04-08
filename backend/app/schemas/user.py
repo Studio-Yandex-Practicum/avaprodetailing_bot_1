@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Optional
 
 from fastapi import Form
 from pydantic import BaseModel
@@ -39,6 +40,16 @@ class UserCreate(BaseModel):
             f'{self.last_name}'
             'создан.'
         )
+
+
+class CheckedUser(BaseModel):
+    telegram_id: Optional[str]
+    is_admin: Optional[bool]
+    is_superuser: Optional[bool]
+
+    class Config:
+        extra = 'forbid'
+        from_attributes = True
 
 
 class UserUpdate(UserCreate):

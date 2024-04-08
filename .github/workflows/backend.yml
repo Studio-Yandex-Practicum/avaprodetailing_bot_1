@@ -4,6 +4,7 @@ on:
         branches:
             - development
             - 'feature/CI_CD'
+            - 'feature/loyality'
 env:
     BACKEND_IMAGE: ${{ secrets.DOCKER_USERNAME_TEST }}/ava_pro_detealing:latest
 jobs:

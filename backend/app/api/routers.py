@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.api.endpoints import cars_router, users_router# , loyality_router
+from app.api.endpoints import cars_router, users_router, loyality_router
 
 CARS_PREFIX = '/cars'
 USERS_PREFIX = '/users'
@@ -13,6 +13,6 @@ main_router.include_router(
 main_router.include_router(
     users_router, prefix=USERS_PREFIX, tags=['Пользователи']
 )
-# main_router.include_router(
-#     loyality_router, prefix=LOYALITY_PREFIX, tags=['Баллы лояльности']
-# )
+main_router.include_router(
+    loyality_router, prefix=LOYALITY_PREFIX, tags=['Баллы лояльности']
+)

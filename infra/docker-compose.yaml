@@ -1,22 +1,38 @@
-version: '3.8'
+version: "3.8"
 
 services:
   db:
-    image: postgres:13.0-alpine
+    container_name: db
+    image: postgres:latest
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 1h
+      timeout: 10s
+      retries: 3
     env_file:
       - ./.env
-  
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "8081:80"
+    env_file:
+      - ./.env      
+
   backend:
     container_name: backend
     image: zali1813/avaprodetailing_backend:v1
     restart: always
     env_file:
       - ./.env
-  
+    depends_on:
+      - db:
+        condition: service_healthy
+
   nginx:
-    image: nginx:1.21.3-alpine
+    image: nginx:latest
     ports:
       - "8001:80"
     volumes:

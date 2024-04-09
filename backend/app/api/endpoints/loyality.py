@@ -3,6 +3,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.schemas.loyality import LoyalitySettings
 from app.core.db import get_async_session
 from app.crud.loyality import loyality_settings_crud
+from app.crud.history import history_crud
+from app.crud.user import user_crud
 from app.api.validators import (
     check_user_exists,
     check_user_is_admin_or_superuser
@@ -32,6 +34,12 @@ async def update_loyality_settings(
 ):
     await check_user_exists(telegram_id, session)
     await check_user_is_admin_or_superuser(telegram_id, session)
+    await history_crud.create(
+        await user_crud.get_user_by_telegram_id(telegram_id, session),
+        loyality_settings_crud.model.__name__,
+        await loyality_settings_crud.get(ID_LOYALITY_SETTINGS, session),
+        update_data,
+        session)
     return await loyality_settings_crud.update(
         await loyality_settings_crud.get(ID_LOYALITY_SETTINGS, session),
         update_data,

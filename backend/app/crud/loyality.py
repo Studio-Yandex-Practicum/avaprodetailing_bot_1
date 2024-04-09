@@ -9,7 +9,6 @@ class CRUDLoyalitySettings(CRUDBase):
         id: int,
         session: AsyncSession,
     ):
-        # new_object_data = data.dict()
         new_object = self.model(id=id)
         session.add(new_object)
         await session.commit()

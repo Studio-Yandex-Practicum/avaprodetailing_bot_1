@@ -1,13 +1,21 @@
-FROM python:3.10-slim
+FROM python:3.10 as requirements-stage
+
+WORKDIR /tmp
+
+RUN curl -sSL https://install.python-poetry.org | python -
+
+COPY ./pyproject.toml ./poetry.lock* /tmp/
+
+RUN /root/.local/bin/poetry export -f requirements.txt --output requirements.txt --without-hashes
 
 WORKDIR /app
 
-COPY ./pyproject.toml ./poetry.lock* /
+FROM python:3.10
 
-ENV PATH="${PATH}:/root/.poetry/bin"
+COPY --from=requirements-stage /tmp/requirements.txt /app/requirements.txt
 
-RUN pip install --no-cache-dir poetry==1.8.2 && poetry config virtualenvs.create false && poetry install
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 
 COPY backend .
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--proxy-headers", "--host", "0.0.0.0", "--port", "8000"]

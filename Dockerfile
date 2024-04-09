@@ -4,7 +4,9 @@ WORKDIR /app
 
 COPY ./pyproject.toml ./poetry.lock* /
 
-RUN pip install --no-cache-dir poetry && poetry config virtualenvs.create false && /root/.local/bin/poetry install
+ENV PATH="${PATH}:/root/.poetry/bin"
+
+RUN pip install --no-cache-dir poetry && poetry config virtualenvs.create false && poetry install
 
 COPY backend .
 

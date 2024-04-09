@@ -25,4 +25,3 @@ class CRUDHistory(CRUDBase):
 
 
 history_crud = CRUDHistory(History)
-                

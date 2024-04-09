@@ -49,8 +49,6 @@ async def check_car_exists(car_id: int, session: AsyncSession) -> None:
         )
 
 
-
-
 async def check_user_exists(telegram_id: str, session: AsyncSession) -> None:
     if not await user_crud.get_user_by_telegram_id(telegram_id, session):
         raise HTTPException(

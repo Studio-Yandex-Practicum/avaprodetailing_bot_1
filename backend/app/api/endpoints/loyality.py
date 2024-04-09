@@ -1,20 +1,22 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.schemas.loyality import LoyalitySettings, Loyality, LoyalityList
-from app.core.db import get_async_session
-from app.crud.loyality import loyality_settings_crud, loyality_crud
-from app.crud.history import history_crud
-from app.crud.user import user_crud
+
 from app.api.validators import (
-    check_user_exists,
-    check_user_is_admin_or_superuser,
     check_admin_user,
+    check_user_exists,
+    check_user_is_admin_or_superuser
 )
 from app.core.config import ID_LOYALITY_SETTINGS
+from app.core.db import get_async_session
 from app.core.descriptions import (
-    DESCRIPTION_GET_LOYALITY_POINT,
-    DECRIPTION_GET_LOYALITY_HISTORY
+    DECRIPTION_GET_LOYALITY_HISTORY,
+    DESCRIPTION_GET_LOYALITY_POINT
 )
+from app.crud.history import history_crud
+from app.crud.loyality import loyality_crud, loyality_settings_crud
+from app.crud.user import user_crud
+from app.schemas.loyality import Loyality, LoyalityList, LoyalitySettings
+
 
 router = APIRouter()
 

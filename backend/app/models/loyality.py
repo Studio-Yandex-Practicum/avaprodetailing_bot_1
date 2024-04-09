@@ -1,7 +1,9 @@
-from sqlalchemy import Column, DateTime, Integer, ForeignKey, Boolean
-from app.core.db import Base
 from datetime import datetime as dt
 from datetime import timedelta
+from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer
+
+from app.core.db import Base
+
 
 
 class LoyalitySettings(Base):

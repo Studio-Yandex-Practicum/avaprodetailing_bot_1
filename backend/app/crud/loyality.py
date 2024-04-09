@@ -1,8 +1,9 @@
+from sqlalchemy import func, select
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.crud.base import CRUDBase
 from app.crud.user import user_crud
-from app.models import LoyalitySettings, Loyality
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import func, select
+from app.models import Loyality, LoyalitySettings
 
 
 class CRUDLoyalitySettings(CRUDBase):

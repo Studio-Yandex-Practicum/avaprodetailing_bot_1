@@ -13,7 +13,6 @@ from app.api.validators import (
 
 from app.core.db import get_async_session
 from app.crud.user import user_crud
-
 from app.schemas.user import UserCreate, UserFromDB, UserUpdate, CheckedUser
 
 

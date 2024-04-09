@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if request.method == "post" %}
+    <div class="form-control"> 
+        Добро пожаловать {{ form.first_name }}!
+    </div>
+    {% elif request.method == "patch" %}
+    <div>
+        Данные обновлены
+    </div>
+    {% endif %}
+{% endblock %}

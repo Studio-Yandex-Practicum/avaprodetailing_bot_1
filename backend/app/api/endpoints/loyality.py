@@ -77,8 +77,16 @@ async def get_loyality_history(
     return await loyality_crud.get_list_of_transactions(telegram_id, session)
 
 
-@router.post('/admin/{telegram_id}/history/{user_telegram_id}/', response_model=LoyalityList)
-async def add_loyality_history(telegram_id: str, user_telegram_id: str, data: Loyality, session: AsyncSession = Depends(get_async_session)):
+@router.post(
+    '/admin/{telegram_id}/history/{user_telegram_id}/',
+    response_model=LoyalityList
+)
+async def add_loyality_history(
+    telegram_id: str,
+    user_telegram_id: str,
+    data: Loyality,
+    session: AsyncSession = Depends(get_async_session)
+):
     await check_admin_user(telegram_id, session)
     await check_user_exists(user_telegram_id, session)
     return await loyality_crud.create(

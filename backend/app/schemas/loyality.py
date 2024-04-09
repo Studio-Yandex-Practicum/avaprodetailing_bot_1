@@ -12,7 +12,7 @@ class LoyalitySettings(BaseModel):
 
 class LoyalityList(BaseModel):
     amount: int
-    
+
     class Config:
         forbid_extra = True
 

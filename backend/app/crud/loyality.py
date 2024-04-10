@@ -1,6 +1,9 @@
+from datetime import datetime, timedelta
+
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.config import LIFETIME_OF_BONUSES_IN_DAYS
 from app.crud.base import CRUDBase
 from app.crud.user import user_crud
 from app.models import Loyality, LoyalitySettings
@@ -20,6 +23,23 @@ class CRUDLoyalitySettings(CRUDBase):
 
 
 class CRUDLoyality(CRUDBase):
+    async def create(
+        self,
+        data,
+        session: AsyncSession,
+    ):
+        new_object_data = data.dict()
+        new_object = self.model(
+            **new_object_data,
+            exp_date=datetime.now() + timedelta(
+                days=LIFETIME_OF_BONUSES_IN_DAYS
+            )
+        )
+        session.add(new_object)
+        await session.commit()
+        await session.refresh(new_object)
+        return new_object
+
     async def get_count_of_points(
         self,
         telegram_id: str,

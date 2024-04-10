@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.api.endpoints import cars_router, users_router, loyality_router
+from app.api.endpoints import cars_router, loyality_router, users_router
 
 CARS_PREFIX = '/cars'
 USERS_PREFIX = '/users'

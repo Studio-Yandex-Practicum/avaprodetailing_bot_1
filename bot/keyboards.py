@@ -1,6 +1,5 @@
 from aiogram.types import KeyboardButton, WebAppInfo
 from dotenv import load_dotenv
-# import os
 
 load_dotenv()
 

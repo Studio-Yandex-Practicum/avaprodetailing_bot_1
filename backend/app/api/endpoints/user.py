@@ -6,15 +6,15 @@ from fastapi.templating import Jinja2Templates
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.validators import (
-    valid_phone_number, check_phone_dublicate,
-    check_birth_date_less_current_data, check_telegram_id_dublicate,
-    check_user_exists, check_user_is_admin_or_superuser
+    check_birth_date_less_current_data,
+    check_phone_dublicate,
+    check_telegram_id_dublicate, check_user_exists,
+    check_user_is_admin_or_superuser,
+    valid_phone_number
 )
-
 from app.core.db import get_async_session
 from app.crud.user import user_crud
-from app.schemas.user import UserCreate, UserFromDB, UserUpdate, CheckedUser
-
+from app.schemas.user import CheckedUser, UserCreate, UserFromDB, UserUpdate
 
 router = APIRouter()
 

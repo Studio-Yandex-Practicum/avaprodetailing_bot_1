@@ -1,14 +1,16 @@
 import asyncio
-import aiohttp
 import logging
-from http import HTTPStatus
 import os
+from http import HTTPStatus
 from logging.handlers import RotatingFileHandler
+
+import aiohttp
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters.command import Command
 from dotenv import load_dotenv
-from messages import WECLOME_NEW_USER
+
 from keyboards import registration_button
+from messages import WECLOME_NEW_USER
 
 load_dotenv()
 
@@ -36,27 +38,27 @@ SITE_URLs = 'https://127.0.0.1:8081'
 
 @dp.message(Command('start'))
 async def starting(message: types.Message):
-    telegarm_id = message.from_user.id
+    telegram_id = message.from_user.id
     async with aiohttp.ClientSession() as session:
         async with session.get(
-            f'{SITE_URL}/users/check_user/{telegarm_id}'
-        ) as resp:
-            if resp.status == HTTPStatus.NOT_FOUND:
+            f'{SITE_URL}/users/check_user/{telegram_id}'
+        ) as response:
+            if response.status == HTTPStatus.NOT_FOUND:
                 await message.answer(
                     WECLOME_NEW_USER,
                     reply_markup=types.ReplyKeyboardMarkup(
                         keyboard=[
-                            [await registration_button(SITE_URLs, telegarm_id)]
+                            [await registration_button(SITE_URLs, telegram_id)]
                         ],
                         resize_keyboard=True
                     )
                 )
-            elif resp.status == HTTPStatus.OK:
-                response = await resp.json()
+            elif response.status == HTTPStatus.OK:
+                response = await response.json()
                 print(response['is_admin'])
                 await message.answer('Приветствую222!', reply_markup=kb)
             else:
-                logging.ERROR('Problem: server returned %s', resp.status)
+                logging.ERROR('Problem: server returned %s', response.status)
                 await message.answer(
                     'У нас проводятся технические работы, попробуйте позже'
                 )

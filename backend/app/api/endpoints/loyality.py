@@ -28,9 +28,12 @@ async def get_loyality_settings(
 ):
     await check_user_exists(telegram_id, session)
     await check_user_is_admin_or_superuser(telegram_id, session)
-    if not await loyality_settings_crud.get(ID_LOYALITY_SETTINGS, session):
+    obj = await loyality_settings_crud.get(ID_LOYALITY_SETTINGS, session)
+    return (
         await loyality_settings_crud.create(ID_LOYALITY_SETTINGS, session)
-    return await loyality_settings_crud.get(ID_LOYALITY_SETTINGS, session)
+        if not obj
+        else obj
+    )
 
 
 @router.patch('/admin/{telegram_id}/', response_model=LoyalitySettings)
@@ -41,14 +44,15 @@ async def update_loyality_settings(
 ):
     await check_user_exists(telegram_id, session)
     await check_user_is_admin_or_superuser(telegram_id, session)
+    obj = await loyality_settings_crud.get(ID_LOYALITY_SETTINGS, session)
     await history_crud.create(
         await user_crud.get_user_by_telegram_id(telegram_id, session),
         loyality_settings_crud.model.__name__,
-        await loyality_settings_crud.get(ID_LOYALITY_SETTINGS, session),
+        obj,
         update_data,
         session)
     return await loyality_settings_crud.update(
-        await loyality_settings_crud.get(ID_LOYALITY_SETTINGS, session),
+        obj,
         update_data,
         session
     )

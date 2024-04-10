@@ -72,7 +72,7 @@ async def process_registration(
     )
 
 
-@router.get('/{telegram_id}/patch/{phone_number}')
+@router.get('/{admin_id}/patch/{user_id}')
 async def get_update_form(
     request: Request,
     telegram_id: str,

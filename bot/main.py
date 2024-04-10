@@ -55,7 +55,6 @@ async def starting(message: types.Message):
                 )
             elif response.status == HTTPStatus.OK:
                 response = await response.json()
-                print(response['is_admin'])
                 await message.answer('Приветствую222!', reply_markup=kb)
             else:
                 logging.ERROR('Problem: server returned %s', response.status)

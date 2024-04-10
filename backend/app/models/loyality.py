@@ -1,8 +1,9 @@
+from datetime import datetime
+
 from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer
 
-from app.core.db import Base
 from app.core.config import DEFAULT_LOYALITY_VALUE
-from datetime import datetime
+from app.core.db import Base
 
 
 class LoyalitySettings(Base):

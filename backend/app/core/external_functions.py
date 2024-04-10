@@ -1,5 +1,8 @@
 import os
 from distutils.util import strtobool
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def check_work_mode(mode: str) -> str:
@@ -7,7 +10,7 @@ def check_work_mode(mode: str) -> str:
         os.getenv('SQLITE_DATABASE_URL')
         if bool(strtobool(os.getenv(mode, 'True')))
         else (
-            f'postgresql://{os.getenv("POSTGRESQL_DATABASE_USER")}:'
+            f'postgresql+asyncpg://{os.getenv("POSTGRESQL_DATABASE_USER")}:'
             f'{os.getenv("POSTGRESQL_DATABASE_PASSWORD")}'
             f'@{os.getenv("POSTGRESQL_DATABASE_HOST")}'
             f'/{os.getenv("POSTGRESQL_DATABASE_NAME")}'

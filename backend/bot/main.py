@@ -9,6 +9,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from models import User
 from sqlalchemy import select
 from sqlalchemy import func, exists
+from app.core.external_functions import check_work_mode
 
 load_dotenv()
 
@@ -72,6 +73,6 @@ if __name__ == '__main__':
             '[%(funcName)s:%(lineno)d] - %(message)s'
         )
     )
-    engine = create_async_engine(os.getenv('SQLITE_DATABASE_URL'), echo=True)
+    engine = create_async_engine((check_work_mode('TEST_MODE')), echo=True)
     sessionmaker = async_sessionmaker(engine, expire_on_commit=False)
     asyncio.run(main())

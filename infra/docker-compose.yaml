@@ -46,7 +46,7 @@ services:
   #   container_name: bot
   #   build:
   #     context: ../bot
-  #     dockerfile: Dockerfile
+  #     dockerfile: bot.Dockerfile
   #   restart: always
   #   env_file:
   #     - ./.env

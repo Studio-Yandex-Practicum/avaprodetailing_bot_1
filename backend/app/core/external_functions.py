@@ -15,4 +15,4 @@ def check_work_mode(mode: str) -> str:
             f'@{os.getenv("POSTGRESQL_DATABASE_HOST")}'
             f'/{os.getenv("POSTGRESQL_DATABASE_NAME")}'
         )
-    ) or ''
+    )

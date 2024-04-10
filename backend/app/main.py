@@ -7,5 +7,6 @@ from fastapi.staticfiles import StaticFiles
 
 app = FastAPI(title=settings.app_title)
 
+
 app.include_router(main_router)
 app.mount("/static", StaticFiles(directory="app/static"), name="static")

@@ -10,7 +10,7 @@ from app.models import User
 class CRUDUser(CRUDBase):
     async def get_user_by_telegram_id(
         self, telegram_id: str, session: AsyncSession
-    ) -> Optional[User]:
+    ):
         return (
             (
                 await session.execute(

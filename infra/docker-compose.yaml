@@ -1,4 +1,4 @@
-version: "3.8"
+# version: "3.8"
 
 services:
   db:
@@ -7,8 +7,8 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 1h
+      test: ["CMD-SHELL", "pg_isready -U username -d database", "--quiet"]
+      interval: 3s
       timeout: 10s
       retries: 3
     env_file:
@@ -19,7 +19,9 @@ services:
     ports:
       - "8081:80"
     env_file:
-      - ./.env      
+      - ./.env
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin     
 
   backend:
     container_name: backend
@@ -28,7 +30,8 @@ services:
     env_file:
       - ./.env
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   nginx:
     image: nginx:latest
@@ -50,4 +53,4 @@ services:
 
 volumes:
   postgres_data:
-  
+  pgadmin_data:

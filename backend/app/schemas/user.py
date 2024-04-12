@@ -4,6 +4,8 @@ from typing import Optional
 from fastapi import Form
 from pydantic import BaseModel
 
+from app.schemas.history import UserHistoryDB
+
 
 class UserCreate(BaseModel):
     phone_number: str
@@ -68,3 +70,10 @@ class UserFromDB(UserCreate):
 
     class Config:
         from_attributes = True
+
+
+class UserDBAdmin(UserFromDB):
+    changes: list[UserHistoryDB]
+
+    class Config(UserFromDB.Config):
+        pass

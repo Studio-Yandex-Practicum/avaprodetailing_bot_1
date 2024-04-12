@@ -12,6 +12,7 @@ from app.core.config import (
     MIN_LENGTH_STR,
     NUMBER_PLATE_FORMAT_ERROR,
 )
+from app.schemas.history import CarHistoryDB
 
 
 class CarDB(BaseModel):
@@ -23,9 +24,16 @@ class CarDB(BaseModel):
         from_attributes = True
 
 
-class CarDBAdmin(CarDB):
+class CarListDBAdmin(CarDB):
     id: int
     owner_telegram_id: str
+
+    class Config(CarDB.Config):
+        pass
+
+
+class CarDBAdmin(CarListDBAdmin):
+    changes: list[CarHistoryDB]
 
     class Config(CarDB.Config):
         pass

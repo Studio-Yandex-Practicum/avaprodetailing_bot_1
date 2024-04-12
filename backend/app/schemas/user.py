@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date
 from typing import Optional
 
 from fastapi import Form
@@ -13,7 +13,7 @@ class UserCreate(BaseModel):
     first_name: str
     second_name: str
     last_name: str
-    birth_date: datetime
+    birth_date: date
 
     @classmethod
     async def as_form(
@@ -23,7 +23,7 @@ class UserCreate(BaseModel):
         first_name: str = Form(..., title='Имя'),
         second_name: str = Form(..., title='Отчество'),
         last_name: str = Form(..., title='Фамилия'),
-        birth_date: datetime = Form(..., title='Дата рождения')
+        birth_date: date = Form(..., title='Дата рождения')
     ):
         return cls(
             phone_number=phone_number,

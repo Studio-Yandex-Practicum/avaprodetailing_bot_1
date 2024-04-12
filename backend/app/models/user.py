@@ -30,10 +30,14 @@ class User(Base):
         foreign_keys='LoyalityHistory.user_id',
         backref='user',
     )
+    cars = relationship('Car', backref='owner', cascade='all, delete')
+
 
     def __repr__(self):
         return (
-            f'Номер телефона: {self.phone_number},'
-            f'ФИО: {self.first_name} {self.second_name} {self.last_name}'
-            f'Дата рождения: {self.birth_date}'
+            f'{type(self).__name__}('
+            f'last_name={self.last_name}, first_name={self.first_name}, '
+            f'second_name={self.second_name}, birth_date={self.birth_date}, '
+            f'telegram_id={self.telegram_id}, '
+            f'phone_number={self.phone_number})'
         )

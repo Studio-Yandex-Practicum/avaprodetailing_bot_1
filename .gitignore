@@ -57,6 +57,7 @@ cover/
 
 # Databases
 *.db
+*.sqlite3
 
 # Django stuff:
 *.log

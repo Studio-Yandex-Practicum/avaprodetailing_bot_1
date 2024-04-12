@@ -9,7 +9,14 @@ from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters.command import Command
 from dotenv import load_dotenv
 
-from keyboards import registration_button, personal_acount_button, car_list
+from keyboards import (
+    registration_button,
+    personal_acount_button,
+    car_list,
+    edit_car_user_button,
+    delete_car_user_button,
+    create_car_user_button
+)
 from messages import WECLOME_NEW_USER
 
 load_dotenv()
@@ -126,16 +133,47 @@ async def web_app2(message: types.Message):
 @dp.message(F.text == 'Список автомобилей')
 async def get_car_list(message: types.Message):
     async with aiohttp.ClientSession() as session:
-        async with session.get(f'{SITE_URL}/cars/{message.from_user.id}') as response:
-            if response.status == HTTPStatus.OK:
-                response = await response.json()
-                await message.answer(str(response))
+        async with session.get(
+            f'{SITE_URL}/cars/{message.from_user.id}'
+        ) as response:
+            if response.status == HTTPStatus.OK and len(await response.json()) > 0:
+                [
+                    await message.answer(
+                        (
+                            f'Марка: {car.brand}\n Модель: {car.model}\n'
+                            f'Гос. Номер: {car.number_plate}'
+                        ),
+                        reply_markup=types.InlineKeyboardMarkup(
+                            [
+                                [
+                                    edit_car_user_button(
+                                        SITE_URL,
+                                        message.from_user.id,
+                                        car.id
+                                    ),
+                                    delete_car_user_button(car.id)
+                                ]
+                            ]
+                        )
+                    )
+                    for car in response
+                ]
+                
             else:
-                logging.ERROR('Problem: server returned %s', response.status)
                 await message.answer(
-                    'У нас проводятся технические работы, попробуйте позже'
+                    'Добавиьт машину',
+                    reply_markup=types.InlineKeyboardMarkup(
+                        inline_keyboard=[
+                            [
+                                await create_car_user_button(
+                                    SITE_URL,
+                                    message.from_user.id
+                                )
+                            ]
+                        ]
+                    )
                 )
-                                
+
 
 async def main():
     await dp.start_polling(bot)

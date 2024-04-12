@@ -1,8 +1,8 @@
-"""Add User and Car  models with relationship between them.
+"""renew
 
-Revision ID: 294f07522dd8
-Revises: 5f4afe9a9881
-Create Date: 2024-04-12 13:55:36.448516
+Revision ID: 0253b469bda8
+Revises: 
+Create Date: 2024-04-12 16:48:16.807727
 
 """
 from typing import Sequence, Union
@@ -12,8 +12,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '294f07522dd8'
-down_revision: Union[str, None] = '5f4afe9a9881'
+revision: str = '0253b469bda8'
+down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 

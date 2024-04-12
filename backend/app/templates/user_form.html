@@ -18,26 +18,26 @@
         var WebApp = window.Telegram.WebApp
         WebApp.expand()
         
-            Telegram.WebApp.showScanQrPopup({
-                text: 'with any link'
-            }, function (text) {
-                if ('with any link') {
-                    const lowerText = text.toString().toLowerCase();
-                    if (lowerText.substring(0, 7) === 'http://' ||
-                        lowerText.substring(0, 8) === 'https://'
-                    ) {
-                        setTimeout(function () {
-                            Telegram.WebApp.showAlert(lowerText);
-                        }, 50);
+            // Telegram.WebApp.showScanQrPopup({
+            //     text: 'with any link'
+            // }, function (text) {
+            //     if ('with any link') {
+            //         const lowerText = text.toString().toLowerCase();
+            //         if (lowerText.substring(0, 7) === 'http://' ||
+            //             lowerText.substring(0, 8) === 'https://'
+            //         ) {
+            //             setTimeout(function () {
+            //                 Telegram.WebApp.showAlert(lowerText);
+            //             }, 50);
 
-                        return true;
-                    }
-                } else {
-                    WebApp.showAlert(text);
+            //             return true;
+            //         }
+            //     } else {
+            //         WebApp.showAlert(text);
 
-                    return true;
-                }
-            });
+            //         return true;
+            //     }
+            // });
         
         
         $('#registration_btn').on('click', function (event) {

@@ -1,6 +1,6 @@
 
 import re
-from datetime import datetime
+from datetime import date
 from http import HTTPStatus
 
 from fastapi import HTTPException
@@ -211,6 +211,6 @@ def valid_phone_number(phone_number: str) -> str:
     return phone_number
 
 
-def check_birth_date_less_current_data(birth_date: datetime) -> None:
-    if birth_date > datetime.now():
+def check_birth_date_less_current_data(birth_date: date) -> None:
+    if birth_date > date.today():
         raise ValueError(INVALID_BIRTH_DATE)

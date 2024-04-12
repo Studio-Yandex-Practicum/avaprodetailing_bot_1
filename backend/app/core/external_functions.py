@@ -16,3 +16,5 @@ def check_work_mode(mode: str) -> str:
             f'/{os.getenv("POSTGRESQL_DATABASE_NAME")}'
         )
     )
+
+print(check_work_mode('TEST_MODE'))

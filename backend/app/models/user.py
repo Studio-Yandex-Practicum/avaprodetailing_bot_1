@@ -1,4 +1,5 @@
 from sqlalchemy import Boolean, Column, DateTime, Integer, String
+from sqlalchemy.orm import relationship
 
 from app.core.config import (
     MAX_LENGTH_LAST_NAME,
@@ -18,6 +19,8 @@ class User(Base):
     birth_date = Column(DateTime)
     is_admin = Column(Boolean, default=False)
     is_superuser = Column(Boolean, default=False)
+    cars = relationship('Car', backref='owner', cascade='all, delete')
+
 
     def __repr__(self):
         return (

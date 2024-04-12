@@ -2,6 +2,8 @@ from typing import Optional
 
 from pydantic import BaseModel
 
+from app.schemas.history import LoyalityHistoryDB
+
 
 class LoyalitySettings(BaseModel):
     default_value: Optional[int]
@@ -20,3 +22,10 @@ class LoyalityList(BaseModel):
 
 class Loyality(LoyalityList):
     user_id: int
+
+
+class LoyalityDBAdmin(Loyality):
+    changes: list[LoyalityHistoryDB]
+
+    class Config:
+        from_attributes = True

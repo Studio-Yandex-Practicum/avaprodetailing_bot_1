@@ -12,11 +12,13 @@ from app.api.validators import (
 )
 from app.core.db import get_async_session
 from app.crud.cars import cars_crud
+from app.crud.user import user_crud
 from app.schemas.cars import (
     CarCreate,
     CarCreateUser,
     CarDB,
     CarDBAdmin,
+    CarListDBAdmin,
     CarUpdate,
 )
 
@@ -26,13 +28,24 @@ router = APIRouter()
 """ADMIN OR SUPERUSER ROLE"""
 
 
-@router.get('/admin/{telegram_id}/', response_model=list[CarDBAdmin])
+@router.get('/admin/{telegram_id}/', response_model=list[CarListDBAdmin])
 async def get_all_cars_as_admin(
     telegram_id: str,
     session: AsyncSession = Depends(get_async_session),
 ):
     await check_admin_user(telegram_id, session)
     return await cars_crud.get_all(session)
+
+
+@router.get('/admin/{telegram_id}/get_car/{car_id}', response_model=CarDBAdmin)
+async def get_car(
+    car_id: int,
+    telegram_id: str,
+    session: AsyncSession = Depends(get_async_session),
+):
+    await check_admin_user(telegram_id, session)
+    await check_car_exists(car_id, session)
+    return await cars_crud.get_car_as_admin(car_id, session)
 
 
 @router.post('/admin/{telegram_id}/add_car', response_model=CarDBAdmin)
@@ -44,9 +57,14 @@ async def add_car_as_admin(
     await check_admin_user(telegram_id, session)
     await check_user_exists(car_data.owner_telegram_id, session)
     await check_car_data_before_create(car_data, session)
-    return await cars_crud.create(
-        car_data,
-        session=session,
+    return await cars_crud.get_car_as_admin(
+        (
+            await cars_crud.create(
+                car_data,
+                session=session,
+            )
+        ).id,
+        session,
     )
 
 
@@ -66,11 +84,13 @@ async def edit_car_as_admin(
         update_data,
         session=session,
     )
-    return await cars_crud.update(
+    await cars_crud.update(
+        telegram_id,
         await cars_crud.get(car_id, session),
         update_data,
         session=session,
     )
+    return await cars_crud.get_car_as_admin(car_id, session)
 
 
 @router.delete(
@@ -84,7 +104,7 @@ async def delete_car_as_admin(
     await check_admin_user(telegram_id, session)
     await check_car_exists(car_id, session)
     return await cars_crud.remove(
-        await cars_crud.get(car_id, session),
+        await cars_crud.get_car_as_admin(car_id, session),
         session,
     )
 
@@ -137,7 +157,8 @@ async def edit_car(
         session=session,
     )
     return await cars_crud.update(
-        await cars_crud.get(car_id, session),
+        telegram_id,
+        car,
         update_data,
         session=session,
     )

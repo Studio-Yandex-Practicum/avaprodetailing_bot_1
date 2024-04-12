@@ -1,4 +1,3 @@
-
 import re
 from datetime import date
 from http import HTTPStatus
@@ -40,6 +39,9 @@ INVALID_PHONE_NUMBER = (
     'Номер телефона должен состоять из цифр и иметь длину от 10 до 16 символов'
 )
 INVALID_BIRTH_DATE = 'Дата рождения не может быть больше текущей даты'
+
+
+"""API EXCEPTION HANDLER"""
 
 
 async def check_car_exists(car_id: int, session: AsyncSession) -> None:
@@ -173,15 +175,52 @@ async def validate_number_plate(number_plate) -> None:
         )
 
 
-async def check_phone_dublicate(
-        phone_number: str,
-        telegram_id: str,
-        session: AsyncSession
+async def api_check_phone_duplicate(
+    phone_number: str, telegram_id: str, session: AsyncSession
 ) -> None:
-    user_id = await user_crud.get_user_by_phone_number(
-        phone_number,
-        session
+    user_id = await user_crud.get_user_by_phone_number(phone_number, session)
+    if user_id and telegram_id != user_id.telegram_id:
+        raise HTTPException(
+            status_code=HTTPStatus.BAD_REQUEST, detail=DUBLICATE_PHONE
+        )
+
+
+async def api_check_telegram_id_duplicate(
+    telegram_id: str, current_telegram_id: str, session: AsyncSession
+) -> str:
+    user = await user_crud.get_user_by_telegram_id(
+        current_telegram_id, session
     )
+    if user and current_telegram_id != user.telegram_id:
+        raise HTTPException(
+            status_code=HTTPStatus.BAD_REQUEST, detail=DUBLICATE_TELEGRAM_ID
+        )
+    return telegram_id
+
+
+def api_validate_and_format_phone_number(phone_number: str) -> str:
+    phone_number = re.sub(r'[^\w\s]', '', phone_number)
+    if not phone_number.isdigit() or not (10 <= len(phone_number) < 16):
+        raise HTTPException(
+            status_code=HTTPStatus.BAD_REQUEST, detail=INVALID_PHONE_NUMBER
+        )
+    return phone_number
+
+
+def api_check_birth_date_less_current_data(birth_date: date) -> None:
+    if birth_date > date.today():
+        raise HTTPException(
+            status_code=HTTPStatus.BAD_REQUEST, detail=INVALID_BIRTH_DATE
+        )
+
+
+"""VALIDATION"""
+
+
+async def check_phone_dublicate(
+    phone_number: str, telegram_id: str, session: AsyncSession
+) -> None:
+    user_id = await user_crud.get_user_by_phone_number(phone_number, session)
     if user_id and telegram_id != user_id.telegram_id:
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST,
@@ -190,9 +229,7 @@ async def check_phone_dublicate(
 
 
 async def check_telegram_id_dublicate(
-        telegram_id: str,
-        current_telegram_id: str,
-        session: AsyncSession
+    telegram_id: str, current_telegram_id: str, session: AsyncSession
 ) -> str:
     user = await user_crud.get_user_by_telegram_id(
         current_telegram_id, session
@@ -205,9 +242,7 @@ async def check_telegram_id_dublicate(
 def valid_phone_number(phone_number: str) -> str:
     phone_number = re.sub(r'[^\w\s]', '', phone_number)
     if not phone_number.isdigit() or not (10 <= len(phone_number) < 16):
-        raise ValueError(
-            INVALID_PHONE_NUMBER
-        )
+        raise ValueError(INVALID_PHONE_NUMBER)
     return phone_number
 
 

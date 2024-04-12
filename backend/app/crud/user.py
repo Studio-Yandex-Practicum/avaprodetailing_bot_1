@@ -49,13 +49,23 @@ class CRUDUser(CRUDBase):
                 await session.execute(
                     select(self.model)
                     .where(self.model.telegram_id == telegram_id)
-                    .options(selectinload(self.model.changes))
+                    .options(
+                        selectinload(self.model.loyality),
+                        selectinload(self.model.cars),
+                        selectinload(self.model.payments),
+                        selectinload(self.model.changes),
+                    )
                 )
             )
             .scalars()
             .first()
         )
+        user.loyality_balance = sum(
+            [loyality.amount for loyality in user.loyality]
+        )
         user.changes.sort(key=lambda x: x.date, reverse=True)
+        user.loyality.sort(key=lambda x: x.exp_date, reverse=True)
+        user.payments.sort(key=lambda x: x.date, reverse=True)
         return user
 
     async def get_user_by_phone_number(

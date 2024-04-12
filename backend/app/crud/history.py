@@ -4,9 +4,9 @@ from app.crud.base import CRUDBase
 from app.models import History
 
 COMMENT = (
-    'User id:{user.id} name: {user.last_name} {user.first_name} '
-    'changed {model} from {old_value} to '
-    '{new_value}'
+    'User id:{} name: {} {} '
+    'changed {} from {} to '
+    '{}'
 )
 
 

@@ -5,11 +5,11 @@ from http import HTTPStatus
 from logging.handlers import RotatingFileHandler
 
 import aiohttp
-from aiogram import Bot, Dispatcher, types
+from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters.command import Command
 from dotenv import load_dotenv
 
-from keyboards import registration_button
+from keyboards import registration_button, personal_acount_button, car_list
 from messages import WECLOME_NEW_USER
 
 load_dotenv()
@@ -30,8 +30,8 @@ kb = types.ReplyKeyboardMarkup(
     resize_keyboard=True
 )
 # Для тестов
-SITE_URL = 'http://127.0.0.1:8081'
-SITE_URLs = 'https://127.0.0.1:8081'
+SITE_URL = 'https://a63d-95-25-72-15.ngrok-free.app'
+SITE_URLs = 'https://a63d-95-25-72-15.ngrok-free.app'
 
 # Для тестов
 
@@ -46,6 +46,7 @@ async def starting(message: types.Message):
             if response.status == HTTPStatus.NOT_FOUND:
                 await message.answer(
                     WECLOME_NEW_USER,
+                    print(await registration_button(SITE_URL, telegram_id)),
                     reply_markup=types.ReplyKeyboardMarkup(
                         keyboard=[
                             [await registration_button(SITE_URLs, telegram_id)]
@@ -55,13 +56,86 @@ async def starting(message: types.Message):
                 )
             elif response.status == HTTPStatus.OK:
                 response = await response.json()
-                await message.answer('Приветствую222!', reply_markup=kb)
+                if (
+                    not response['is_admin'] and
+                    not response['is_superuser']
+                ):
+                    await message.answer(
+                        'С возвращением!',
+                        reply_markup=types.ReplyKeyboardMarkup(
+                            keyboard=[
+                                [
+                                    await personal_acount_button(
+                                        SITE_URL,
+                                        message.from_user.id,
+                                        response['phone_number']
+                                    ),
+                                    car_list
+                                ]
+                            ]
+                        ),
+                        resize_keyboard=True
+                    )
             else:
                 logging.ERROR('Problem: server returned %s', response.status)
                 await message.answer(
                     'У нас проводятся технические работы, попробуйте позже'
                 )
 
+
+@dp.message(F.web_app_data)
+async def web_app2(message: types.Message):
+    if message.web_app_data.data == 'Registartion Success':
+        async with aiohttp.ClientSession() as session:
+            async with session.get(
+                f'{SITE_URL}/users/check_user/{message.from_user.id}'
+            ) as response:
+                if response.status == HTTPStatus.OK:
+                    response = await response.json()
+                    if (
+                        not response['is_admin'] and
+                        not response['is_superuser']
+                    ):
+                        await message.answer(
+                            'Регистрация успешно пройдена',
+                            reply_markup=types.ReplyKeyboardMarkup(
+                                keyboard=[
+                                    [
+                                        await personal_acount_button(
+                                            SITE_URL,
+                                            message.from_user.id,
+                                            response['phone_number']
+                                        ),
+                                        car_list
+                                    ]
+                                ]
+                            ),
+                            resize_keyboard=True
+                        )
+
+                    await message.answer(str(response))
+                else:
+                    logging.ERROR(
+                        'Problem: server returned %s', response.status
+                    )
+                    await message.answer(
+                        'У нас проводятся технические работы, попробуйте позже'
+                    )
+
+
+@dp.message(F.text == 'Список автомобилей')
+async def get_car_list(message: types.Message):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(f'{SITE_URL}/cars/{message.from_user.id}') as response:
+            if response.status == HTTPStatus.OK:
+                response = await response.json()
+                await message.answer(str(response))
+            else:
+                logging.ERROR('Problem: server returned %s', response.status)
+                await message.answer(
+                    'У нас проводятся технические работы, попробуйте позже'
+                )
+                                
 
 async def main():
     await dp.start_polling(bot)

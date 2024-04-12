@@ -49,6 +49,16 @@ async def check_car_exists(car_id: int, session: AsyncSession) -> None:
         )
 
 
+async def check_user_registered(
+    telegram_id: str,
+    session: AsyncSession
+) -> None:
+    if await user_crud.get_user_by_telegram_id(telegram_id, session):
+        raise HTTPException(
+            status_code=HTTPStatus.BAD_REQUEST, detail=DUBLICATE_TELEGRAM_ID
+        )
+
+
 async def check_user_exists(telegram_id: str, session: AsyncSession) -> None:
     if not await user_crud.get_user_by_telegram_id(telegram_id, session):
         raise HTTPException(
@@ -173,7 +183,10 @@ async def check_phone_dublicate(
         session
     )
     if user_id and telegram_id != user_id.telegram_id:
-        raise ValueError(DUBLICATE_PHONE)
+        raise HTTPException(
+            status_code=HTTPStatus.BAD_REQUEST,
+            detail=DUBLICATE_PHONE
+        )
 
 
 async def check_telegram_id_dublicate(

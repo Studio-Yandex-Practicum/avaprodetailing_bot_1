@@ -1,0 +1,1015 @@
+2024-04-10 22:08:36,266 [INFO]: [start_polling:527] - Start polling
+2024-04-10 22:08:36,548 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-10 22:11:17,725 [INFO]: [start_polling:527] - Start polling
+2024-04-10 22:11:18,026 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-10 22:11:24,702 [INFO]: [feed_update:172] - Update id=583427958 is not handled. Duration 1 ms by bot id=6103311971
+2024-04-10 22:11:24,702 [ERROR]: [_process_update:315] - Cause exception while process update id=583427958 by bot id=6103311971
+ClientConnectorError: Cannot connect to host 127.0.0.1:8081 ssl:default [Connect call failed ('127.0.0.1', 8081)]
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/connector.py", line 992, in _wrap_create_connection
+    return await self._loop.create_connection(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/base_events.py", line 1076, in create_connection
+    raise exceptions[0]
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/base_events.py", line 1060, in create_connection
+    sock = await self._connect_sock(
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/base_events.py", line 969, in _connect_sock
+    await self.sock_connect(sock, address)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/selector_events.py", line 501, in sock_connect
+    return await fut
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/selector_events.py", line 541, in _sock_connect_cb
+    raise OSError(err, f'Connect call failed {address}')
+ConnectionRefusedError: [Errno 61] Connect call failed ('127.0.0.1', 8081)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 43, in starting
+    async with session.get(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/client.py", line 1194, in __aenter__
+    self._resp = await self._coro
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/client.py", line 578, in _request
+    conn = await self._connector.connect(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/connector.py", line 544, in connect
+    proto = await self._create_connection(req, traces, timeout)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/connector.py", line 911, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/connector.py", line 1235, in _create_direct_connection
+    raise last_exc
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/connector.py", line 1204, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/connector.py", line 1000, in _wrap_create_connection
+    raise client_error(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host 127.0.0.1:8081 ssl:default [Connect call failed ('127.0.0.1', 8081)]
+2024-04-10 22:13:15,384 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-10 22:13:15,388 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-10 22:13:15,388 [INFO]: [start_polling:554] - Polling stopped
+2024-04-10 22:13:18,881 [INFO]: [start_polling:527] - Start polling
+2024-04-10 22:13:19,144 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-10 22:13:24,522 [INFO]: [feed_update:172] - Update id=583427959 is not handled. Duration 0 ms by bot id=6103311971
+2024-04-10 22:13:24,522 [ERROR]: [_process_update:315] - Cause exception while process update id=583427959 by bot id=6103311971
+ClientConnectorError: Cannot connect to host 127.0.0.1:8081 ssl:default [Connect call failed ('127.0.0.1', 8081)]
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/connector.py", line 992, in _wrap_create_connection
+    return await self._loop.create_connection(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/base_events.py", line 1076, in create_connection
+    raise exceptions[0]
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/base_events.py", line 1060, in create_connection
+    sock = await self._connect_sock(
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/base_events.py", line 969, in _connect_sock
+    await self.sock_connect(sock, address)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/selector_events.py", line 501, in sock_connect
+    return await fut
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/selector_events.py", line 541, in _sock_connect_cb
+    raise OSError(err, f'Connect call failed {address}')
+ConnectionRefusedError: [Errno 61] Connect call failed ('127.0.0.1', 8081)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 43, in starting
+    async with session.get(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/client.py", line 1194, in __aenter__
+    self._resp = await self._coro
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/client.py", line 578, in _request
+    conn = await self._connector.connect(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/connector.py", line 544, in connect
+    proto = await self._create_connection(req, traces, timeout)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/connector.py", line 911, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/connector.py", line 1235, in _create_direct_connection
+    raise last_exc
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/connector.py", line 1204, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/connector.py", line 1000, in _wrap_create_connection
+    raise client_error(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host 127.0.0.1:8081 ssl:default [Connect call failed ('127.0.0.1', 8081)]
+2024-04-10 22:14:51,722 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-10 22:14:51,725 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-10 22:14:51,726 [INFO]: [start_polling:554] - Polling stopped
+2024-04-10 22:17:05,761 [INFO]: [start_polling:527] - Start polling
+2024-04-10 22:17:06,078 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-10 22:17:17,602 [INFO]: [feed_update:172] - Update id=583427960 is not handled. Duration 100 ms by bot id=6103311971
+2024-04-10 22:17:17,602 [ERROR]: [_process_update:315] - Cause exception while process update id=583427960 by bot id=6103311971
+ClientConnectorCertificateError: Cannot connect to host ava-detailing.1427821-cx12821.tw1.ru:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1007)')]
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/connector.py", line 992, in _wrap_create_connection
+    return await self._loop.create_connection(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/base_events.py", line 1103, in create_connection
+    transport, protocol = await self._create_connection_transport(
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/base_events.py", line 1133, in _create_connection_transport
+    await waiter
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/sslproto.py", line 534, in data_received
+    ssldata, appdata = self._sslpipe.feed_ssldata(data)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/sslproto.py", line 188, in feed_ssldata
+    self._sslobj.do_handshake()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/ssl.py", line 975, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1007)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 43, in starting
+    async with session.get(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/client.py", line 1194, in __aenter__
+    self._resp = await self._coro
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/client.py", line 578, in _request
+    conn = await self._connector.connect(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/connector.py", line 544, in connect
+    proto = await self._create_connection(req, traces, timeout)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/connector.py", line 911, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/connector.py", line 1235, in _create_direct_connection
+    raise last_exc
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/connector.py", line 1204, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/connector.py", line 994, in _wrap_create_connection
+    raise ClientConnectorCertificateError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorCertificateError: Cannot connect to host ava-detailing.1427821-cx12821.tw1.ru:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1007)')]
+2024-04-10 22:19:02,683 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-10 22:19:02,689 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-10 22:19:02,689 [INFO]: [start_polling:554] - Polling stopped
+2024-04-10 22:19:07,339 [INFO]: [start_polling:527] - Start polling
+2024-04-10 22:19:07,631 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-10 22:19:18,945 [INFO]: [feed_update:172] - Update id=583427961 is handled. Duration 522 ms by bot id=6103311971
+2024-04-10 22:30:55,189 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-10 22:30:55,195 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-10 22:30:55,195 [INFO]: [start_polling:554] - Polling stopped
+2024-04-10 22:30:59,534 [INFO]: [start_polling:527] - Start polling
+2024-04-10 22:30:59,812 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-10 22:31:14,958 [INFO]: [feed_update:172] - Update id=583427962 is handled. Duration 498 ms by bot id=6103311971
+2024-04-10 23:03:05,709 [INFO]: [feed_update:172] - Update id=583427963 is handled. Duration 426 ms by bot id=6103311971
+2024-04-10 23:03:12,075 [INFO]: [feed_update:172] - Update id=583427964 is handled. Duration 131 ms by bot id=6103311971
+2024-04-11 20:22:27,308 [INFO]: [start_polling:527] - Start polling
+2024-04-11 20:22:27,578 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-11 20:22:50,516 [INFO]: [feed_update:172] - Update id=583427965 is handled. Duration 758 ms by bot id=6103311971
+2024-04-11 20:23:48,782 [INFO]: [feed_update:172] - Update id=583427966 is handled. Duration 695 ms by bot id=6103311971
+2024-04-11 20:55:28,753 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-11 20:55:28,757 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-11 20:55:28,757 [INFO]: [start_polling:554] - Polling stopped
+2024-04-11 20:55:57,446 [INFO]: [start_polling:527] - Start polling
+2024-04-11 20:55:57,718 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-11 20:56:14,374 [INFO]: [feed_update:172] - Update id=583427967 is handled. Duration 741 ms by bot id=6103311971
+2024-04-11 21:11:22,884 [INFO]: [feed_update:172] - Update id=583427968 is handled. Duration 722 ms by bot id=6103311971
+2024-04-11 21:12:43,859 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-11 21:12:43,862 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-11 21:12:43,863 [INFO]: [start_polling:554] - Polling stopped
+2024-04-11 21:12:48,641 [INFO]: [start_polling:527] - Start polling
+2024-04-11 21:12:48,903 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-11 21:13:01,091 [INFO]: [feed_update:172] - Update id=583427969 is handled. Duration 715 ms by bot id=6103311971
+2024-04-11 22:04:08,313 [INFO]: [feed_update:172] - Update id=583427970 is handled. Duration 644 ms by bot id=6103311971
+2024-04-11 22:49:55,020 [INFO]: [feed_update:172] - Update id=583427971 is handled. Duration 732 ms by bot id=6103311971
+2024-04-11 23:44:08,208 [INFO]: [feed_update:172] - Update id=583427972 is handled. Duration 687 ms by bot id=6103311971
+2024-04-12 05:28:31,877 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2024-04-12 05:28:31,885 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-12 05:28:43,228 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-12 09:42:20,990 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-12 09:42:21,001 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 09:42:21,002 [INFO]: [start_polling:554] - Polling stopped
+2024-04-12 10:08:19,638 [INFO]: [start_polling:527] - Start polling
+2024-04-12 10:08:19,935 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 10:08:20,425 [INFO]: [feed_update:172] - Update id=583427973 is handled. Duration 342 ms by bot id=6103311971
+2024-04-12 10:08:20,426 [INFO]: [feed_update:172] - Update id=583427974 is handled. Duration 342 ms by bot id=6103311971
+2024-04-12 10:16:32,308 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-12 10:16:32,314 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 10:16:32,314 [INFO]: [start_polling:554] - Polling stopped
+2024-04-12 10:16:36,510 [INFO]: [start_polling:527] - Start polling
+2024-04-12 10:16:36,792 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 10:17:19,943 [INFO]: [feed_update:172] - Update id=583427975 is not handled. Duration 6 ms by bot id=6103311971
+2024-04-12 10:17:19,946 [ERROR]: [_process_update:315] - Cause exception while process update id=583427975 by bot id=6103311971
+ValidationError: 1 validation error for SendMessage
+text
+  Input should be a valid string [type=string_type, input_value=WebAppData(data='some str...Регистрация'), input_type=WebAppData]
+    For further information visit https://errors.pydantic.dev/2.5/v/string_type
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 70, in web_app2
+    await message.answer(message.web_app_data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/types/message.py", line 1903, in answer
+    return SendMessage(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/pydantic/main.py", line 164, in __init__
+    __pydantic_self__.__pydantic_validator__.validate_python(data, self_instance=__pydantic_self__)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for SendMessage
+text
+  Input should be a valid string [type=string_type, input_value=WebAppData(data='some str...Регистрация'), input_type=WebAppData]
+    For further information visit https://errors.pydantic.dev/2.5/v/string_type
+2024-04-12 10:19:50,084 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-12 10:19:50,088 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 10:19:50,089 [INFO]: [start_polling:554] - Polling stopped
+2024-04-12 10:19:54,160 [INFO]: [start_polling:527] - Start polling
+2024-04-12 10:19:54,454 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 10:20:34,028 [INFO]: [feed_update:172] - Update id=583427976 is handled. Duration 430 ms by bot id=6103311971
+2024-04-12 10:36:07,606 [INFO]: [feed_update:172] - Update id=583427977 is handled. Duration 381 ms by bot id=6103311971
+2024-04-12 10:36:23,157 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-12 10:36:23,163 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 10:36:23,163 [INFO]: [start_polling:554] - Polling stopped
+2024-04-12 10:36:27,289 [INFO]: [start_polling:527] - Start polling
+2024-04-12 10:36:27,571 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 10:36:46,681 [INFO]: [feed_update:172] - Update id=583427978 is handled. Duration 485 ms by bot id=6103311971
+2024-04-12 10:46:33,382 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-12 10:46:33,388 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 10:46:33,389 [INFO]: [start_polling:554] - Polling stopped
+2024-04-12 10:46:38,348 [INFO]: [start_polling:527] - Start polling
+2024-04-12 10:46:38,610 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 10:46:53,760 [INFO]: [feed_update:172] - Update id=583427979 is handled. Duration 755 ms by bot id=6103311971
+2024-04-12 11:27:04,070 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-12 11:27:04,078 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 11:27:04,080 [INFO]: [start_polling:554] - Polling stopped
+2024-04-12 11:27:08,561 [INFO]: [start_polling:527] - Start polling
+2024-04-12 11:27:08,856 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 11:27:59,456 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-12 11:27:59,460 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 11:27:59,460 [INFO]: [start_polling:554] - Polling stopped
+2024-04-12 11:28:03,443 [INFO]: [start_polling:527] - Start polling
+2024-04-12 11:28:03,713 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 11:28:19,621 [INFO]: [feed_update:172] - Update id=583427980 is handled. Duration 841 ms by bot id=6103311971
+2024-04-12 11:32:28,443 [INFO]: [feed_update:172] - Update id=583427981 is handled. Duration 766 ms by bot id=6103311971
+2024-04-12 11:49:00,494 [INFO]: [feed_update:172] - Update id=583427982 is handled. Duration 722 ms by bot id=6103311971
+2024-04-12 11:49:41,233 [INFO]: [feed_update:172] - Update id=583427983 is not handled. Duration 633 ms by bot id=6103311971
+2024-04-12 11:49:41,234 [ERROR]: [_process_update:315] - Cause exception while process update id=583427983 by bot id=6103311971
+TypeError: 'int' object is not callable
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 113, in web_app2
+    logging.ERROR(
+TypeError: 'int' object is not callable
+2024-04-12 11:52:32,209 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-12 11:52:32,213 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 11:52:32,215 [INFO]: [start_polling:554] - Polling stopped
+2024-04-12 11:52:37,030 [INFO]: [start_polling:527] - Start polling
+2024-04-12 11:52:37,309 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 11:53:09,246 [INFO]: [feed_update:172] - Update id=583427984 is handled. Duration 678 ms by bot id=6103311971
+2024-04-12 11:53:32,284 [INFO]: [feed_update:172] - Update id=583427985 is not handled. Duration 639 ms by bot id=6103311971
+2024-04-12 11:53:32,286 [ERROR]: [_process_update:315] - Cause exception while process update id=583427985 by bot id=6103311971
+TypeError: 'int' object is not callable
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 113, in web_app2
+    logging.ERROR(
+TypeError: 'int' object is not callable
+2024-04-12 11:56:09,627 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-12 11:56:09,629 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 11:56:09,629 [INFO]: [start_polling:554] - Polling stopped
+2024-04-12 11:56:13,687 [INFO]: [start_polling:527] - Start polling
+2024-04-12 11:56:13,976 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 11:56:17,476 [INFO]: [feed_update:172] - Update id=583427986 is not handled. Duration 674 ms by bot id=6103311971
+2024-04-12 11:56:17,477 [ERROR]: [_process_update:315] - Cause exception while process update id=583427986 by bot id=6103311971
+TypeError: 'int' object is not callable
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 114, in web_app2
+    logging.ERROR(
+TypeError: 'int' object is not callable
+2024-04-12 11:57:47,265 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-12 11:57:47,269 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 11:57:47,269 [INFO]: [start_polling:554] - Polling stopped
+2024-04-12 11:57:52,633 [INFO]: [start_polling:527] - Start polling
+2024-04-12 11:57:52,886 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 11:58:14,492 [INFO]: [feed_update:172] - Update id=583427987 is handled. Duration 745 ms by bot id=6103311971
+2024-04-12 11:58:37,080 [INFO]: [feed_update:172] - Update id=583427988 is handled. Duration 899 ms by bot id=6103311971
+2024-04-12 11:59:04,820 [INFO]: [feed_update:172] - Update id=583427989 is handled. Duration 675 ms by bot id=6103311971
+2024-04-12 12:01:30,303 [INFO]: [feed_update:172] - Update id=583427990 is handled. Duration 692 ms by bot id=6103311971
+2024-04-12 12:16:26,201 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-12 12:16:26,210 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 12:16:26,211 [INFO]: [start_polling:554] - Polling stopped
+2024-04-12 12:16:32,594 [INFO]: [start_polling:527] - Start polling
+2024-04-12 12:16:32,898 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 12:16:51,291 [INFO]: [feed_update:172] - Update id=583427991 is handled. Duration 849 ms by bot id=6103311971
+2024-04-12 12:17:19,237 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-12 12:17:19,240 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 12:17:19,240 [INFO]: [start_polling:554] - Polling stopped
+2024-04-12 12:17:22,995 [INFO]: [start_polling:527] - Start polling
+2024-04-12 12:17:23,245 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 12:18:31,808 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-12 12:18:31,814 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 12:18:31,816 [INFO]: [start_polling:554] - Polling stopped
+2024-04-12 12:18:35,445 [INFO]: [start_polling:527] - Start polling
+2024-04-12 12:18:35,689 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 12:18:38,984 [INFO]: [feed_update:172] - Update id=583427992 is handled. Duration 733 ms by bot id=6103311971
+2024-04-12 12:18:40,182 [INFO]: [feed_update:172] - Update id=583427993 is not handled. Duration 1 ms by bot id=6103311971
+2024-04-12 12:18:40,182 [ERROR]: [_process_update:315] - Cause exception while process update id=583427993 by bot id=6103311971
+AttributeError: 'NoneType' object has no attribute 'data'
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 88, in web_app2
+    if message.web_app_data.data == 'Registartion Success':
+AttributeError: 'NoneType' object has no attribute 'data'
+2024-04-12 12:21:49,885 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-12 12:21:49,891 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 12:21:49,892 [INFO]: [start_polling:554] - Polling stopped
+2024-04-12 12:21:53,665 [INFO]: [start_polling:527] - Start polling
+2024-04-12 12:21:53,926 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 12:21:57,363 [INFO]: [feed_update:172] - Update id=583427994 is not handled. Duration 0 ms by bot id=6103311971
+2024-04-12 12:21:57,363 [ERROR]: [_process_update:315] - Cause exception while process update id=583427994 by bot id=6103311971
+AttributeError: 'NoneType' object has no attribute 'data'
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 88, in web_app2
+    if message.web_app_data.data == 'Registartion Success':
+AttributeError: 'NoneType' object has no attribute 'data'
+2024-04-12 12:22:00,350 [INFO]: [feed_update:172] - Update id=583427995 is not handled. Duration 0 ms by bot id=6103311971
+2024-04-12 12:22:00,351 [ERROR]: [_process_update:315] - Cause exception while process update id=583427995 by bot id=6103311971
+AttributeError: 'NoneType' object has no attribute 'data'
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 88, in web_app2
+    if message.web_app_data.data == 'Registartion Success':
+AttributeError: 'NoneType' object has no attribute 'data'
+2024-04-12 12:27:20,312 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-12 12:27:20,321 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 12:27:20,322 [INFO]: [start_polling:554] - Polling stopped
+2024-04-12 12:27:24,876 [INFO]: [start_polling:527] - Start polling
+2024-04-12 12:27:25,190 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 12:27:32,208 [INFO]: [feed_update:172] - Update id=583427996 is not handled. Duration 2 ms by bot id=6103311971
+2024-04-12 12:27:32,209 [ERROR]: [_process_update:315] - Cause exception while process update id=583427996 by bot id=6103311971
+AttributeError: 'NoneType' object has no attribute 'data'
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 88, in web_app2
+    if message.web_app_data.data == 'Registartion Success':
+AttributeError: 'NoneType' object has no attribute 'data'
+2024-04-12 12:27:45,019 [INFO]: [feed_update:172] - Update id=583427997 is not handled. Duration 2 ms by bot id=6103311971
+2024-04-12 12:27:45,020 [ERROR]: [_process_update:315] - Cause exception while process update id=583427997 by bot id=6103311971
+AttributeError: 'NoneType' object has no attribute 'data'
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 88, in web_app2
+    if message.web_app_data.data == 'Registartion Success':
+AttributeError: 'NoneType' object has no attribute 'data'
+2024-04-12 12:27:50,459 [INFO]: [feed_update:172] - Update id=583427998 is not handled. Duration 2 ms by bot id=6103311971
+2024-04-12 12:27:50,459 [ERROR]: [_process_update:315] - Cause exception while process update id=583427998 by bot id=6103311971
+AttributeError: 'NoneType' object has no attribute 'data'
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 88, in web_app2
+    if message.web_app_data.data == 'Registartion Success':
+AttributeError: 'NoneType' object has no attribute 'data'
+2024-04-12 12:27:51,252 [INFO]: [feed_update:172] - Update id=583427999 is not handled. Duration 1 ms by bot id=6103311971
+2024-04-12 12:27:51,252 [ERROR]: [_process_update:315] - Cause exception while process update id=583427999 by bot id=6103311971
+AttributeError: 'NoneType' object has no attribute 'data'
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 88, in web_app2
+    if message.web_app_data.data == 'Registartion Success':
+AttributeError: 'NoneType' object has no attribute 'data'
+2024-04-12 12:27:51,477 [INFO]: [feed_update:172] - Update id=583428000 is not handled. Duration 1 ms by bot id=6103311971
+2024-04-12 12:27:51,477 [ERROR]: [_process_update:315] - Cause exception while process update id=583428000 by bot id=6103311971
+AttributeError: 'NoneType' object has no attribute 'data'
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 88, in web_app2
+    if message.web_app_data.data == 'Registartion Success':
+AttributeError: 'NoneType' object has no attribute 'data'
+2024-04-12 12:27:51,717 [INFO]: [feed_update:172] - Update id=583428001 is not handled. Duration 1 ms by bot id=6103311971
+2024-04-12 12:27:51,718 [ERROR]: [_process_update:315] - Cause exception while process update id=583428001 by bot id=6103311971
+AttributeError: 'NoneType' object has no attribute 'data'
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 88, in web_app2
+    if message.web_app_data.data == 'Registartion Success':
+AttributeError: 'NoneType' object has no attribute 'data'
+2024-04-12 12:27:51,938 [INFO]: [feed_update:172] - Update id=583428002 is not handled. Duration 2 ms by bot id=6103311971
+2024-04-12 12:27:51,938 [ERROR]: [_process_update:315] - Cause exception while process update id=583428002 by bot id=6103311971
+AttributeError: 'NoneType' object has no attribute 'data'
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 88, in web_app2
+    if message.web_app_data.data == 'Registartion Success':
+AttributeError: 'NoneType' object has no attribute 'data'
+2024-04-12 12:27:52,034 [INFO]: [feed_update:172] - Update id=583428003 is not handled. Duration 0 ms by bot id=6103311971
+2024-04-12 12:27:52,034 [ERROR]: [_process_update:315] - Cause exception while process update id=583428003 by bot id=6103311971
+AttributeError: 'NoneType' object has no attribute 'data'
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 88, in web_app2
+    if message.web_app_data.data == 'Registartion Success':
+AttributeError: 'NoneType' object has no attribute 'data'
+2024-04-12 12:27:52,214 [INFO]: [feed_update:172] - Update id=583428004 is not handled. Duration 0 ms by bot id=6103311971
+2024-04-12 12:27:52,214 [ERROR]: [_process_update:315] - Cause exception while process update id=583428004 by bot id=6103311971
+AttributeError: 'NoneType' object has no attribute 'data'
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 88, in web_app2
+    if message.web_app_data.data == 'Registartion Success':
+AttributeError: 'NoneType' object has no attribute 'data'
+2024-04-12 12:27:52,407 [INFO]: [feed_update:172] - Update id=583428005 is not handled. Duration 1 ms by bot id=6103311971
+2024-04-12 12:27:52,407 [ERROR]: [_process_update:315] - Cause exception while process update id=583428005 by bot id=6103311971
+AttributeError: 'NoneType' object has no attribute 'data'
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 88, in web_app2
+    if message.web_app_data.data == 'Registartion Success':
+AttributeError: 'NoneType' object has no attribute 'data'
+2024-04-12 12:27:52,607 [INFO]: [feed_update:172] - Update id=583428006 is not handled. Duration 1 ms by bot id=6103311971
+2024-04-12 12:27:52,607 [ERROR]: [_process_update:315] - Cause exception while process update id=583428006 by bot id=6103311971
+AttributeError: 'NoneType' object has no attribute 'data'
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 88, in web_app2
+    if message.web_app_data.data == 'Registartion Success':
+AttributeError: 'NoneType' object has no attribute 'data'
+2024-04-12 12:27:52,785 [INFO]: [feed_update:172] - Update id=583428007 is not handled. Duration 1 ms by bot id=6103311971
+2024-04-12 12:27:52,785 [ERROR]: [_process_update:315] - Cause exception while process update id=583428007 by bot id=6103311971
+AttributeError: 'NoneType' object has no attribute 'data'
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 88, in web_app2
+    if message.web_app_data.data == 'Registartion Success':
+AttributeError: 'NoneType' object has no attribute 'data'
+2024-04-12 12:29:54,518 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-12 12:29:54,520 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 12:29:54,520 [INFO]: [start_polling:554] - Polling stopped
+2024-04-12 12:29:59,982 [INFO]: [start_polling:527] - Start polling
+2024-04-12 12:30:00,264 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 12:30:42,852 [INFO]: [feed_update:172] - Update id=583428008 is not handled. Duration 3 ms by bot id=6103311971
+2024-04-12 12:30:42,853 [ERROR]: [_process_update:315] - Cause exception while process update id=583428008 by bot id=6103311971
+AttributeError: 'NoneType' object has no attribute 'data'
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 88, in web_app2
+    if message.web_app_data.data == 'Registartion Success':
+AttributeError: 'NoneType' object has no attribute 'data'
+2024-04-12 12:38:38,038 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-12 12:38:38,047 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 12:38:38,048 [INFO]: [start_polling:554] - Polling stopped
+2024-04-12 12:40:31,406 [INFO]: [start_polling:527] - Start polling
+2024-04-12 12:40:31,722 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-12 12:40:31,855 [INFO]: [feed_update:172] - Update id=583428009 is not handled. Duration 0 ms by bot id=6103311971

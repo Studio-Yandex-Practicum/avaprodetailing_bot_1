@@ -52,7 +52,7 @@ async def update_loyality_settings(
         update_data,
         session)
     return await loyality_settings_crud.update(
-        obj,
+        await loyality_settings_crud.get(ID_LOYALITY_SETTINGS, session),
         update_data,
         session
     )

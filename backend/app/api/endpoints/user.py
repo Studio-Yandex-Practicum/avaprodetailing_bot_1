@@ -10,7 +10,8 @@ from app.api.validators import (
     check_phone_dublicate,
     check_telegram_id_dublicate, check_user_exists,
     check_user_is_admin_or_superuser,
-    valid_phone_number
+    valid_phone_number,
+    check_user_registered
 )
 from app.core.db import get_async_session
 from app.crud.user import user_crud
@@ -58,6 +59,7 @@ async def process_registration(
         'errors': []
     }
     try:
+        await check_user_registered(form_data.telegram_id, session)
         form_data.phone_number = valid_phone_number(form_data.phone_number)
         await check_telegram_id_dublicate(None, form_data.telegram_id, session)
         await check_phone_dublicate(

@@ -46,6 +46,7 @@ class CheckedUser(BaseModel):
     telegram_id: Optional[str]
     is_admin: Optional[bool]
     is_superuser: Optional[bool]
+    phone_number: Optional[str]
 
     class Config:
         extra = 'forbid'

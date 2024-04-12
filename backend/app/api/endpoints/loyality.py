@@ -11,7 +11,6 @@ from app.core.descriptions import (
     DECRIPTION_GET_LOYALITY_HISTORY,
     DESCRIPTION_GET_LOYALITY_POINT,
 )
-from app.crud.history import loyality_history_crud
 from app.crud.loyality import loyality_crud, loyality_settings_crud
 from app.crud.user import user_crud
 from app.schemas.loyality import Loyality, LoyalityList, LoyalitySettings

@@ -6,7 +6,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.validators import (
     check_admin_user,
     check_user_exists,
-    check_user_is_admin_or_superuser,
 )
 from app.core.db import get_async_session
 from app.crud.payment import payments_crud

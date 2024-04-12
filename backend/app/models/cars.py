@@ -1,3 +1,5 @@
+from sqlalchemy import Column, String
+from sqlalchemy.orm import relationship
 from sqlalchemy import Column, ForeignKey, String
 
 from app.core.config import MAX_LENGTH_BRAND_MODEL, MAX_LENGTH_NUMBER_PLATE
@@ -10,6 +12,8 @@ class Car(Base):
     number_plate: str = Column(
         String(MAX_LENGTH_NUMBER_PLATE), nullable=False, unique=True
     )
+    changes = relationship(
+        'CarHistory', backref='car', cascade='all, delete-orphan')
     owner_telegram_id: str = Column(
         String,
         ForeignKey(

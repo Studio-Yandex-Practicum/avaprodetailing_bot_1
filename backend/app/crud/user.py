@@ -1,13 +1,33 @@
 from typing import Optional
 
+from fastapi.encoders import jsonable_encoder
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
 
 from app.crud.base import CRUDBase
+from app.crud.history import user_history_crud
 from app.models import User
 
 
 class CRUDUser(CRUDBase):
+
+    async def update(
+        self, user_id, object: User, new_data, session: AsyncSession
+    ):
+        old_object_data = object.__repr__()
+        update_data = new_data.dict(exclude_unset=True)
+        for field in jsonable_encoder(object):
+            if field in update_data:
+                setattr(object, field, update_data[field])
+        await user_history_crud.create(
+            user_id, object.id, old_object_data, object.__repr__(), session
+        )
+        session.add(object)
+        await session.commit()
+        await session.refresh(object)
+        return object
+
     async def get_user_by_telegram_id(
         self, telegram_id: str, session: AsyncSession
     ):
@@ -20,6 +40,23 @@ class CRUDUser(CRUDBase):
             .scalars()
             .first()
         )
+
+    async def get_user_by_telegram_id_as_admin(
+        self, telegram_id: int, session: AsyncSession
+    ):
+        user = (
+            (
+                await session.execute(
+                    select(self.model)
+                    .where(self.model.telegram_id == telegram_id)
+                    .options(selectinload(self.model.changes))
+                )
+            )
+            .scalars()
+            .first()
+        )
+        user.changes.sort(key=lambda x: x.date, reverse=True)
+        return user
 
     async def get_user_by_phone_number(
         self, phone_number: str, session: AsyncSession

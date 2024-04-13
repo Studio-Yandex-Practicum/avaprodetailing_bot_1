@@ -15,7 +15,8 @@ from keyboards import (
     car_list,
     edit_car_user_button,
     delete_car_user_button,
-    create_car_user_button
+    create_car_user_button,
+    Cars
 )
 from messages import WECLOME_NEW_USER
 
@@ -37,8 +38,8 @@ kb = types.ReplyKeyboardMarkup(
     resize_keyboard=True
 )
 # Для тестов
-SITE_URL = 'https://a63d-95-25-72-15.ngrok-free.app'
-SITE_URLs = 'https://a63d-95-25-72-15.ngrok-free.app'
+SITE_URL = 'https://d10e-95-25-72-15.ngrok-free.app'
+SITE_URLs = 'https://d10e-95-25-72-15.ngrok-free.app'
 
 # Для тестов
 
@@ -90,8 +91,10 @@ async def starting(message: types.Message):
                 )
 
 
-@dp.message(F.web_app_data)
+@dp.message(F.web_app_data.via_bot)
 async def web_app2(message: types.Message):
+    if message.web_app_data.data == 'Car added':
+        await message.answer('Car added')
     if message.web_app_data.data == 'Registartion Success':
         async with aiohttp.ClientSession() as session:
             async with session.get(
@@ -136,43 +139,57 @@ async def get_car_list(message: types.Message):
         async with session.get(
             f'{SITE_URL}/cars/{message.from_user.id}'
         ) as response:
-            if response.status == HTTPStatus.OK and len(await response.json()) > 0:
+            if (
+                response.status == HTTPStatus.OK and
+                len(await response.json()) > 0
+            ):
                 [
                     await message.answer(
                         (
-                            f'Марка: {car.brand}\n Модель: {car.model}\n'
-                            f'Гос. Номер: {car.number_plate}'
+                            f'Марка: {car["brand"]}\n Модель: {car["model"]}\n'
+                            f'Гос. Номер: {car["number_plate"]}'
                         ),
                         reply_markup=types.InlineKeyboardMarkup(
-                            [
+                            inline_keyboard=[
                                 [
-                                    edit_car_user_button(
+                                    await edit_car_user_button(
                                         SITE_URL,
                                         message.from_user.id,
-                                        car.id
+                                        car["id"]
                                     ),
-                                    delete_car_user_button(car.id)
+                                    await delete_car_user_button(car["id"])
                                 ]
                             ]
                         )
                     )
-                    for car in response
+                    for car in await response.json()
                 ]
-                
-            else:
-                await message.answer(
-                    'Добавиьт машину',
-                    reply_markup=types.InlineKeyboardMarkup(
-                        inline_keyboard=[
-                            [
-                                await create_car_user_button(
-                                    SITE_URL,
-                                    message.from_user.id
-                                )
-                            ]
+            await message.answer(
+                'Добавиьт машину',
+                reply_markup=types.InlineKeyboardMarkup(
+                    inline_keyboard=[
+                        [
+                            await create_car_user_button(
+                                SITE_URL,
+                                message.from_user.id
+                            )
                         ]
-                    )
+                    ]
                 )
+            )
+
+
+@dp.callback_query(Cars.filter(F.action == 'delete'))
+async def delete_car(call: types.CallbackQuery, callback_data: Cars):
+    async with aiohttp.ClientSession() as session:
+        async with session.delete(
+            (
+                f'{SITE_URL}/cars/{call.message.chat.id}'
+                f'/delete_car/{callback_data.car_id}'
+            )
+        ) as response:
+            if response.status == HTTPStatus.OK:
+                await call.message.answer('Машина удалена')
 
 
 async def main():

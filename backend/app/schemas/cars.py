@@ -1,6 +1,7 @@
 import re
 from typing import Optional
 
+from fastapi import Form
 from pydantic import BaseModel, validator
 
 from app.core.config import (
@@ -22,6 +23,10 @@ class CarDB(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class CarListUser(CarDB):
+    id: int
 
 
 class CarListDBAdmin(CarDB):
@@ -82,8 +87,62 @@ class CarCreate(CarUpdate):
     number_plate: str
     owner_telegram_id: str
 
+    class Config:
+        orm_mode = True
+
+    @classmethod
+    async def as_form(
+        cls,
+        brand: str = Form(
+            ...,
+            title='Марка',
+            min_length=MIN_LENGTH_STR,
+            max_length=MAX_LENGTH_BRAND_MODEL
+        ),
+        model: str = Form(
+            ...,
+            title='Модель',
+            min_length=MIN_LENGTH_STR,
+            max_length=MAX_LENGTH_BRAND_MODEL
+        ),
+        number_plate: str = Form(..., title='Гос. Номер'),
+        owner_telegram_id: str = Form(..., title='Владелец')
+
+    ):
+        return cls(
+            brand=brand,
+            model=model,
+            number_plate=number_plate,
+            owner_telegram_id=owner_telegram_id
+        )
+
 
 class CarCreateUser(CarUpdate):
     brand: str
     model: str
     number_plate: str
+
+    @classmethod
+    async def as_form(
+        cls,
+        brand: str = Form(
+            ...,
+            title='Марка',
+            min_length=MIN_LENGTH_STR,
+            max_length=MAX_LENGTH_BRAND_MODEL
+        ),
+        model: str = Form(
+            ...,
+            title='Модель',
+            min_length=MIN_LENGTH_STR,
+            max_length=MAX_LENGTH_BRAND_MODEL
+        ),
+        number_plate: str = Form(..., title='Гос. Номер')
+
+    ):
+        return cls(
+            id=None,
+            brand=brand,
+            model=model,
+            number_plate=number_plate
+        )

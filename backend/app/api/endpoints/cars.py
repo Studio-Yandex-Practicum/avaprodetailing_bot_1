@@ -1,4 +1,7 @@
-from fastapi import APIRouter, Depends
+from http import HTTPStatus
+
+from fastapi import APIRouter, Depends, Request
+from fastapi.templating import Jinja2Templates
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.validators import (
@@ -20,10 +23,11 @@ from app.schemas.cars import (
     CarDBAdmin,
     CarListDBAdmin,
     CarUpdate,
+    CarListUser
 )
 
 router = APIRouter()
-
+templates = Jinja2Templates(directory="app/templates")
 
 """ADMIN OR SUPERUSER ROLE"""
 
@@ -112,7 +116,7 @@ async def delete_car_as_admin(
 """USER ROLE"""
 
 
-@router.get('/{telegram_id}', response_model=list[CarDB])
+@router.get('/{telegram_id}', response_model=list[CarListUser])
 async def get_my_cars(
     telegram_id: str,
     session: AsyncSession = Depends(get_async_session),
@@ -126,6 +130,8 @@ async def add_car(
     car_data: CarCreateUser,
     telegram_id: str,
     session: AsyncSession = Depends(get_async_session),
+    # form_data: CarCreateUser = Depends(CarCreateUser.as_form),
+
 ):
     await check_user_exists(telegram_id, session)
     await check_car_data_before_create(car_data, session)
@@ -178,4 +184,38 @@ async def delete_car(
     return await cars_crud.remove(
         car,
         session,
+    )
+
+
+@router.get('/{telegram_id}/add_car/add_form')
+async def add_car_form(
+    request: Request,
+    telegram_id: str,
+    session: AsyncSession = Depends(get_async_session)
+):
+    await check_user_exists(telegram_id, session)
+    context = {'request': request}
+    context['telegram_id'] = telegram_id
+    return templates.TemplateResponse(
+        'car_form.html',
+        context,
+        status_code=HTTPStatus.OK
+    )
+
+
+@router.get('/{telegram_id}/edit_car/{car_id}/edit_form')
+async def edit_car_form(
+    request: Request,
+    car_id: int,
+    telegram_id: str,
+    session: AsyncSession = Depends(get_async_session)
+):
+    await check_user_exists(telegram_id, session)
+    return templates.TemplateResponse(
+        'car_form.html',
+        dict(
+            request=request,
+            form_data=await cars_crud.get(car_id, session)
+        ),
+        status_code=HTTPStatus.OK
     )

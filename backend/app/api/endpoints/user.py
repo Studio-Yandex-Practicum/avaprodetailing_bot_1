@@ -15,6 +15,7 @@ from app.api.validators import (
     check_phone_dublicate,
     check_telegram_id_dublicate,
     check_user_exists,
+    check_user_registered,
     valid_phone_number,
 )
 from app.core.db import get_async_session

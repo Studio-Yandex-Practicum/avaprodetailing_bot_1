@@ -49,7 +49,7 @@ async def edit_car_user_button(
 async def delete_car_user_button(car_id: int) -> InlineKeyboardButton:
     return InlineKeyboardButton(
         text='Удалить',
-        callback_data=Cars(action='delete', car_id=car_id)
+        callback_data=Cars(action='delete', car_id=car_id).pack()
     )
 
 

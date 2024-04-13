@@ -4,6 +4,7 @@ import os
 from http import HTTPStatus
 from logging.handlers import RotatingFileHandler
 
+import qrcode.image.svg
 import aiohttp
 from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters.command import Command
@@ -16,7 +17,8 @@ from keyboards import (
     edit_car_user_button,
     delete_car_user_button,
     create_car_user_button,
-    Cars
+    Cars,
+    user_qr_code_button
 )
 from messages import WECLOME_NEW_USER
 
@@ -78,7 +80,8 @@ async def starting(message: types.Message):
                                         message.from_user.id,
                                         response['phone_number']
                                     ),
-                                    car_list
+                                    car_list,
+                                    user_qr_code_button
                                 ]
                             ]
                         ),
@@ -116,7 +119,8 @@ async def web_app2(message: types.Message):
                                             message.from_user.id,
                                             response['phone_number']
                                         ),
-                                        car_list
+                                        car_list,
+                                        user_qr_code_button
                                     ]
                                 ]
                             ),
@@ -190,6 +194,15 @@ async def delete_car(call: types.CallbackQuery, callback_data: Cars):
         ) as response:
             if response.status == HTTPStatus.OK:
                 await call.message.answer('Машина удалена')
+
+
+@dp.message(F.text == user_qr_code_button.text)
+async def user_qr_code(message: types.Message):
+    img = qrcode.make(message.from_user.id)
+    img.save(f'{message.from_user.id}.png')
+    with open(f'{message.from_user.id}.png', 'rb') as file:
+        await message.answer_photo(types.BufferedInputFile(file.read(), filename='qr_code.png'))
+    os.remove(f'{message.from_user.id}.png')
 
 
 async def main():

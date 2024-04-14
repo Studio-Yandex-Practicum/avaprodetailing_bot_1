@@ -4,21 +4,22 @@ import os
 from http import HTTPStatus
 from logging.handlers import RotatingFileHandler
 
-import qrcode.image.svg
 import aiohttp
-from aiogram import Bot, Dispatcher, types, F
+import qrcode.image.svg
+from aiogram import Bot, Dispatcher, F, types
 from aiogram.filters.command import Command
 from dotenv import load_dotenv
 
 from keyboards import (
-    registration_button,
-    personal_acount_button,
-    car_list,
-    edit_car_user_button,
-    delete_car_user_button,
-    create_car_user_button,
     Cars,
-    user_qr_code_button
+    car_list,
+    create_car_user_button,
+    delete_car_user_button,
+    edit_car_user_button,
+    personal_acount_button,
+    registration_button,
+    user_qr_code_button,
+    loyality_points_button
 )
 from messages import WECLOME_NEW_USER
 
@@ -82,7 +83,8 @@ async def starting(message: types.Message):
                                     ),
                                     car_list,
                                     user_qr_code_button
-                                ]
+                                ],
+                                [loyality_points_button]
                             ]
                         ),
                         resize_keyboard=True
@@ -121,7 +123,8 @@ async def web_app2(message: types.Message):
                                         ),
                                         car_list,
                                         user_qr_code_button
-                                    ]
+                                    ],
+                                    [loyality_points_button]
                                 ]
                             ),
                             resize_keyboard=True
@@ -201,8 +204,30 @@ async def user_qr_code(message: types.Message):
     img = qrcode.make(message.from_user.id)
     img.save(f'{message.from_user.id}.png')
     with open(f'{message.from_user.id}.png', 'rb') as file:
-        await message.answer_photo(types.BufferedInputFile(file.read(), filename='qr_code.png'))
+        await message.answer_photo(
+            types.BufferedInputFile(
+                file.read(),
+                filename='qr_code.png'
+            )
+        )
     os.remove(f'{message.from_user.id}.png')
+
+
+@dp.message(F.text == loyality_points_button.text)
+async def loyality_points(message: types.Message):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(
+            f'{SITE_URL}/loyality/user/{message.from_user.id}/'
+        ) as response:
+            data = await response.json()
+            if response.status == HTTPStatus.OK:
+                (
+                    await message.answer('У вас накопленно баллов: 0')
+                    if not data[0]['count'] else
+                    await message.answer(f"У вас накопленно баллов: {data['count']}")
+                )
+            if response.status == HTTPStatus.NOT_FOUND:
+                await message.answer(data[0]['count'])
 
 
 async def main():

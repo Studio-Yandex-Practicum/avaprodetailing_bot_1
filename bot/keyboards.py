@@ -12,6 +12,7 @@ class Cars(CallbackData, prefix='car'):
 
 car_list = KeyboardButton(text='Список автомобилей')
 user_qr_code_button = KeyboardButton(text='Показать QR-код')
+loyality_points_button = KeyboardButton(text='Накоплено баллов')
 
 
 async def registration_button(

@@ -6,4 +6,5 @@ from app.models.history import (  # noqa
     UserHistory,
 )
 from app.models.loyality import Loyality, LoyalitySettings  # noqa
+from app.models.payment import Payment  # noqa
 from app.models.user import User  # noqa

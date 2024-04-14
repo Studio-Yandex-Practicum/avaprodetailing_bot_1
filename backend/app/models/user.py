@@ -31,7 +31,10 @@ class User(Base):
         backref='user',
     )
     cars = relationship('Car', backref='owner', cascade='all, delete')
-
+    loyality = relationship('Loyality', backref='user')
+    payments = relationship(
+        'Payment', foreign_keys='Payment.payer_id', backref='user'
+    )
 
     def __repr__(self):
         return (

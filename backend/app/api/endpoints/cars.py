@@ -15,7 +15,6 @@ from app.api.validators import (
 )
 from app.core.db import get_async_session
 from app.crud.cars import cars_crud
-from app.crud.user import user_crud
 from app.schemas.cars import (
     CarCreate,
     CarCreateUser,

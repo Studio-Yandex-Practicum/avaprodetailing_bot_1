@@ -166,7 +166,7 @@ async def get_user_as_admin(
 
 
 @router.patch(
-    '/admin/{telegram_id}/edit_user/{user_id}', response_model=UserDBAdmin
+    '/admin/{telegram_id}/edit_user/{user_id}', response_model=UserFromDB
 )
 async def edit_user_as_admin(
     telegram_id: str,

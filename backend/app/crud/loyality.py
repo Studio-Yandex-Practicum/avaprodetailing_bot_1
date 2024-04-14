@@ -24,7 +24,7 @@ class CRUDLoyalitySettings(CRUDBase):
         await session.commit()
         await session.refresh(new_object)
         return new_object
-    
+
     async def update(
         self,
         user_id: int,

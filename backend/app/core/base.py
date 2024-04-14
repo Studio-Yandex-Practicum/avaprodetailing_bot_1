@@ -6,6 +6,7 @@ from app.models import (  # noqa
     LoyalityHistory,
     LoyalitySettings,
     LoyalitySettingsHistory,
+    Payment,
     User,
     UserHistory,
 )

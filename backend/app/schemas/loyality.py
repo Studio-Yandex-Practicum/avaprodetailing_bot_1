@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Optional
 
 from pydantic import BaseModel
@@ -22,6 +23,14 @@ class LoyalityList(BaseModel):
 
 class Loyality(LoyalityList):
     user_id: int
+
+
+class LoyalityListDBAdmin(Loyality):
+    date: datetime
+    exp_date: datetime
+
+    class Config:
+        from_attributes = True
 
 
 class LoyalityDBAdmin(Loyality):

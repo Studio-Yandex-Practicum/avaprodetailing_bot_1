@@ -33,6 +33,8 @@ MAX_LENGTH_LAST_NAME = 64
 
 ID_LOYALITY_SETTINGS = 1
 
+MAX_LENGTH_UUID4 = 36
+
 
 class Settings(BaseSettings):
     app_title: str = APP_TITLE

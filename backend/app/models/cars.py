@@ -1,4 +1,3 @@
-from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, ForeignKey, String
 
@@ -13,7 +12,8 @@ class Car(Base):
         String(MAX_LENGTH_NUMBER_PLATE), nullable=False, unique=True
     )
     changes = relationship(
-        'CarHistory', backref='car', cascade='all, delete-orphan')
+        'CarHistory', backref='car', cascade='all, delete-orphan'
+    )
     owner_telegram_id: str = Column(
         String,
         ForeignKey(

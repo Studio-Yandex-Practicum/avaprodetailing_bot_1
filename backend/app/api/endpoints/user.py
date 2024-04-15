@@ -207,3 +207,13 @@ async def delete_user_as_admin(
     return await user_crud.remove(
         await user_crud.get_user_by_telegram_id(user_id, session), session
     )
+
+
+@router.post('/admin/{telegram_id}/add_user')
+async def add_user_as_admin(
+    telegram_id: str,
+    request: Request,
+    session: AsyncSession = Depends(get_async_session)
+):
+    await check_admin_user(telegram_id, session)
+    return templates.TemplateResponse('add_user.html', dict(request=request))

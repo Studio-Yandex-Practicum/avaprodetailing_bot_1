@@ -19,7 +19,9 @@ from keyboards import (
     personal_acount_button,
     registration_button,
     user_qr_code_button,
-    loyality_points_button
+    loyality_points_button,
+    loyality_points_history_button,
+    universal_web_app_keyboard_button
 )
 from messages import WECLOME_NEW_USER
 
@@ -84,10 +86,27 @@ async def starting(message: types.Message):
                                     car_list,
                                     user_qr_code_button
                                 ],
-                                [loyality_points_button]
+                                [
+                                    loyality_points_button,
+                                    loyality_points_history_button
+                                ]
                             ]
                         ),
                         resize_keyboard=True
+                    )
+                elif response['is_admin'] and not response['is_superuser']:
+                    await message.answer(
+                        'Добро пожаловать.',
+                        reply_markup=types.ReplyKeyboardMarkup(
+                            keyboard=[
+                                [
+                                    universal_web_app_keyboard_button(
+                                        'Регистрация ноавого клиента',
+                                        url=''
+                                    )
+                                ]
+                            ]
+                        )
                     )
             else:
                 logging.ERROR('Problem: server returned %s', response.status)
@@ -124,7 +143,10 @@ async def web_app2(message: types.Message):
                                         car_list,
                                         user_qr_code_button
                                     ],
-                                    [loyality_points_button]
+                                    [
+                                        loyality_points_button,
+                                        loyality_points_history_button
+                                    ]
                                 ]
                             ),
                             resize_keyboard=True
@@ -224,10 +246,22 @@ async def loyality_points(message: types.Message):
                 (
                     await message.answer('У вас накопленно баллов: 0')
                     if not data[0]['count'] else
-                    await message.answer(f"У вас накопленно баллов: {data['count']}")
+                    await message.answer(
+                        f"У вас накопленно баллов: {data['count']}"
+                    )
                 )
-            if response.status == HTTPStatus.NOT_FOUND:
+            elif response.status == HTTPStatus.NOT_FOUND:
                 await message.answer(data[0]['count'])
+            else:
+                await message.answer('Что-то пошло не так. Попробуйте позже')
+
+
+# @dp.message(F.text == loyality_points_history_button.text)
+# async def loyality_points_history(message: types.Message):
+#     async with aiohttp.ClientSession() as session:
+#         async with session.get(f'{SITE_URL}/loyality/user/{message.from_user.id}/history') as response:
+#             data = await response.json()
+#             if len(data) > 0:
 
 
 async def main():

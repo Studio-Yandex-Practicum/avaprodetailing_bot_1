@@ -84,3 +84,11 @@ class UserDBAdmin(UserFromDB):
 
     class Config(UserFromDB.Config):
         pass
+
+
+class UserByAdmin(BaseModel):
+    phone_number: str
+    first_name: str
+    second_name: str
+    last_name: str
+    birth_date: date

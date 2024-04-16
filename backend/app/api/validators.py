@@ -249,3 +249,11 @@ def valid_phone_number(phone_number: str) -> str:
 def check_birth_date_less_current_data(birth_date: date) -> None:
     if birth_date > date.today():
         raise ValueError(INVALID_BIRTH_DATE)
+
+
+async def check_mobile_phone_nuber_is_exists(
+    phone_number: str,
+    session: AsyncSession
+) -> None:
+    if await user_crud.get_user_by_phone_number(phone_number, session):
+        raise HTTPException(HTTPStatus.BAD_REQUEST, DUBLICATE_PHONE)

@@ -11,6 +11,9 @@
                         Номер телефона
                     </label>
                     <input type="text" name="phone_number" class="form-control">
+                    <div class="error">
+
+                    </div>
                 </div>
                 <div class="mb3">
                     <label for="first_name" class="form-label">
@@ -40,6 +43,31 @@
                     <input type="button" id="add_user_button" value="Добавить">
                 </div>
             </form>
+            <script>
+                $(document).ready(function(){
+                    Telegram.WebApp.ready()
+                    var WebApp = window.Telegram.WebApp
+                    WebApp.expand()
+                    $('#add_user_button').on('click', function(event){
+                        event.preventDefault()
+                        $.ajax({
+                            url: '/users/admin/{{ request.path_params.telegram_id }}/add_user',
+                            method: 'post',
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            data: JSON.stringify(
+                                {
+                                    phone_number: $('input[name="phone_number"]').val(),
+                                    first_name: $('input[name="first_name"]').val(),
+                                    second_name: $('input[name="second_name"]').val(),
+                                    last_name: $('input[name="last_name"]').val(),
+                                    birth_date: $('input[name="birth_date"]').val(),
+                                }
+                            )
+                        })
+                    })
+                })
+            </script>
         </div>
     </div>
 </div>

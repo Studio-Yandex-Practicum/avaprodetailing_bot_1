@@ -2,6 +2,7 @@ import re
 from http import HTTPStatus
 from typing import Optional
 
+from fastapi import Form
 from fastapi import HTTPException
 from pydantic import BaseModel, validator
 
@@ -26,6 +27,10 @@ class CarDB(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class CarListUser(CarDB):
+    id: int
 
 
 class CarListDBAdmin(CarDB):
@@ -102,7 +107,67 @@ class CarCreateUser(CarUpdate):
     model: str
     number_plate: str
 
+    class Config:
+        orm_mode = True
 
+    @classmethod
+    async def as_form(
+        cls,
+        brand: str = Form(
+            ...,
+            title='Марка',
+            min_length=MIN_LENGTH_STR,
+            max_length=MAX_LENGTH_BRAND_MODEL
+        ),
+        model: str = Form(
+            ...,
+            title='Модель',
+            min_length=MIN_LENGTH_STR,
+            max_length=MAX_LENGTH_BRAND_MODEL
+        ),
+        number_plate: str = Form(..., title='Гос. Номер'),
+        owner_telegram_id: str = Form(..., title='Владелец')
+
+    ):
+        return cls(
+            brand=brand,
+            model=model,
+            number_plate=number_plate,
+            owner_telegram_id=owner_telegram_id
+        )
+
+
+class CarCreateUser(CarUpdate):
+    brand: str
+    model: str
+    number_plate: str
+
+    @classmethod
+    async def as_form(
+        cls,
+        brand: str = Form(
+            ...,
+            title='Марка',
+            min_length=MIN_LENGTH_STR,
+            max_length=MAX_LENGTH_BRAND_MODEL
+        ),
+        model: str = Form(
+            ...,
+            title='Модель',
+            min_length=MIN_LENGTH_STR,
+            max_length=MAX_LENGTH_BRAND_MODEL
+        ),
+        number_plate: str = Form(..., title='Гос. Номер')
+
+    ):
+        return cls(
+            id=None,
+            brand=brand,
+            model=model,
+            number_plate=number_plate
+        )
+
+      
 class CarCreate(CarCreateUser):
     owner_telegram_id: str
 
@@ -118,3 +183,4 @@ class CarCreate(CarCreateUser):
                 )
             case _:
                 return value
+

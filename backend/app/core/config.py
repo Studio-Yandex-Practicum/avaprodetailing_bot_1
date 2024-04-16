@@ -9,6 +9,8 @@ APP_TITLE = 'Система лояльности AVA Pro Detailing'
 
 ALLOWED_CHARS = 'АВЕКМНОРСТУХ'
 
+OWNER_TELEGRAM_ID_ERROR = 'Укажите владельца автомобиля.'
+
 MIN_LENGTH_BRAND_MODEL_ERROR = 'Поле не может быть пустым.'
 MAX_LENGTH_BRAND_MODEL_ERROR = 'Название не может быть более 50 символов.'
 MIN_LENGTH_STR = 1
@@ -21,6 +23,7 @@ PHONE_LENGTH_STRING = 12
 DEFAULT_LOYALITY_VALUE = 100
 LIFETIME_OF_BONUSES_IN_DAYS = 365
 
+NUMBER_PLATE_ERROR = 'Укажите номер автомобиля.'
 LENGTH_NUMBER_PLATE_ERROR = 'Длина номера автомобиля должна быть 8-9 символов.'
 NUMBER_PLATE_FORMAT_ERROR = (
     'Неверный формат номера. '

@@ -24,7 +24,7 @@ class PaymentMethod(str, enum.Enum):
 class Payment(Base):
     generated_payment_id: str = Column(
         String(MAX_LENGTH_UUID4),
-        nullable=False,
+        nullable=True,
         unique=True,
     )
     date: datetime = Column(DateTime, nullable=False, default=datetime.now)

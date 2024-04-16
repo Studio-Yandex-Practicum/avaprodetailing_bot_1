@@ -23,7 +23,10 @@ class LoyalitySettings(Base):
 
 class Loyality(Base):
     user_id: int = Column(
-        Integer, ForeignKey('user.id', name='fk_loyality_user_id_user')
+        Integer, ForeignKey(
+            'user.telegram_id',
+            name='fk_loyality_user_telegram_id_user'
+        )
     )
     amount: int = Column(Integer, nullable=False)
     edited: bool = Column(Boolean, nullable=False, default=False)

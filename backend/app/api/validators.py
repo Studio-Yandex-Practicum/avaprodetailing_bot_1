@@ -51,6 +51,16 @@ async def check_car_exists(car_id: int, session: AsyncSession) -> None:
         )
 
 
+async def check_user_registered(
+    telegram_id: str,
+    session: AsyncSession
+) -> None:
+    if await user_crud.get_user_by_telegram_id(telegram_id, session):
+        raise HTTPException(
+            status_code=HTTPStatus.BAD_REQUEST, detail=DUBLICATE_TELEGRAM_ID
+        )
+
+
 async def check_user_exists(telegram_id: str, session: AsyncSession) -> None:
     if not await user_crud.get_user_by_telegram_id(telegram_id, session):
         raise HTTPException(
@@ -212,7 +222,10 @@ async def check_phone_dublicate(
 ) -> None:
     user_id = await user_crud.get_user_by_phone_number(phone_number, session)
     if user_id and telegram_id != user_id.telegram_id:
-        raise ValueError(DUBLICATE_PHONE)
+        raise HTTPException(
+            status_code=HTTPStatus.BAD_REQUEST,
+            detail=DUBLICATE_PHONE
+        )
 
 
 async def check_telegram_id_dublicate(
@@ -236,3 +249,11 @@ def valid_phone_number(phone_number: str) -> str:
 def check_birth_date_less_current_data(birth_date: date) -> None:
     if birth_date > date.today():
         raise ValueError(INVALID_BIRTH_DATE)
+
+
+async def check_mobile_phone_nuber_is_exists(
+    phone_number: str,
+    session: AsyncSession
+) -> None:
+    if await user_crud.get_user_by_phone_number(phone_number, session):
+        raise HTTPException(HTTPStatus.BAD_REQUEST, DUBLICATE_PHONE)

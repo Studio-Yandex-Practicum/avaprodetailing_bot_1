@@ -15,7 +15,9 @@ from app.api.validators import (
     check_phone_dublicate,
     check_telegram_id_dublicate,
     check_user_exists,
+    check_user_registered,
     valid_phone_number,
+    check_mobile_phone_nuber_is_exists
 )
 from app.core.db import get_async_session
 from app.crud.user import user_crud
@@ -25,6 +27,7 @@ from app.schemas.user import (
     UserDBAdmin,
     UserFromDB,
     UserUpdate,
+    UserByAdmin
 )
 
 router = APIRouter()
@@ -63,6 +66,7 @@ async def process_registration(
 ):
     context = {'request': request, 'form': form_data, 'errors': []}
     try:
+        await check_user_registered(form_data.telegram_id, session)
         form_data.phone_number = valid_phone_number(form_data.phone_number)
         await check_telegram_id_dublicate(None, form_data.telegram_id, session)
         await check_phone_dublicate(
@@ -205,3 +209,24 @@ async def delete_user_as_admin(
     return await user_crud.remove(
         await user_crud.get_user_by_telegram_id(user_id, session), session
     )
+
+
+@router.get('/admin/{telegram_id}/add_user')
+async def add_user_as_admin_form(
+    telegram_id: str,
+    request: Request,
+    session: AsyncSession = Depends(get_async_session)
+):
+    await check_admin_user(telegram_id, session)
+    return templates.TemplateResponse('add_user.html', dict(request=request))
+
+
+@router.post('/admin/{telegram_id}/add_user')
+async def add_user_as_admin(
+    telegram_id: str,
+    user_data: UserByAdmin,
+    session: AsyncSession = Depends(get_async_session)
+):
+    await check_admin_user(telegram_id, session)
+    await check_mobile_phone_nuber_is_exists(user_data.phone_number, session)
+    return await user_crud.create(user_data, session)

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}Регистрация Пользователя{% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="row align-items-center justify-content-center">
+        <div class="col-md-6">
+            <h1 class="text-center">Регистрация пользователя</h1>
+            <form id="register_user" class="form-control">
+                <div class="mb3">
+                    <label for="phone_number" class="form-label">
+                        Номер телефона
+                    </label>
+                    <input type="text" name="phone_number" class="form-control">
+                    <div class="error">
+
+                    </div>
+                </div>
+                <div class="mb3">
+                    <label for="first_name" class="form-label">
+                        Имя
+                    </label>
+                    <input type="text" name="first_name" class="form-control">
+                </div>
+                <div class="mb3">
+                    <label for="second_name" class="form-label">
+                        Отчество
+                    </label>
+                    <input type="text" name="second_name" class="form-control">
+                </div>
+                <div class="mb3">
+                    <label for="last_name" class="form-label">
+                        Фамилия
+                    </label>
+                    <input type="text" name="last_name" class="form-control">
+                </div>
+                <div class="mb3">
+                    <label for="birth_date" class="form-label">
+                        Фамилия
+                    </label>
+                    <input type="date" name="birth_date" class="form-control">
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <input type="button" id="add_user_button" value="Добавить">
+                </div>
+            </form>
+            <script>
+                $(document).ready(function(){
+                    Telegram.WebApp.ready()
+                    var WebApp = window.Telegram.WebApp
+                    WebApp.expand()
+                    $('#add_user_button').on('click', function(event){
+                        event.preventDefault()
+                        $.ajax({
+                            url: '/users/admin/{{ request.path_params.telegram_id }}/add_user',
+                            method: 'post',
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            data: JSON.stringify(
+                                {
+                                    phone_number: $('input[name="phone_number"]').val(),
+                                    first_name: $('input[name="first_name"]').val(),
+                                    second_name: $('input[name="second_name"]').val(),
+                                    last_name: $('input[name="last_name"]').val(),
+                                    birth_date: $('input[name="birth_date"]').val(),
+                                }
+                            )
+                        })
+                    })
+                })
+            </script>
+        </div>
+    </div>
+</div>
+{% endblock content %}

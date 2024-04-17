@@ -22,7 +22,7 @@ loyality_points_history_button = KeyboardButton(
 async def universal_web_app_keyboard_button(
     text: str, url: str
 ) -> KeyboardButton:
-    return KeyboardButton(text, url=url)
+    return KeyboardButton(text=text, web_app=WebAppInfo(url=url))
 
 
 async def registration_button(
@@ -39,6 +39,19 @@ async def personal_acount_button(
 ) -> KeyboardButton:
     return KeyboardButton(
         text='Личный кабинет',
+        web_app=WebAppInfo(
+            url=f'{site_url}/users/{telegram_id}/patch/{phone}'
+        ),
+    )
+
+
+#  эту кнопку администратора надо доработать для корректной работы
+# возможно, дописать эндпойнт
+async def edit_user_admin_button(
+    site_url: str, admin_id, telegram_id: str, phone: str
+) -> InlineKeyboardButton:
+    return InlineKeyboardButton(
+        text='Редактировать',
         web_app=WebAppInfo(
             url=f'{site_url}/users/{telegram_id}/patch/{phone}'
         ),

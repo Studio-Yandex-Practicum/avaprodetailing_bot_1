@@ -11,6 +11,8 @@ from sqlalchemy import (
     Integer,
     String,
 )
+from sqlalchemy.orm import relationship
+
 
 from app.core.db import Base
 from app.core.config import MAX_LENGTH_UUID4
@@ -29,7 +31,12 @@ class Payment(Base):
     )
     date: datetime = Column(DateTime, nullable=False, default=datetime.now)
     price: int = Column(Integer, nullable=False)
-    payment_method = Column(Enum(PaymentMethod), nullable=False)
+    payment_method: PaymentMethod = Column(Enum(PaymentMethod), nullable=False)
+    loyality = relationship(
+        'Loyality',
+        uselist=False,
+        back_populates='payment',
+    )
     admin_id: int = Column(
         Integer,
         ForeignKey(

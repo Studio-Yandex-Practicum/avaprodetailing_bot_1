@@ -45,8 +45,9 @@ services:
 
   bot:
     container_name: bot
-    build:
-      dockerfile: bot.Dockerfile
+    image: zali1813/avaprodetailing_bot:v1
+    # build:
+    #   dockerfile: bot.Dockerfile
     restart: always
     env_file:
       - ./.env

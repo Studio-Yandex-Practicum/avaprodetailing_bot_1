@@ -17,6 +17,7 @@ from keyboards import (
     create_payment_button,
     delete_car_user_button,
     edit_car_user_button,
+    edit_user_admin_button,
     personal_acount_button,
     registration_button,
     loyality_points_button,
@@ -100,7 +101,8 @@ async def starting(message: types.Message):
                             keyboard=[
                                 [
                                     await universal_web_app_keyboard_button(
-                                        'Регистрация нового клиента', url=''
+                                        'Регистрация нового клиента',
+                                        url='https://ya.ru',  # заглушка, поскольку webapp принимает только https
                                     ),
                                     user_list,
                                 ],
@@ -111,6 +113,7 @@ async def starting(message: types.Message):
                                 ],
                             ]
                         ),
+                        resize_keyboard=True,
                     )
             else:
                 logging.ERROR('Problem: server returned %s', response.status)
@@ -198,7 +201,7 @@ async def get_car_list(message: types.Message):
                     for car in await response.json()
                 ]
             await message.answer(
-                'Добавиьт машину',
+                'Добавить машину',
                 reply_markup=types.InlineKeyboardMarkup(
                     inline_keyboard=[
                         [
@@ -243,17 +246,48 @@ async def loyality_points(message: types.Message):
         ) as response:
             data = await response.json()
             if response.status == HTTPStatus.OK:
-                (
-                    await message.answer('У вас накопленно баллов: 0')
-                    if not data[0]['count']
-                    else await message.answer(
-                        f"У вас накопленно баллов: {data['count']}"
-                    )
+                await message.answer(
+                    f'У вас накоплено баллов: {data["count"]}'
                 )
             elif response.status == HTTPStatus.NOT_FOUND:
-                await message.answer(data[0]['count'])
+                await message.answer(data['count'])
             else:
                 await message.answer('Что-то пошло не так. Попробуйте позже')
+
+
+@dp.message(F.text == 'Список пользователей')
+async def get_user_list(message: types.Message):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(
+            f'{SITE_URL}/users/admin/{message.from_user.id}'
+        ) as response:
+            if (
+                response.status == HTTPStatus.OK
+                and len(await response.json()) > 0
+            ):
+                [
+                    await message.answer(
+                        (
+                            f'ФИО: {user["last_name"]} {user["first_name"]} '
+                            f'{user["second_name"]}\n'
+                            f'Дата рождения: {user["birth_date"]}\n'
+                            f'Номер телефона: {user["phone_number"]}'
+                        ),
+                        reply_markup=types.InlineKeyboardMarkup(
+                            inline_keyboard=[
+                                [
+                                    await edit_user_admin_button(
+                                        SITE_URL,
+                                        message.from_user.id,
+                                        user['telegram_id'],
+                                        user['phone_number'],
+                                    )
+                                ]
+                            ]
+                        ),
+                    )
+                    for user in await response.json()
+                ]
 
 
 # @dp.message(F.text == loyality_points_history_button.text)

@@ -230,3 +230,16 @@ async def add_user_as_admin(
     await check_admin_user(telegram_id, session)
     await check_mobile_phone_nuber_is_exists(user_data.phone_number, session)
     return await user_crud.create(user_data, session)
+
+
+@router.get('/admin/{telegram_id}/user_info')
+async def get_user_info_as_admin(
+    telegram_id: str,
+    request: Request,
+    session: AsyncSession = Depends(get_async_session)
+):
+    await check_admin_user(telegram_id, session)
+    return templates.TemplateResponse(
+        'get_edit_user.html',
+        dict(request=request)
+    )

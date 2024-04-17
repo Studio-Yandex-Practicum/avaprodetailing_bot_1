@@ -101,7 +101,14 @@ async def starting(message: types.Message):
                             keyboard=[
                                 [
                                     universal_web_app_keyboard_button(
-                                        'Регистрация ноавого клиента',
+                                        'Регистрация нового клиента',
+                                        url=(
+                                            '/users/admin/'
+                                            f'{message.from_user.id}/add_user'
+                                        )
+                                    ),
+                                    universal_web_app_keyboard_button(
+                                        'Просмотр/редактирование клиента',
                                         url=''
                                     )
                                 ]

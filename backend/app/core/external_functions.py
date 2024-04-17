@@ -10,9 +10,9 @@ def check_work_mode(mode: str) -> str:
         os.getenv('SQLITE_DATABASE_URL')
         if bool(strtobool(os.getenv(mode, 'True')))
         else (
-            f'postgresql+asyncpg://{os.getenv("POSTGRESQL_DATABASE_USER")}:'
-            f'{os.getenv("POSTGRESQL_DATABASE_PASSWORD")}'
-            f'@{os.getenv("POSTGRESQL_DATABASE_HOST")}'
-            f'/{os.getenv("POSTGRESQL_DATABASE_NAME")}'
+            f'postgresql+asyncpg://{os.getenv("POSTGRES_USER")}:'
+            f'{os.getenv("POSTGRES_PASSWORD")}'
+            f'@{os.getenv("POSTGRES_HOST")}'
+            f'/{os.getenv("POSTGRES_DB")}'
         )
     )

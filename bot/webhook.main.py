@@ -47,22 +47,18 @@ kb = types.ReplyKeyboardMarkup(
     resize_keyboard=True
 )
 SITE_URL = os.getenv('SITE_URL')
-SITE_URLs = os.getenv('SITE_URLs')
 WEB_SERVER_HOST = os.getenv('WEB_SERVER_HOST')
 WEB_SERVER_PORT = os.getenv('WEB_SERVER_PORT')
 
 WEBHOOK_PATH = "/webhook"
 WEBHOOK_SECRET = os.getenv('WEBHOOK_SECRET')
-BASE_WEBHOOK_URL = os.getenv('BASE_WEBHOOK_URL')
+
 
 router = Router()
 
 
 @router.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
-    """
-    This handler receives messages with `/start` command
-   """
     telegram_id = message.from_user.id
     async with aiohttp.ClientSession() as session:
         async with session.get(
@@ -71,20 +67,16 @@ async def command_start_handler(message: Message) -> None:
             if response.status == HTTPStatus.NOT_FOUND:
                 await message.answer(
                     WELCOME_NEW_USER,
-                    print(await registration_button(SITE_URL, telegram_id)),
                     reply_markup=types.ReplyKeyboardMarkup(
                         keyboard=[
-                            [await registration_button(SITE_URLs, telegram_id)]
+                            [await registration_button(SITE_URL, telegram_id)]
                         ],
-                        resize_keyboard=True
-                    )
+                        resize_keyboard=True,
+                    ),
                 )
             elif response.status == HTTPStatus.OK:
                 response = await response.json()
-                if (
-                    not response['is_admin'] and
-                    not response['is_superuser']
-                ):
+                if not response['is_admin'] and not response['is_superuser']:
                     await message.answer(
                         'С возвращением!',
                         reply_markup=types.ReplyKeyboardMarkup(
@@ -93,33 +85,44 @@ async def command_start_handler(message: Message) -> None:
                                     await personal_acount_button(
                                         SITE_URL,
                                         message.from_user.id,
-                                        response['phone_number']
+                                        response['phone_number'],
                                     ),
                                     car_list,
-                                    user_qr_code_button
+                                    user_qr_code_button,
                                 ],
                                 [
                                     loyality_points_button,
-                                    loyality_points_history_button
-                                ]
+                                    loyality_points_history_button,
+                                ],
                             ]
                         ),
-                        resize_keyboard=True
+                        resize_keyboard=True,
                     )
-                elif response['is_admin'] and not response['is_superuser']:
-                    await message.answer(
-                        'Добро пожаловать.',
-                        reply_markup=types.ReplyKeyboardMarkup(
-                            keyboard=[
-                                [
-                                    universal_web_app_keyboard_button(
-                                        'Регистрация ноавого клиента',
-                                        url=''
+            elif response['is_admin'] and response['is_superuser']:
+                await message.answer(
+                    'Добро пожаловать.',
+                    reply_markup=types.ReplyKeyboardMarkup(
+                        keyboard=[
+                            [
+                                await universal_web_app_keyboard_button(
+                                    'Регистрация нового клиента',
+                                    url=(
+                                        f'{SITE_URL}/users/admin/'
+                                        f'{message.from_user.id}/add_user'
                                     )
-                                ]
+                                ),
+                                await universal_web_app_keyboard_button(
+                                    'Просмотр/редактирование клиента',
+                                    url=(
+                                        f'{SITE_URL}/users/admin/'
+                                        f'{message.from_user.id}/user_info'
+                                    )
+                                )
                             ]
-                        )
-                    )
+                        ]
+                    ),
+                    resize_keyboard=True,
+                )
             else:
                 logging.error('Problem: server returned %s', response.status)
                 await message.answer(
@@ -139,8 +142,8 @@ async def web_app2(message: types.Message):
                 if response.status == HTTPStatus.OK:
                     response = await response.json()
                     if (
-                        not response['is_admin'] and
-                        not response['is_superuser']
+                        not response['is_admin']
+                        and not response['is_superuser']
                     ):
                         await message.answer(
                             'Регистрация успешно пройдена',
@@ -150,18 +153,18 @@ async def web_app2(message: types.Message):
                                         await personal_acount_button(
                                             SITE_URL,
                                             message.from_user.id,
-                                            response['phone_number']
+                                            response['phone_number'],
                                         ),
                                         car_list,
-                                        user_qr_code_button
+                                        user_qr_code_button,
                                     ],
                                     [
                                         loyality_points_button,
-                                        loyality_points_history_button
-                                    ]
+                                        loyality_points_history_button,
+                                    ],
                                 ]
                             ),
-                            resize_keyboard=True
+                            resize_keyboard=True,
                         )
 
                     await message.answer(str(response))
@@ -181,8 +184,8 @@ async def get_car_list(message: types.Message):
             f'{SITE_URL}/cars/{message.from_user.id}'
         ) as response:
             if (
-                response.status == HTTPStatus.OK and
-                len(await response.json()) > 0
+                response.status == HTTPStatus.OK
+                and len(await response.json()) > 0
             ):
                 [
                     await message.answer(
@@ -196,27 +199,26 @@ async def get_car_list(message: types.Message):
                                     await edit_car_user_button(
                                         SITE_URL,
                                         message.from_user.id,
-                                        car["id"]
+                                        car["id"],
                                     ),
-                                    await delete_car_user_button(car["id"])
+                                    await delete_car_user_button(car["id"]),
                                 ]
                             ]
-                        )
+                        ),
                     )
                     for car in await response.json()
                 ]
             await message.answer(
-                'Добавиьт машину',
+                'Добавить машину',
                 reply_markup=types.InlineKeyboardMarkup(
                     inline_keyboard=[
                         [
                             await create_car_user_button(
-                                SITE_URL,
-                                message.from_user.id
+                                SITE_URL, message.from_user.id
                             )
                         ]
                     ]
-                )
+                ),
             )
 
 
@@ -239,10 +241,7 @@ async def user_qr_code(message: types.Message):
     img.save(f'{message.from_user.id}.png')
     with open(f'{message.from_user.id}.png', 'rb') as file:
         await message.answer_photo(
-            types.BufferedInputFile(
-                file.read(),
-                filename='qr_code.png'
-            )
+            types.BufferedInputFile(file.read(), filename='qr_code.png')
         )
     os.remove(f'{message.from_user.id}.png')
 
@@ -255,29 +254,52 @@ async def loyality_points(message: types.Message):
         ) as response:
             data = await response.json()
             if response.status == HTTPStatus.OK:
-                (
-                    await message.answer('У вас накопленно баллов: 0')
-                    if not data[0]['count'] else
-                    await message.answer(
-                        f"У вас накопленно баллов: {data['count']}"
-                    )
+                await message.answer(
+                    f'У вас накоплено баллов: {data["count"]}'
                 )
             elif response.status == HTTPStatus.NOT_FOUND:
-                await message.answer(data[0]['count'])
+                await message.answer(data['count'])
             else:
                 await message.answer('Что-то пошло не так. Попробуйте позже')
 
 
-# @router.message(F.text == loyality_points_history_button.text)
-# async def loyality_points_history(message: types.Message):
-#     async with aiohttp.ClientSession() as session:
-#         async with session.get(f'{SITE_URL}/loyality/user/{message.from_user.id}/history') as response:
-#             data = await response.json()
-#             if len(data) > 0:
+@router.message(F.text == 'Список пользователей')
+async def get_user_list(message: types.Message):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(
+            f'{SITE_URL}/users/admin/{message.from_user.id}'
+        ) as response:
+            if (
+                response.status == HTTPStatus.OK
+                and len(await response.json()) > 0
+            ):
+                [
+                    await message.answer(
+                        (
+                            f'ФИО: {user["last_name"]} {user["first_name"]} '
+                            f'{user["second_name"]}\n'
+                            f'Дата рождения: {user["birth_date"]}\n'
+                            f'Номер телефона: {user["phone_number"]}'
+                        ),
+                        reply_markup=types.InlineKeyboardMarkup(
+                            inline_keyboard=[
+                                [
+                                    await edit_user_admin_button(
+                                        SITE_URL,
+                                        message.from_user.id,
+                                        user['telegram_id'],
+                                        user['phone_number'],
+                                    )
+                                ]
+                            ]
+                        ),
+                    )
+                    for user in await response.json()
+                ]
 
 
 async def on_startup(bot: Bot) -> None:
-    await bot.set_webhook(f"{BASE_WEBHOOK_URL}{WEBHOOK_PATH}", secret_token=WEBHOOK_SECRET)
+    await bot.set_webhook(f"{SITE_URL}{WEBHOOK_PATH}", secret_token=WEBHOOK_SECRET)
 
 
 async def main():
@@ -294,7 +316,7 @@ async def main():
     )
     webhook_requests_handler.register(app, path=WEBHOOK_PATH)
     setup_application(app, dp, bot=bot)
-    web.run_app(app, host=WEB_SERVER_HOST, port=WEB_SERVER_PORT)
+    web._run_app(app, host=WEB_SERVER_HOST, port=WEB_SERVER_PORT)
 
 
 if __name__ == '__main__':

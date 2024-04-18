@@ -1,4 +1,4 @@
-# version: "3.8"
+name: 'team1_avaprodetailing'
 
 services:
   db:
@@ -26,7 +26,7 @@ services:
   backend:
     container_name: backend
     image: zali1813/avaprodetailing_backend:v1
-    restart: always
+    restart: unless-stopped
     env_file:
       - ./.env
     depends_on:
@@ -45,7 +45,7 @@ services:
   bot:
     container_name: bot
     image: zali1813/avaprodetailing_bot:v1
-    restart: always
+    restart: unless-stopped
     env_file:
       - ./.env
 

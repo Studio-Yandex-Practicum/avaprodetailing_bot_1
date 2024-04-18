@@ -17,6 +17,7 @@ from app.core.config import (
     NUMBER_PLATE_FORMAT_ERROR,
 )
 from app.crud.cars import cars_crud
+from app.crud.loyality import loyality_crud
 from app.crud.user import user_crud
 from app.models import Car
 from app.schemas.cars import CarCreate, CarUpdate
@@ -40,6 +41,14 @@ INVALID_PHONE_NUMBER = (
 )
 INVALID_BIRTH_DATE = 'Дата рождения не может быть больше текущей даты'
 
+INVALID_AMOUNT = (
+    'Количество бонусов для начисления или списания не может быть равно нулю.'
+)
+AMOUNT_ERROR = (
+    'Количество бонусов для списания не может превышать '
+    'сумму накопленных бонусов'
+)
+
 
 """API EXCEPTION HANDLER"""
 
@@ -52,8 +61,7 @@ async def check_car_exists(car_id: int, session: AsyncSession) -> None:
 
 
 async def check_user_registered(
-    telegram_id: str,
-    session: AsyncSession
+    telegram_id: str, session: AsyncSession
 ) -> None:
     if await user_crud.get_user_by_telegram_id(telegram_id, session):
         raise HTTPException(
@@ -214,6 +222,21 @@ def api_check_birth_date_less_current_data(birth_date: date) -> None:
         )
 
 
+async def check_loyality_balance(
+    data, telegram_id: str, session: AsyncSession
+) -> None:
+    if data.amount == 0:
+        raise HTTPException(
+            status_code=HTTPStatus.BAD_REQUEST, detail=INVALID_AMOUNT
+        )
+    if data.action == 'списано':
+        if (
+            await loyality_crud.get_count_of_points(telegram_id, session)
+            < data.amount
+        ):
+            raise HTTPException(HTTPStatus.BAD_REQUEST, detail=AMOUNT_ERROR)
+
+
 """VALIDATION"""
 
 
@@ -223,8 +246,7 @@ async def check_phone_dublicate(
     user_id = await user_crud.get_user_by_phone_number(phone_number, session)
     if user_id and telegram_id != user_id.telegram_id:
         raise HTTPException(
-            status_code=HTTPStatus.BAD_REQUEST,
-            detail=DUBLICATE_PHONE
+            status_code=HTTPStatus.BAD_REQUEST, detail=DUBLICATE_PHONE
         )
 
 
@@ -252,8 +274,7 @@ def check_birth_date_less_current_data(birth_date: date) -> None:
 
 
 async def check_mobile_phone_nuber_is_exists(
-    phone_number: str,
-    session: AsyncSession
+    phone_number: str, session: AsyncSession
 ) -> None:
     if await user_crud.get_user_by_phone_number(phone_number, session):
         raise HTTPException(HTTPStatus.BAD_REQUEST, DUBLICATE_PHONE)

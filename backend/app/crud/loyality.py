@@ -10,6 +10,7 @@ from app.crud.history import (
     loyality_settings_history_crud,
 )
 from app.crud.history import loyality_history_crud
+from app.crud.user import user_crud
 from app.models import Loyality, LoyalitySettings
 
 
@@ -72,17 +73,23 @@ class CRUDLoyality(CRUDBase):
     async def get_count_of_points(
         self, telegram_id: str, session: AsyncSession
     ):
-        return (
+        count = (
             (
                 await session.execute(
                     select(func.sum(Loyality.amount)).filter(
-                        Loyality.user_id == telegram_id
+                        Loyality.user_id
+                        == (
+                            await user_crud.get_user_by_telegram_id(
+                                telegram_id, session
+                            )
+                        ).id
                     )
                 )
             )
             .scalars()
             .first()
         )
+        return count if count else 0
 
     async def get_list_of_transactions(
         self, telegram_id: str, session: AsyncSession
@@ -90,7 +97,14 @@ class CRUDLoyality(CRUDBase):
         return (
             (
                 await session.execute(
-                    select(Loyality).filter(Loyality.user_id == telegram_id)
+                    select(Loyality).filter(
+                        Loyality.user_id
+                        == (
+                            await user_crud.get_user_by_telegram_id(
+                                telegram_id, session
+                            )
+                        ).id
+                    )
                 )
             )
             .scalars()

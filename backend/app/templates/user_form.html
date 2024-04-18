@@ -9,8 +9,8 @@
 <label for="last_name">Фамилия</label><br>
 <input type="text" id="last_name" name="last_name"{% if user%} value='{{ user.last_name }}' {% endif %}>
 <label for="birth_date">Дата рождения</label><br>
-<input type="datetime-local" id="birth_date" name="birth_date"{% if user%} value='{{ user.birth_date }}' {% endif %}>
-<input type="button" id="registration_btn" {% if user %} value='Редактирова'{% else %}value="Зарегестрироваться" {% endif %}>
+<input type="date" id="birth_date" name="birth_date"{% if user%} value='{{ user.birth_date }}' {% endif %}>
+<input type="button" id="registration_btn" {% if user %} value='Редактировать'{% else %}value="Зарегистрироваться" {% endif %}>
 <div class="form-errors"></div>
 <script>
     $(document).ready(function () {

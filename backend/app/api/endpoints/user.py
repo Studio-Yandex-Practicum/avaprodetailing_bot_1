@@ -168,21 +168,20 @@ async def get_user_as_admin(
 
 
 @router.patch(
-    '/admin/{telegram_id}/edit_user/{user_id}', response_model=UserFromDB
+    '/admin/{telegram_id}/edit_user', response_model=UserFromDB
 )
 async def edit_user_as_admin(
     telegram_id: str,
-    user_id: str,
     update_data: UserUpdate,
     session: AsyncSession = Depends(get_async_session),
 ):
     await check_admin_user(telegram_id, session)
-    await check_user_exists(user_id, session)
+    await check_user_exists(update_data.telegram_id, session)
     update_data.phone_number = api_validate_and_format_phone_number(
         update_data.phone_number
     )
     await api_check_telegram_id_duplicate(
-        update_data.telegram_id, user_id, session
+        update_data.telegram_id, update_data.telegram_id, session
     )
     await api_check_phone_duplicate(
         update_data.phone_number, update_data.telegram_id, session
@@ -190,7 +189,10 @@ async def edit_user_as_admin(
     api_check_birth_date_less_current_data(update_data.birth_date)
     return await user_crud.update(
         telegram_id,
-        await user_crud.get_user_by_telegram_id_as_admin(user_id, session),
+        await user_crud.get_user_by_telegram_id_as_admin(
+            update_data.telegram_id,
+            session
+        ),
         update_data,
         session,
     )
@@ -243,3 +245,14 @@ async def get_user_info_as_admin(
         'get_edit_user.html',
         dict(request=request)
     )
+
+
+@router.get('/admin/{telegram_id}/user_data/{user_telegram_id}')
+async def get_user_data_as_admin_by_telegram_id(
+    telegram_id: str,
+    user_telegram_id: str,
+    session: AsyncSession = Depends(get_async_session)
+):
+    await check_admin_user(telegram_id, session)
+    await check_user_exists(user_telegram_id, session)
+    return await user_crud.get_user_by_telegram_id(user_telegram_id, session)

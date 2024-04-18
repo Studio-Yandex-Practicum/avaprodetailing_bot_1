@@ -1,8 +1,8 @@
 """first
 
-Revision ID: 9aaa94e32e56
+Revision ID: 27a2c8778d50
 Revises: 
-Create Date: 2024-04-13 17:55:54.064542
+Create Date: 2024-04-17 23:09:50.990699
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '9aaa94e32e56'
+revision: str = '27a2c8778d50'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -56,7 +56,7 @@ def upgrade() -> None:
     sa.Column('date', sa.DateTime(), nullable=False),
     sa.Column('exp_date', sa.DateTime(), nullable=False),
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], name='fk_loyality_user_id_user'),
+    sa.ForeignKeyConstraint(['user_id'], ['user.telegram_id'], name='fk_loyality_user_telegram_id_user'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('loyalitysettingshistory',
@@ -69,6 +69,20 @@ def upgrade() -> None:
     sa.ForeignKeyConstraint(['changed_by_id'], ['user.id'], name='fk_loyalitysettingshistory_changed_by_id_user'),
     sa.ForeignKeyConstraint(['object_id'], ['loyalitysettings.id'], name='fk_loyalitysettingshistory_object_id_loyalitysettings'),
     sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('payment',
+    sa.Column('generated_payment_id', sa.String(length=36), nullable=False),
+    sa.Column('date', sa.DateTime(), nullable=False),
+    sa.Column('price', sa.Integer(), nullable=False),
+    sa.Column('payment_method', sa.Enum('online', 'cash', name='paymentmethod'), nullable=False),
+    sa.Column('admin_id', sa.Integer(), nullable=True),
+    sa.Column('payer_id', sa.Integer(), nullable=True),
+    sa.Column('is_paid', sa.Boolean(), nullable=False),
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['admin_id'], ['user.id'], name='fk_payment_admin_id_user'),
+    sa.ForeignKeyConstraint(['payer_id'], ['user.id'], name='fk_payment_payer_id_user'),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('generated_payment_id')
     )
     op.create_table('userhistory',
     sa.Column('changed_by_id', sa.Integer(), nullable=True),
@@ -112,6 +126,7 @@ def downgrade() -> None:
     op.drop_table('loyalityhistory')
     op.drop_table('carhistory')
     op.drop_table('userhistory')
+    op.drop_table('payment')
     op.drop_table('loyalitysettingshistory')
     op.drop_table('loyality')
     op.drop_table('car')

@@ -43,8 +43,8 @@ kb = types.ReplyKeyboardMarkup(
     resize_keyboard=True
 )
 # Для тестов
-SITE_URL = 'https://d10e-95-25-72-15.ngrok-free.app'
-SITE_URLs = 'https://d10e-95-25-72-15.ngrok-free.app'
+SITE_URL = 'https://777b-95-25-72-15.ngrok-free.app'
+SITE_URLs = 'https://777b-95-25-72-15.ngrok-free.app'
 
 # Для тестов
 
@@ -94,22 +94,25 @@ async def starting(message: types.Message):
                         ),
                         resize_keyboard=True
                     )
-                elif response['is_admin'] and not response['is_superuser']:
+                elif response['is_admin'] and response['is_superuser']:
                     await message.answer(
                         'Добро пожаловать.',
                         reply_markup=types.ReplyKeyboardMarkup(
                             keyboard=[
                                 [
-                                    universal_web_app_keyboard_button(
+                                    await universal_web_app_keyboard_button(
                                         'Регистрация нового клиента',
                                         url=(
-                                            '/users/admin/'
+                                            f'{SITE_URL}/users/admin/'
                                             f'{message.from_user.id}/add_user'
                                         )
                                     ),
-                                    universal_web_app_keyboard_button(
+                                    await universal_web_app_keyboard_button(
                                         'Просмотр/редактирование клиента',
-                                        url=''
+                                        url=(
+                                            f'{SITE_URL}/users/admin/'
+                                            f'{message.from_user.id}/user_info'
+                                        )
                                     )
                                 ]
                             ]

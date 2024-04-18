@@ -22,7 +22,7 @@ async def universal_web_app_keyboard_button(
     text: str,
     url: str
 ) -> KeyboardButton:
-    return KeyboardButton(text, url=url)
+    return KeyboardButton(text=text, web_app=WebAppInfo(url=url))
 
 
 async def registration_button(

@@ -107,7 +107,7 @@ async def starting(message: types.Message):
                         )
                     )
             else:
-                logging.ERROR('Problem: server returned %s', response.status)
+                logging.error('Problem: server returned %s', response.status)
                 await message.answer(
                     'У нас проводятся технические работы, попробуйте позже'
                 )
@@ -152,7 +152,7 @@ async def web_app2(message: types.Message):
 
                     await message.answer(str(response))
                 else:
-                    logging.ERROR(
+                    logging.error(
                         'Problem: server returned %s', response.status
                     )
                     await message.answer(

@@ -1,14 +1,8 @@
-"""first
+"""First migration
 
-<<<<<<<< HEAD:backend/alembic/versions/27a2c8778d50_first.py
-Revision ID: 27a2c8778d50
+Revision ID: a5baa1753ab2
 Revises: 
-Create Date: 2024-04-17 23:09:50.990699
-========
-Revision ID: 7e04ee801c64
-Revises: 
-Create Date: 2024-04-17 01:43:25.934543
->>>>>>>> development:backend/alembic/versions/7e04ee801c64_first.py
+Create Date: 2024-04-18 11:54:07.482081
 
 """
 from typing import Sequence, Union
@@ -18,11 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-<<<<<<<< HEAD:backend/alembic/versions/27a2c8778d50_first.py
-revision: str = '27a2c8778d50'
-========
-revision: str = '7e04ee801c64'
->>>>>>>> development:backend/alembic/versions/7e04ee801c64_first.py
+revision: str = 'a5baa1753ab2'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -59,19 +49,6 @@ def upgrade() -> None:
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('number_plate')
     )
-<<<<<<<< HEAD:backend/alembic/versions/27a2c8778d50_first.py
-    op.create_table('loyality',
-    sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.Column('amount', sa.Integer(), nullable=False),
-    sa.Column('edited', sa.Boolean(), nullable=False),
-    sa.Column('date', sa.DateTime(), nullable=False),
-    sa.Column('exp_date', sa.DateTime(), nullable=False),
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['user_id'], ['user.telegram_id'], name='fk_loyality_user_telegram_id_user'),
-    sa.PrimaryKeyConstraint('id')
-    )
-========
->>>>>>>> development:backend/alembic/versions/7e04ee801c64_first.py
     op.create_table('loyalitysettingshistory',
     sa.Column('changed_by_id', sa.Integer(), nullable=True),
     sa.Column('object_id', sa.Integer(), nullable=True),
@@ -84,11 +61,7 @@ def upgrade() -> None:
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('payment',
-<<<<<<<< HEAD:backend/alembic/versions/27a2c8778d50_first.py
-    sa.Column('generated_payment_id', sa.String(length=36), nullable=False),
-========
     sa.Column('generated_payment_id', sa.String(length=36), nullable=True),
->>>>>>>> development:backend/alembic/versions/7e04ee801c64_first.py
     sa.Column('date', sa.DateTime(), nullable=False),
     sa.Column('price', sa.Integer(), nullable=False),
     sa.Column('payment_method', sa.Enum('online', 'cash', name='paymentmethod'), nullable=False),

@@ -44,10 +44,7 @@ kb = types.ReplyKeyboardMarkup(
     keyboard=[[test_button, test_button_1]], resize_keyboard=True
 )
 # Для тестов
-# SITE_URL = 'https://d10e-95-25-72-15.ngrok-free.app'
-# SITE_URLs = 'https://d10e-95-25-72-15.ngrok-free.app'
-SITE_URL = 'https://b633-81-200-154-81.ngrok-free.app'
-SITE_URLs = 'https://b633-81-200-154-81.ngrok-free.app'
+SITE_URL = 'https://ava-detailing.hopto.org'
 
 # Для тестов
 
@@ -62,10 +59,9 @@ async def starting(message: types.Message):
             if response.status == HTTPStatus.NOT_FOUND:
                 await message.answer(
                     WECLOME_NEW_USER,
-                    print(await registration_button(SITE_URL, telegram_id)),
                     reply_markup=types.ReplyKeyboardMarkup(
                         keyboard=[
-                            [await registration_button(SITE_URLs, telegram_id)]
+                            [await registration_button(SITE_URL, telegram_id)]
                         ],
                         resize_keyboard=True,
                     ),
@@ -292,14 +288,6 @@ async def get_user_list(message: types.Message):
                     )
                     for user in await response.json()
                 ]
-
-
-# @dp.message(F.text == loyality_points_history_button.text)
-# async def loyality_points_history(message: types.Message):
-#     async with aiohttp.ClientSession() as session:
-#         async with session.get(f'{SITE_URL}/loyality/user/{message.from_user.id}/history') as response:
-#             data = await response.json()
-#             if len(data) > 0:
 
 
 async def main():

@@ -17,7 +17,7 @@ services:
   pgadmin:
     image: dpage/pgadmin4
     ports:
-      - "8083:80"
+      - "8088:80"
     env_file:
       - ./.env
     volumes:
@@ -39,15 +39,12 @@ services:
       - "8081:80"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./nginx/certs:/etc/nginx/certs
     depends_on:
       - backend
 
   bot:
     container_name: bot
     image: zali1813/avaprodetailing_bot:v1
-    # build:
-    #   dockerfile: bot.Dockerfile
     restart: always
     env_file:
       - ./.env

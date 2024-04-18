@@ -2,13 +2,14 @@ name: avaprodetailing backend workflow
 on: [push]
 env:
   BACKEND_IMAGE: ${{ secrets.DOCKER_USERNAME }}/avaprodetailing_backend:v1
+  BOT_IMAGE: ${{ secrets.DOCKER_USERNAME }}/avaprodetailing_bot:v1
 jobs:
 
   build_and_push_to_docker_hub:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     # if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-    if: github.ref == 'refs/heads/development' || github.ref == 'refs/heads/fix/CI/CD'
+    if: github.ref == 'refs/heads/development' || github.ref == 'refs/heads/bot/CI/CD'
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -28,6 +29,13 @@ jobs:
           push: true
           file: ./app.Dockerfile
           tags: ${{ env.BACKEND_IMAGE }}
+      
+      - name: Push bot to Docker Hub
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          file: ./bot.Dockerfile
+          tags: ${{ env.BOT_IMAGE }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -36,13 +44,14 @@ jobs:
       - name: executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
+          host: ${{ secrets.HOST2 }}
+          username: ${{ secrets.USER2 }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             cd ~/avaprodetailing
             sudo docker compose stop
             sudo docker pull ${{ env.BACKEND_IMAGE }}
+            sudo docker pull ${{ env.BOT_IMAGE }}
             sudo docker compose up -d
             sudo docker image prune -f

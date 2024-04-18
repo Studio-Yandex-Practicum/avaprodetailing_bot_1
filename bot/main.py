@@ -23,7 +23,7 @@ from keyboards import (
     loyality_points_history_button,
     universal_web_app_keyboard_button
 )
-from messages import WECLOME_NEW_USER
+from messages import WELCOME_NEW_USER
 
 load_dotenv()
 
@@ -56,7 +56,7 @@ async def starting(message: types.Message):
         ) as response:
             if response.status == HTTPStatus.NOT_FOUND:
                 await message.answer(
-                    WECLOME_NEW_USER,
+                    WELOME_NEW_USER,
                     print(await registration_button(SITE_URL, telegram_id)),
                     reply_markup=types.ReplyKeyboardMarkup(
                         keyboard=[

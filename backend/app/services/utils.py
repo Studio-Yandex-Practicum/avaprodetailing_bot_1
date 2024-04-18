@@ -38,7 +38,7 @@ ONLINE_PAYMENT_ADMIN_CONFIRMATION = (
 )
 ONLINE_PAYMENT_CLIENT_CONFIRMATION = (
     'Оплата по счету № {} на сумму {} {} прошла успешно.\n{} баллов: {}.'
-    '\nБлагодарим Вам за визит!'
+    '\nБлагодарим Вас за визит!'
 )
 
 CASH_PAYMENT_ADMIN_CONFIRMATION = (
@@ -46,7 +46,7 @@ CASH_PAYMENT_ADMIN_CONFIRMATION = (
 )
 CASH_PAYMENT_CLIENT_CONFIRMATION = (
     'Оплата на сумму {} RUB прошла успешно.\n{} баллов: {}.'
-    '\nБлагодарим Вам за визит!'
+    '\nБлагодарим Вас за визит!'
 )
 
 LOYALITY_ACTION_ADMIN_CONFIRMATION = (

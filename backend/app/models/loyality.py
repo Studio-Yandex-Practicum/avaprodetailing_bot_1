@@ -49,7 +49,7 @@ class Loyality(Base):
 
     def __repr__(self):
         return (
-            f'{self.action.capitalize()} {self.amount} баллов.\n'
+            f'{self.action.capitalize()} {abs(self.amount)} баллов.\n'
             f'Пользователю {self.user_id} {self.action} '
             f'баллов: {abs(self.amount)}. '
             f'Дата начисления: {self.date.strftime("%d-%m-%Y")}. '

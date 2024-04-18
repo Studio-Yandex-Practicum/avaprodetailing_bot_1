@@ -81,7 +81,6 @@ async def add_payment(
     if loyality_action == 'списано':
         price = price - loyality_amount
         loyality_amount = -(loyality_amount)
-        print(loyality_amount)
     match payment.payment_method:
         case 'cash':
             new_payment = await payments_crud.create(

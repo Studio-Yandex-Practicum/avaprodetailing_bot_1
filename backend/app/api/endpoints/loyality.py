@@ -3,6 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.validators import (
     check_admin_user,
+    check_loyality_balance,
     check_user_exists,
 )
 from app.core.config import ID_LOYALITY_SETTINGS
@@ -52,11 +53,9 @@ async def get_loyality_points(
     telegram_id: str, session: AsyncSession = Depends(get_async_session)
 ):
     await check_user_exists(telegram_id, session)
-    return [
-        dict(
-            count=await loyality_crud.get_count_of_points(telegram_id, session)
-        )
-    ]
+    return dict(
+        count=await loyality_crud.get_count_of_points(telegram_id, session),
+    )
 
 
 @router.get(
@@ -78,10 +77,14 @@ async def add_loyality_history(
 ):
     await check_admin_user(telegram_id, session)
     await check_user_exists(user_telegram_id, session)
+    await check_loyality_balance(data, user_telegram_id, session)
+    if data.action == 'списано':
+        data.amount = -(data.amount)
     return await loyality_crud.create(
         telegram_id,
         user_telegram_id,
         Loyality(
+            action=data.action,
             amount=data.amount,
             user_id=(
                 await user_crud.get_user_by_telegram_id(

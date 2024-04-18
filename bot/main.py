@@ -252,7 +252,7 @@ async def loyality_points(message: types.Message):
         async with session.get(
             f'{SITE_URL}/loyality/user/{message.from_user.id}/'
         ) as response:
-            data = response.json()
+            data = await response.json()
             if response.status == HTTPStatus.OK:
                 await message.answer(
                     f'У вас накоплено баллов: {data["count"]}'
@@ -299,7 +299,8 @@ async def get_user_list(message: types.Message):
 
 
 async def on_startup(bot: Bot) -> None:
-    await bot.set_webhook(f"{SITE_URL}{WEBHOOK_PATH}", secret_token=WEBHOOK_SECRET)
+    await bot.set_webhook(f"{SITE_URL}:{WEB_SERVER_PORT}{WEBHOOK_PATH}",
+                          secret_token=WEBHOOK_SECRET)
 
 
 async def main():

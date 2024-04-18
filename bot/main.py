@@ -45,7 +45,6 @@ kb = types.ReplyKeyboardMarkup(
 )
 
 SITE_URL = os.getenv('SITE_URL')
-SITE_URLs = os.getenv('SITE_URLs')
 
 
 @dp.message(Command('start'))
@@ -61,7 +60,7 @@ async def starting(message: types.Message):
                     print(await registration_button(SITE_URL, telegram_id)),
                     reply_markup=types.ReplyKeyboardMarkup(
                         keyboard=[
-                            [await registration_button(SITE_URLs, telegram_id)]
+                            [await registration_button(SITE_URL, telegram_id)]
                         ],
                         resize_keyboard=True,
                     ),

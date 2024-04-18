@@ -108,7 +108,7 @@ class CarCreateUser(CarUpdate):
     number_plate: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
     @classmethod
     async def as_form(

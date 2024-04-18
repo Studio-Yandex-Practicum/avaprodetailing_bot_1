@@ -48,7 +48,7 @@ kb = types.ReplyKeyboardMarkup(
 )
 SITE_URL = os.getenv('SITE_URL')
 WEB_SERVER_HOST = os.getenv('WEB_SERVER_HOST')
-WEB_SERVER_PORT = os.getenv('WEB_SERVER_PORT')
+WEB_SERVER_PORT = int(os.getenv('WEB_SERVER_PORT'))
 
 WEBHOOK_PATH = "/webhook"
 WEBHOOK_SECRET = os.getenv('WEBHOOK_SECRET')

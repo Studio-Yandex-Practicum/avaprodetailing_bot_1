@@ -56,7 +56,7 @@ async def starting(message: types.Message):
         ) as response:
             if response.status == HTTPStatus.NOT_FOUND:
                 await message.answer(
-                    WELOME_NEW_USER,
+                    WELCOME_NEW_USER,
                     print(await registration_button(SITE_URL, telegram_id)),
                     reply_markup=types.ReplyKeyboardMarkup(
                         keyboard=[
@@ -99,7 +99,7 @@ async def starting(message: types.Message):
                             keyboard=[
                                 [
                                     universal_web_app_keyboard_button(
-                                        'Регистрация ноавого клиента',
+                                        'Регистрация нового клиента',
                                         url=''
                                     )
                                 ]

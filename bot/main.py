@@ -57,7 +57,6 @@ async def starting(message: types.Message):
             if response.status == HTTPStatus.NOT_FOUND:
                 await message.answer(
                     WELCOME_NEW_USER,
-                    print(await registration_button(SITE_URL, telegram_id)),
                     reply_markup=types.ReplyKeyboardMarkup(
                         keyboard=[
                             [await registration_button(SITE_URL, telegram_id)]
@@ -89,15 +88,25 @@ async def starting(message: types.Message):
                         ),
                         resize_keyboard=True,
                     )
-                elif response['is_admin'] and not response['is_superuser']:
+               elif response['is_admin'] and response['is_superuser']:
                     await message.answer(
                         'Добро пожаловать.',
                         reply_markup=types.ReplyKeyboardMarkup(
                             keyboard=[
                                 [
-                                    universal_web_app_keyboard_button(
+                                    await universal_web_app_keyboard_button(
                                         'Регистрация нового клиента',
-                                        url=''
+                                        url=(
+                                            f'{SITE_URL}/users/admin/'
+                                            f'{message.from_user.id}/add_user'
+                                        )
+                                    ),
+                                    await universal_web_app_keyboard_button(
+                                        'Просмотр/редактирование клиента',
+                                        url=(
+                                            f'{SITE_URL}/users/admin/'
+                                            f'{message.from_user.id}/user_info'
+                                        )
                                     )
                                 ]
                             ]
@@ -277,14 +286,6 @@ async def get_user_list(message: types.Message):
                     )
                     for user in await response.json()
                 ]
-
-
-# @dp.message(F.text == loyality_points_history_button.text)
-# async def loyality_points_history(message: types.Message):
-#     async with aiohttp.ClientSession() as session:
-#         async with session.get(f'{SITE_URL}/loyality/user/{message.from_user.id}/history') as response:
-#             data = await response.json()
-#             if len(data) > 0:
 
 
 async def main():

@@ -4,15 +4,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.validators import (
     check_admin_user,
     check_user_exists,
-    check_user_is_admin_or_superuser
 )
 from app.core.config import ID_LOYALITY_SETTINGS
 from app.core.db import get_async_session
 from app.core.descriptions import (
     DECRIPTION_GET_LOYALITY_HISTORY,
-    DESCRIPTION_GET_LOYALITY_POINT
+    DESCRIPTION_GET_LOYALITY_POINT,
 )
-from app.crud.history import history_crud
 from app.crud.loyality import loyality_crud, loyality_settings_crud
 from app.crud.user import user_crud
 from app.schemas.loyality import Loyality, LoyalityList, LoyalitySettings
@@ -23,11 +21,9 @@ router = APIRouter()
 
 @router.get('/admin/{telegram_id}/', response_model=LoyalitySettings)
 async def get_loyality_settings(
-    telegram_id: str,
-    session: AsyncSession = Depends(get_async_session)
+    telegram_id: str, session: AsyncSession = Depends(get_async_session)
 ):
-    await check_user_exists(telegram_id, session)
-    await check_user_is_admin_or_superuser(telegram_id, session)
+    await check_admin_user(telegram_id, session)
     obj = await loyality_settings_crud.get(ID_LOYALITY_SETTINGS, session)
     return (
         await loyality_settings_crud.create(ID_LOYALITY_SETTINGS, session)
@@ -40,28 +36,20 @@ async def get_loyality_settings(
 async def update_loyality_settings(
     telegram_id: str,
     update_data: LoyalitySettings,
-    session: AsyncSession = Depends(get_async_session)
+    session: AsyncSession = Depends(get_async_session),
 ):
-    await check_user_exists(telegram_id, session)
-    await check_user_is_admin_or_superuser(telegram_id, session)
-    obj = await loyality_settings_crud.get(ID_LOYALITY_SETTINGS, session)
-    await history_crud.create(
-        await user_crud.get_user_by_telegram_id(telegram_id, session),
-        loyality_settings_crud.model.__name__,
-        obj,
-        update_data,
-        session)
+    await check_admin_user(telegram_id, session)
     return await loyality_settings_crud.update(
-        obj,
+        telegram_id,
+        await loyality_settings_crud.get(ID_LOYALITY_SETTINGS, session),
         update_data,
-        session
+        session,
     )
 
 
 @router.get('/user/{telegram_id}/', description=DESCRIPTION_GET_LOYALITY_POINT)
 async def get_loyality_points(
-    telegram_id: str,
-    session: AsyncSession = Depends(get_async_session)
+    telegram_id: str, session: AsyncSession = Depends(get_async_session)
 ):
     await check_user_exists(telegram_id, session)
     return [
@@ -72,30 +60,34 @@ async def get_loyality_points(
 
 
 @router.get(
-    '/user/{telegram_id}/history',
-    description=DECRIPTION_GET_LOYALITY_HISTORY
+    '/user/{telegram_id}/history', description=DECRIPTION_GET_LOYALITY_HISTORY
 )
 async def get_loyality_history(
-    telegram_id: str,
-    session: AsyncSession = Depends(get_async_session)
+    telegram_id: str, session: AsyncSession = Depends(get_async_session)
 ):
     await check_user_exists(telegram_id, session)
     return await loyality_crud.get_list_of_transactions(telegram_id, session)
 
 
-@router.post(
-    '/admin/{telegram_id}/history/{user_telegram_id}/',
-    response_model=LoyalityList
-)
+@router.post('/admin/{telegram_id}/history/{user_telegram_id}/')
 async def add_loyality_history(
     telegram_id: str,
     user_telegram_id: str,
-    data: Loyality,
-    session: AsyncSession = Depends(get_async_session)
+    data: LoyalityList,
+    session: AsyncSession = Depends(get_async_session),
 ):
     await check_admin_user(telegram_id, session)
     await check_user_exists(user_telegram_id, session)
     return await loyality_crud.create(
-        data,
-        session=session,
+        telegram_id,
+        user_telegram_id,
+        Loyality(
+            amount=data.amount,
+            user_id=(
+                await user_crud.get_user_by_telegram_id(
+                    user_telegram_id, session
+                )
+            ).id,
+        ),
+        session,
     )

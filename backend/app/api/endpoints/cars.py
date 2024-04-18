@@ -1,4 +1,7 @@
-from fastapi import APIRouter, Depends
+from http import HTTPStatus
+
+from fastapi import APIRouter, Depends, Request
+from fastapi.templating import Jinja2Templates
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.validators import (
@@ -17,22 +20,35 @@ from app.schemas.cars import (
     CarCreateUser,
     CarDB,
     CarDBAdmin,
+    CarListDBAdmin,
     CarUpdate,
+    CarListUser
 )
 
 router = APIRouter()
-
+templates = Jinja2Templates(directory="app/templates")
 
 """ADMIN OR SUPERUSER ROLE"""
 
 
-@router.get('/admin/{telegram_id}/', response_model=list[CarDBAdmin])
+@router.get('/admin/{telegram_id}/', response_model=list[CarListDBAdmin])
 async def get_all_cars_as_admin(
     telegram_id: str,
     session: AsyncSession = Depends(get_async_session),
 ):
     await check_admin_user(telegram_id, session)
     return await cars_crud.get_all(session)
+
+
+@router.get('/admin/{telegram_id}/get_car/{car_id}', response_model=CarDBAdmin)
+async def get_car(
+    car_id: int,
+    telegram_id: str,
+    session: AsyncSession = Depends(get_async_session),
+):
+    await check_admin_user(telegram_id, session)
+    await check_car_exists(car_id, session)
+    return await cars_crud.get_car_as_admin(car_id, session)
 
 
 @router.post('/admin/{telegram_id}/add_car', response_model=CarDBAdmin)
@@ -44,9 +60,14 @@ async def add_car_as_admin(
     await check_admin_user(telegram_id, session)
     await check_user_exists(car_data.owner_telegram_id, session)
     await check_car_data_before_create(car_data, session)
-    return await cars_crud.create(
-        car_data,
-        session=session,
+    return await cars_crud.get_car_as_admin(
+        (
+            await cars_crud.create(
+                car_data,
+                session=session,
+            )
+        ).id,
+        session,
     )
 
 
@@ -66,11 +87,13 @@ async def edit_car_as_admin(
         update_data,
         session=session,
     )
-    return await cars_crud.update(
+    await cars_crud.update(
+        telegram_id,
         await cars_crud.get(car_id, session),
         update_data,
         session=session,
     )
+    return await cars_crud.get_car_as_admin(car_id, session)
 
 
 @router.delete(
@@ -84,7 +107,7 @@ async def delete_car_as_admin(
     await check_admin_user(telegram_id, session)
     await check_car_exists(car_id, session)
     return await cars_crud.remove(
-        await cars_crud.get(car_id, session),
+        await cars_crud.get_car_as_admin(car_id, session),
         session,
     )
 
@@ -92,7 +115,7 @@ async def delete_car_as_admin(
 """USER ROLE"""
 
 
-@router.get('/{telegram_id}', response_model=list[CarDB])
+@router.get('/{telegram_id}', response_model=list[CarListUser])
 async def get_my_cars(
     telegram_id: str,
     session: AsyncSession = Depends(get_async_session),
@@ -106,6 +129,8 @@ async def add_car(
     car_data: CarCreateUser,
     telegram_id: str,
     session: AsyncSession = Depends(get_async_session),
+    # form_data: CarCreateUser = Depends(CarCreateUser.as_form),
+
 ):
     await check_user_exists(telegram_id, session)
     await check_car_data_before_create(car_data, session)
@@ -137,7 +162,8 @@ async def edit_car(
         session=session,
     )
     return await cars_crud.update(
-        await cars_crud.get(car_id, session),
+        telegram_id,
+        car,
         update_data,
         session=session,
     )
@@ -157,4 +183,38 @@ async def delete_car(
     return await cars_crud.remove(
         car,
         session,
+    )
+
+
+@router.get('/{telegram_id}/add_car/add_form')
+async def add_car_form(
+    request: Request,
+    telegram_id: str,
+    session: AsyncSession = Depends(get_async_session)
+):
+    await check_user_exists(telegram_id, session)
+    context = {'request': request}
+    context['telegram_id'] = telegram_id
+    return templates.TemplateResponse(
+        'car_form.html',
+        context,
+        status_code=HTTPStatus.OK
+    )
+
+
+@router.get('/{telegram_id}/edit_car/{car_id}/edit_form')
+async def edit_car_form(
+    request: Request,
+    car_id: int,
+    telegram_id: str,
+    session: AsyncSession = Depends(get_async_session)
+):
+    await check_user_exists(telegram_id, session)
+    return templates.TemplateResponse(
+        'car_form.html',
+        dict(
+            request=request,
+            form_data=await cars_crud.get(car_id, session)
+        ),
+        status_code=HTTPStatus.OK
     )

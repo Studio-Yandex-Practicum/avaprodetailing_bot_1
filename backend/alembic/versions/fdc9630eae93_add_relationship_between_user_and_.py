@@ -1,8 +1,8 @@
-"""first migration
+"""Add relationship between User and Loyality models.
 
-Revision ID: 5f4afe9a9881
-Revises: 
-Create Date: 2024-04-10 20:16:34.010622
+Revision ID: fdc9630eae93
+Revises: d1e311cc96d4
+Create Date: 2024-04-12 23:00:13.218002
 
 """
 from typing import Sequence, Union
@@ -12,8 +12,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '5f4afe9a9881'
-down_revision: Union[str, None] = None
+revision: str = 'fdc9630eae93'
+down_revision: Union[str, None] = 'd1e311cc96d4'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 

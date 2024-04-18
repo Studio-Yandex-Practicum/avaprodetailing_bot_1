@@ -1,4 +1,4 @@
-# import asyncio
+import asyncio
 import logging
 
 import os
@@ -313,4 +313,4 @@ if __name__ == '__main__':
             '[%(funcName)s:%(lineno)d] - %(message)s'
         )
     )
-    main()
+    asyncio.run(main())

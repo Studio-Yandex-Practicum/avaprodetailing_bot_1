@@ -14,14 +14,17 @@ from keyboards import (
     Cars,
     car_list,
     create_car_user_button,
+    create_payment_button,
     delete_car_user_button,
     edit_car_user_button,
+    edit_user_admin_button,
     personal_acount_button,
     registration_button,
-    user_qr_code_button,
     loyality_points_button,
     loyality_points_history_button,
-    universal_web_app_keyboard_button
+    universal_web_app_keyboard_button,
+    user_list,
+    user_qr_code_button,
 )
 from messages import WECLOME_NEW_USER
 
@@ -31,20 +34,20 @@ bot = Bot(token=os.getenv('BOT_TOKEN'))
 dp = Dispatcher()
 
 test_button = types.KeyboardButton(
-    text='ya.ru',
-    web_app=types.WebAppInfo(url='https://ya.ru')
+    text='ya.ru', web_app=types.WebAppInfo(url='https://ya.ru')
 )
 test_button_1 = types.KeyboardButton(
     text='translate',
-    web_app=types.WebAppInfo(url='https://translate.yandex.ru')
+    web_app=types.WebAppInfo(url='https://translate.yandex.ru'),
 )
 kb = types.ReplyKeyboardMarkup(
-    keyboard=[[test_button, test_button_1]],
-    resize_keyboard=True
+    keyboard=[[test_button, test_button_1]], resize_keyboard=True
 )
 # Для тестов
-SITE_URL = 'https://777b-95-25-72-15.ngrok-free.app'
-SITE_URLs = 'https://777b-95-25-72-15.ngrok-free.app'
+# SITE_URL = 'https://d10e-95-25-72-15.ngrok-free.app'
+# SITE_URLs = 'https://d10e-95-25-72-15.ngrok-free.app'
+SITE_URL = 'https://b633-81-200-154-81.ngrok-free.app'
+SITE_URLs = 'https://b633-81-200-154-81.ngrok-free.app'
 
 # Для тестов
 
@@ -64,15 +67,12 @@ async def starting(message: types.Message):
                         keyboard=[
                             [await registration_button(SITE_URLs, telegram_id)]
                         ],
-                        resize_keyboard=True
-                    )
+                        resize_keyboard=True,
+                    ),
                 )
             elif response.status == HTTPStatus.OK:
                 response = await response.json()
-                if (
-                    not response['is_admin'] and
-                    not response['is_superuser']
-                ):
+                if not response['is_admin'] and not response['is_superuser']:
                     await message.answer(
                         'С возвращением!',
                         reply_markup=types.ReplyKeyboardMarkup(
@@ -81,18 +81,18 @@ async def starting(message: types.Message):
                                     await personal_acount_button(
                                         SITE_URL,
                                         message.from_user.id,
-                                        response['phone_number']
+                                        response['phone_number'],
                                     ),
                                     car_list,
-                                    user_qr_code_button
+                                    user_qr_code_button,
                                 ],
                                 [
                                     loyality_points_button,
-                                    loyality_points_history_button
-                                ]
+                                    loyality_points_history_button,
+                                ],
                             ]
                         ),
-                        resize_keyboard=True
+                        resize_keyboard=True,
                     )
                 elif response['is_admin'] and response['is_superuser']:
                     await message.answer(
@@ -116,7 +116,8 @@ async def starting(message: types.Message):
                                     )
                                 ]
                             ]
-                        )
+                        ),
+                        resize_keyboard=True,
                     )
             else:
                 logging.ERROR('Problem: server returned %s', response.status)
@@ -137,8 +138,8 @@ async def web_app2(message: types.Message):
                 if response.status == HTTPStatus.OK:
                     response = await response.json()
                     if (
-                        not response['is_admin'] and
-                        not response['is_superuser']
+                        not response['is_admin']
+                        and not response['is_superuser']
                     ):
                         await message.answer(
                             'Регистрация успешно пройдена',
@@ -148,18 +149,18 @@ async def web_app2(message: types.Message):
                                         await personal_acount_button(
                                             SITE_URL,
                                             message.from_user.id,
-                                            response['phone_number']
+                                            response['phone_number'],
                                         ),
                                         car_list,
-                                        user_qr_code_button
+                                        user_qr_code_button,
                                     ],
                                     [
                                         loyality_points_button,
-                                        loyality_points_history_button
-                                    ]
+                                        loyality_points_history_button,
+                                    ],
                                 ]
                             ),
-                            resize_keyboard=True
+                            resize_keyboard=True,
                         )
 
                     await message.answer(str(response))
@@ -179,8 +180,8 @@ async def get_car_list(message: types.Message):
             f'{SITE_URL}/cars/{message.from_user.id}'
         ) as response:
             if (
-                response.status == HTTPStatus.OK and
-                len(await response.json()) > 0
+                response.status == HTTPStatus.OK
+                and len(await response.json()) > 0
             ):
                 [
                     await message.answer(
@@ -194,27 +195,26 @@ async def get_car_list(message: types.Message):
                                     await edit_car_user_button(
                                         SITE_URL,
                                         message.from_user.id,
-                                        car["id"]
+                                        car["id"],
                                     ),
-                                    await delete_car_user_button(car["id"])
+                                    await delete_car_user_button(car["id"]),
                                 ]
                             ]
-                        )
+                        ),
                     )
                     for car in await response.json()
                 ]
             await message.answer(
-                'Добавиьт машину',
+                'Добавить машину',
                 reply_markup=types.InlineKeyboardMarkup(
                     inline_keyboard=[
                         [
                             await create_car_user_button(
-                                SITE_URL,
-                                message.from_user.id
+                                SITE_URL, message.from_user.id
                             )
                         ]
                     ]
-                )
+                ),
             )
 
 
@@ -237,10 +237,7 @@ async def user_qr_code(message: types.Message):
     img.save(f'{message.from_user.id}.png')
     with open(f'{message.from_user.id}.png', 'rb') as file:
         await message.answer_photo(
-            types.BufferedInputFile(
-                file.read(),
-                filename='qr_code.png'
-            )
+            types.BufferedInputFile(file.read(), filename='qr_code.png')
         )
     os.remove(f'{message.from_user.id}.png')
 
@@ -253,17 +250,48 @@ async def loyality_points(message: types.Message):
         ) as response:
             data = await response.json()
             if response.status == HTTPStatus.OK:
-                (
-                    await message.answer('У вас накопленно баллов: 0')
-                    if not data[0]['count'] else
-                    await message.answer(
-                        f"У вас накопленно баллов: {data['count']}"
-                    )
+                await message.answer(
+                    f'У вас накоплено баллов: {data["count"]}'
                 )
             elif response.status == HTTPStatus.NOT_FOUND:
-                await message.answer(data[0]['count'])
+                await message.answer(data['count'])
             else:
                 await message.answer('Что-то пошло не так. Попробуйте позже')
+
+
+@dp.message(F.text == 'Список пользователей')
+async def get_user_list(message: types.Message):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(
+            f'{SITE_URL}/users/admin/{message.from_user.id}'
+        ) as response:
+            if (
+                response.status == HTTPStatus.OK
+                and len(await response.json()) > 0
+            ):
+                [
+                    await message.answer(
+                        (
+                            f'ФИО: {user["last_name"]} {user["first_name"]} '
+                            f'{user["second_name"]}\n'
+                            f'Дата рождения: {user["birth_date"]}\n'
+                            f'Номер телефона: {user["phone_number"]}'
+                        ),
+                        reply_markup=types.InlineKeyboardMarkup(
+                            inline_keyboard=[
+                                [
+                                    await edit_user_admin_button(
+                                        SITE_URL,
+                                        message.from_user.id,
+                                        user['telegram_id'],
+                                        user['phone_number'],
+                                    )
+                                ]
+                            ]
+                        ),
+                    )
+                    for user in await response.json()
+                ]
 
 
 # @dp.message(F.text == loyality_points_history_button.text)
@@ -277,13 +305,14 @@ async def loyality_points(message: types.Message):
 async def main():
     await dp.start_polling(bot)
 
+
 if __name__ == '__main__':
     file_handler = RotatingFileHandler(
         filename='bot.log',
         maxBytes=100000,
         backupCount=10,
         encoding='utf-8',
-        mode='w'
+        mode='w',
     )
     logging.basicConfig(
         handlers=[file_handler],
@@ -291,7 +320,7 @@ if __name__ == '__main__':
         format=(
             '%(asctime)s [%(levelname)s]: '
             '[%(funcName)s:%(lineno)d] - %(message)s'
-        )
+        ),
     )
 
     asyncio.run(main())

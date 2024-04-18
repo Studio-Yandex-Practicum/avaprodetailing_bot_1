@@ -91,6 +91,27 @@ class CRUDLoyality(CRUDBase):
         )
         return count if count else 0
 
+    async def get_count_of_points_by_phone_number(
+        self, phone_number: str, session: AsyncSession
+    ):
+        count = (
+            (
+                await session.execute(
+                    select(func.sum(Loyality.amount)).filter(
+                        Loyality.user_id
+                        == (
+                            await user_crud.get_user_by_phone_number(
+                                phone_number, session
+                            )
+                        ).id
+                    )
+                )
+            )
+            .scalars()
+            .first()
+        )
+        return count if count else 0
+
     async def get_list_of_transactions(
         self, telegram_id: str, session: AsyncSession
     ):

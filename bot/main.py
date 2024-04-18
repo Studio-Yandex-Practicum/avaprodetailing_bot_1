@@ -94,7 +94,7 @@ async def starting(message: types.Message):
                         ),
                         resize_keyboard=True,
                     )
-                elif response['is_admin'] and not response['is_superuser']:
+                elif response['is_admin'] and response['is_superuser']:
                     await message.answer(
                         'Добро пожаловать.',
                         reply_markup=types.ReplyKeyboardMarkup(
@@ -102,15 +102,19 @@ async def starting(message: types.Message):
                                 [
                                     await universal_web_app_keyboard_button(
                                         'Регистрация нового клиента',
-                                        url='https://ya.ru',  # заглушка, поскольку webapp принимает только https
+                                        url=(
+                                            f'{SITE_URL}/users/admin/'
+                                            f'{message.from_user.id}/add_user'
+                                        )
                                     ),
-                                    user_list,
-                                ],
-                                [
-                                    await create_payment_button(
-                                        SITE_URL, telegram_id
+                                    await universal_web_app_keyboard_button(
+                                        'Просмотр/редактирование клиента',
+                                        url=(
+                                            f'{SITE_URL}/users/admin/'
+                                            f'{message.from_user.id}/user_info'
+                                        )
                                     )
-                                ],
+                                ]
                             ]
                         ),
                         resize_keyboard=True,

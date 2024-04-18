@@ -63,7 +63,19 @@
                                     last_name: $('input[name="last_name"]').val(),
                                     birth_date: $('input[name="birth_date"]').val(),
                                 }
-                            )
+                            ),
+                            statusCode: {
+                                200: function (){
+                                    alert('Пользователь создан')
+                                    WebApp.close()
+                                },
+                                400: function(){
+                                    alert('Пользователь с таким номером уже зарегистрирован')
+                                },
+                                422: function(){
+                                    alert('Заполните поле "Дата рождения"')
+                                }
+                            }
                         })
                     })
                 })

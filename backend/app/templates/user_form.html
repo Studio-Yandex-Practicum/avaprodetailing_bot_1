@@ -58,53 +58,8 @@
                         var jsonResponse = JSON.parse(data);
                         alert(jsonResponse['detail'])
                     }
-                    }
                 }
-                // success: function () {
-                //     alert('ssssssss')
-                // },
-                // success: function(xhr, status, text){
-	                // if (xhr.status==201) {
-                    //     alert("sdsds")
-                    //     WebApp.sendData("some string that we need to send")
-                    //     WebApp.close()
-                    // }
-                // },
-                // error: function (xhr, status, text) {
-                //     if (xhr.status==422) {
-                //         var data=xhr.responseText;
-                //         var jsonResponse = JSON.parse(data);
-                //         var errors = ''
-                //         $.each(jsonResponse['detail'], function(message, value){
-                //             var field = value['loc'].toString().split(',')[1]
-                //             switch (field) {
-                //                 case 'phone_number':
-                //                     $('.form-errors').append('<p>Обязаетльное поле: Номер телефона</p>')
-                //                     break
-                //                 case 'first_name':
-                //                     $('.form-errors').append('<p>Обязаетльное поле: Имя</p>')
-                //                     break
-                //                 case 'second_name':
-                //                     $('.form-errors').append('<p>Обязаетльное поле: Отчество</p>')
-                //                     break
-                //                 case 'last_name':
-                //                     $('.form-errors').append('<p>Обязаетльное поле: Фамилия</p>')
-                //                     break
-                //                 case 'birth_date':
-                //                     $('.form-errors').append('<p>Обязаетльное поле: Дата Рождения</p>')
-                //                     break
-                //             }
-                //         })
-                        
-                //     }
-                //     if(xhr.status==400) {
-                //         var data=xhr.responseText;
-                //         var jsonResponse = JSON.parse(data);
-                //         alert(jsonResponse['detail'])
-                //     }
-                // }
-            })
-            
         })
     })
+})
 </script>

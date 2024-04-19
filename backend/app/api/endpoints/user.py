@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request, Query
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -15,9 +15,10 @@ from app.api.validators import (
     check_phone_dublicate,
     check_telegram_id_dublicate,
     check_user_exists,
+    check_user_exists_by_phone_number,
     check_user_registered,
     valid_phone_number,
-    check_mobile_phone_nuber_is_exists
+    check_mobile_phone_nuber_is_exists,
 )
 from app.core.db import get_async_session
 from app.crud.user import user_crud
@@ -27,7 +28,7 @@ from app.schemas.user import (
     UserDBAdmin,
     UserFromDB,
     UserUpdate,
-    UserByAdmin
+    UserByAdmin,
 )
 
 router = APIRouter()
@@ -167,22 +168,19 @@ async def get_user_as_admin(
     return await user_crud.get_user_by_telegram_id_as_admin(user_id, session)
 
 
-@router.patch(
-    '/admin/{telegram_id}/edit_user/{user_id}', response_model=UserFromDB
-)
+@router.patch('/admin/{telegram_id}/edit_user', response_model=UserFromDB)
 async def edit_user_as_admin(
     telegram_id: str,
-    user_id: str,
     update_data: UserUpdate,
     session: AsyncSession = Depends(get_async_session),
 ):
     await check_admin_user(telegram_id, session)
-    await check_user_exists(user_id, session)
+    await check_user_exists(update_data.telegram_id, session)
     update_data.phone_number = api_validate_and_format_phone_number(
         update_data.phone_number
     )
     await api_check_telegram_id_duplicate(
-        update_data.telegram_id, user_id, session
+        update_data.telegram_id, update_data.telegram_id, session
     )
     await api_check_phone_duplicate(
         update_data.phone_number, update_data.telegram_id, session
@@ -190,7 +188,9 @@ async def edit_user_as_admin(
     api_check_birth_date_less_current_data(update_data.birth_date)
     return await user_crud.update(
         telegram_id,
-        await user_crud.get_user_by_telegram_id_as_admin(user_id, session),
+        await user_crud.get_user_by_telegram_id_as_admin(
+            update_data.telegram_id, session
+        ),
         update_data,
         session,
     )
@@ -215,7 +215,7 @@ async def delete_user_as_admin(
 async def add_user_as_admin_form(
     telegram_id: str,
     request: Request,
-    session: AsyncSession = Depends(get_async_session)
+    session: AsyncSession = Depends(get_async_session),
 ):
     await check_admin_user(telegram_id, session)
     return templates.TemplateResponse('add_user.html', dict(request=request))
@@ -225,11 +225,45 @@ async def add_user_as_admin_form(
 async def add_user_as_admin(
     telegram_id: str,
     user_data: UserByAdmin,
-    session: AsyncSession = Depends(get_async_session)
+    session: AsyncSession = Depends(get_async_session),
 ):
     await check_admin_user(telegram_id, session)
     await check_mobile_phone_nuber_is_exists(user_data.phone_number, session)
     return await user_crud.create(user_data, session)
+
+
+@router.get('/admin/{telegram_id}/user_info')
+async def get_user_info_as_admin(
+    telegram_id: str,
+    request: Request,
+    session: AsyncSession = Depends(get_async_session),
+):
+    await check_admin_user(telegram_id, session)
+    return templates.TemplateResponse(
+        'get_edit_user.html', dict(request=request)
+    )
+
+
+@router.get('/admin/{telegram_id}/user_data/{user_phone_number}')
+async def get_user_data_as_admin_by_telegram_id(
+    telegram_id: str,
+    user_phone_number: str,
+    session: AsyncSession = Depends(get_async_session),
+):
+    await check_admin_user(telegram_id, session)
+    await check_user_exists_by_phone_number(user_phone_number, session)
+    return await user_crud.get_user_by_phone_number(user_phone_number, session)
+
+
+@router.get('/admin/{telegram_id}/search_user')
+async def search_user(
+    telegram_id: str,
+    user: str = Query(..., min_length=1),
+    session: AsyncSession = Depends(get_async_session),
+):
+    await check_admin_user(telegram_id, session)
+    return await user_crud.get_user_by_substring_phone_number(user, session)
+
 
 """ ADMIN REPORT """
 

@@ -3,6 +3,7 @@ from typing import Optional
 
 from pydantic import BaseModel
 
+from app.models.loyality import LoyalityAction
 from app.schemas.history import LoyalityHistoryDB
 
 
@@ -15,6 +16,7 @@ class LoyalitySettings(BaseModel):
 
 
 class LoyalityList(BaseModel):
+    action: LoyalityAction
     amount: int
 
     class Config:
@@ -23,6 +25,10 @@ class LoyalityList(BaseModel):
 
 class Loyality(LoyalityList):
     user_id: int
+
+
+class LoyalityPayment(Loyality):
+    payment_id: int
 
 
 class LoyalityListDBAdmin(Loyality):

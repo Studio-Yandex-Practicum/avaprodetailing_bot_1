@@ -1,10 +1,16 @@
+import enum
 from datetime import datetime
 
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer
+from sqlalchemy import Boolean, Column, DateTime, Enum, ForeignKey, Integer
 from sqlalchemy.orm import relationship
 
 from app.core.config import DEFAULT_LOYALITY_VALUE
 from app.core.db import Base
+
+
+class LoyalityAction(str, enum.Enum):
+    charge = 'начислено'
+    write_off = 'списано'
 
 
 class LoyalitySettings(Base):
@@ -23,11 +29,18 @@ class LoyalitySettings(Base):
 
 class Loyality(Base):
     user_id: int = Column(
-        Integer, ForeignKey(
-            'user.telegram_id',
-            name='fk_loyality_user_telegram_id_user'
-        )
+        Integer, ForeignKey('user.id', name='fk_loyality_user_id_user')
     )
+    payment_id: int = Column(
+        Integer,
+        ForeignKey('payment.id', name='fk_loyality_payment_id_payment'),
+        nullable=True,
+    )
+    payment = relationship(
+        'Payment',
+        back_populates='loyality',
+    )
+    action: LoyalityAction = Column(Enum(LoyalityAction), nullable=False)
     amount: int = Column(Integer, nullable=False)
     edited: bool = Column(Boolean, nullable=False, default=False)
     date: DateTime = Column(DateTime, nullable=False, default=datetime.now)
@@ -35,12 +48,10 @@ class Loyality(Base):
     changes = relationship('LoyalityHistory', backref='loyality')
 
     def __repr__(self):
-        action = 'начислено'
-        if self.amount < 0:
-            action = 'списано'
         return (
-            f'{action.capitalize()} {self.amount} баллов.\n'
-            f'Пользователю {self.user_id} {action} {self.amount} баллов. '
+            f'{self.action.capitalize()} {abs(self.amount)} баллов.\n'
+            f'Пользователю {self.user_id} {self.action} '
+            f'баллов: {abs(self.amount)}. '
             f'Дата начисления: {self.date.strftime("%d-%m-%Y")}. '
             f'Срок действия: {self.exp_date.strftime("%d-%m-%Y")}'
         )

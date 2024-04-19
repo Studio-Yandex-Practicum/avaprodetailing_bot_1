@@ -20,59 +20,69 @@ period_report_button = KeyboardButton(text='Форма отчёта')
 
 
 async def universal_web_app_keyboard_button(
-    text: str,
-    url: str
+    text: str, url: str
 ) -> KeyboardButton:
     return KeyboardButton(text=text, web_app=WebAppInfo(url=url))
 
 
 async def registration_button(
-        site_url: str, telegram_id: str
+    site_url: str, telegram_id: str
 ) -> KeyboardButton:
     return KeyboardButton(
         text='Регистрация',
-        web_app=WebAppInfo(url=f'{site_url}/users/{telegram_id}')
+        web_app=WebAppInfo(url=f'{site_url}/users/{telegram_id}'),
     )
 
 
 async def personal_acount_button(
-    site_url: str,
-    telegram_id: str,
-    phone: str
+    site_url: str, telegram_id: str, phone: str
 ) -> KeyboardButton:
     return KeyboardButton(
         text='Личный кабинет',
-        web_app=WebAppInfo(url=f'{site_url}/users/{telegram_id}/patch/{phone}')
+        web_app=WebAppInfo(
+            url=f'{site_url}/users/{telegram_id}/patch/{phone}'
+        ),
     )
 
 
 async def edit_car_user_button(
-    site_url: str,
-    telegram_id: str,
-    car_id: str
+    site_url: str, telegram_id: str, car_id: str
 ) -> InlineKeyboardButton:
     return InlineKeyboardButton(
         text='Редактировать',
         web_app=WebAppInfo(
             url=f'{site_url}/cars/{telegram_id}/edit_car/{car_id}/edit_form'
-        )
+        ),
     )
 
 
 async def delete_car_user_button(car_id: int) -> InlineKeyboardButton:
     return InlineKeyboardButton(
         text='Удалить',
-        callback_data=Cars(action='delete', car_id=car_id).pack()
+        callback_data=Cars(action='delete', car_id=car_id).pack(),
     )
 
 
 async def create_car_user_button(
-    site_url: str,
-    telegram_id: str
+    site_url: str, telegram_id: str
 ) -> InlineKeyboardButton:
     return InlineKeyboardButton(
         text='Создать',
         web_app=WebAppInfo(
             url=f'{site_url}/cars/{telegram_id}/add_car/add_form'
-        )
+        ),
+    )
+
+
+async def create_payment_button(
+    site_url: str, admin_telegram_id: str
+) -> KeyboardButton:
+    return KeyboardButton(
+        text='Создать платеж',
+        web_app=WebAppInfo(
+            url=(
+                f'{site_url}/payments/admin/{admin_telegram_id}'
+                '/create_payment'
+            )
+        ),
     )

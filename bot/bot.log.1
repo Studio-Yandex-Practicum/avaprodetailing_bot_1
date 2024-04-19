@@ -1,0 +1,934 @@
+2024-04-13 20:28:28,907 [INFO]: [feed_update:172] - Update id=583428063 is handled. Duration 904 ms by bot id=6103311971
+2024-04-13 20:28:31,759 [INFO]: [feed_update:172] - Update id=583428064 is handled. Duration 1192 ms by bot id=6103311971
+2024-04-13 20:28:36,875 [INFO]: [feed_update:172] - Update id=583428065 is handled. Duration 930 ms by bot id=6103311971
+2024-04-13 20:28:38,395 [INFO]: [feed_update:172] - Update id=583428066 is handled. Duration 350 ms by bot id=6103311971
+2024-04-13 20:28:42,854 [INFO]: [feed_update:172] - Update id=583428067 is handled. Duration 588 ms by bot id=6103311971
+2024-04-13 20:29:38,294 [INFO]: [feed_update:172] - Update id=583428068 is handled. Duration 880 ms by bot id=6103311971
+2024-04-13 21:12:37,799 [INFO]: [feed_update:172] - Update id=583428069 is handled. Duration 1042 ms by bot id=6103311971
+2024-04-13 21:14:20,534 [INFO]: [feed_update:172] - Update id=583428070 is handled. Duration 972 ms by bot id=6103311971
+2024-04-13 21:26:29,620 [INFO]: [feed_update:172] - Update id=583428071 is handled. Duration 1123 ms by bot id=6103311971
+2024-04-13 21:37:20,686 [INFO]: [feed_update:172] - Update id=583428072 is handled. Duration 924 ms by bot id=6103311971
+2024-04-13 22:18:01,064 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-13 22:18:01,069 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-13 22:18:12,411 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-13 22:37:28,029 [INFO]: [feed_update:172] - Update id=583428073 is handled. Duration 1353 ms by bot id=6103311971
+2024-04-13 22:53:50,720 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-13 22:53:50,729 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 22:53:50,729 [INFO]: [start_polling:554] - Polling stopped
+2024-04-13 22:53:56,262 [INFO]: [start_polling:527] - Start polling
+2024-04-13 22:53:56,551 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 22:54:07,662 [INFO]: [feed_update:172] - Update id=583428074 is handled. Duration 800 ms by bot id=6103311971
+2024-04-13 22:55:09,927 [INFO]: [feed_update:172] - Update id=583428075 is handled. Duration 648 ms by bot id=6103311971
+2024-04-13 22:55:15,028 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-13 22:55:15,030 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 22:55:15,030 [INFO]: [start_polling:554] - Polling stopped
+2024-04-13 22:55:19,498 [INFO]: [start_polling:527] - Start polling
+2024-04-13 22:55:19,770 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 22:55:22,256 [INFO]: [feed_update:172] - Update id=583428076 is handled. Duration 736 ms by bot id=6103311971
+2024-04-13 22:55:24,356 [INFO]: [feed_update:172] - Update id=583428077 is handled. Duration 146 ms by bot id=6103311971
+2024-04-13 23:21:11,727 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-13 23:21:11,731 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:21:11,732 [INFO]: [start_polling:554] - Polling stopped
+2024-04-13 23:21:50,289 [INFO]: [start_polling:527] - Start polling
+2024-04-13 23:21:50,555 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:22:02,215 [INFO]: [feed_update:172] - Update id=583428078 is not handled. Duration 312 ms by bot id=6103311971
+2024-04-13 23:22:02,215 [ERROR]: [_process_update:315] - Cause exception while process update id=583428078 by bot id=6103311971
+ValidationError: 2 validation errors for SendPhoto
+photo.is-instance[InputFile]
+  Input should be an instance of InputFile [type=is_instance_of, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.5/v/is_instance_of
+photo.str
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.5/v/string_type
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 201, in user_qr_code
+    await bot.send_photo(chat_id=message.chat.id, photo=qr.make(message.chat.id))
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/client/bot.py", line 2866, in send_photo
+    call = SendPhoto(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/pydantic/main.py", line 164, in __init__
+    __pydantic_self__.__pydantic_validator__.validate_python(data, self_instance=__pydantic_self__)
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for SendPhoto
+photo.is-instance[InputFile]
+  Input should be an instance of InputFile [type=is_instance_of, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.5/v/is_instance_of
+photo.str
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.5/v/string_type
+2024-04-13 23:25:21,374 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-13 23:25:21,376 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:25:21,376 [INFO]: [start_polling:554] - Polling stopped
+2024-04-13 23:25:24,947 [INFO]: [start_polling:527] - Start polling
+2024-04-13 23:25:25,238 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:25:32,345 [INFO]: [feed_update:172] - Update id=583428079 is not handled. Duration 264 ms by bot id=6103311971
+2024-04-13 23:25:32,346 [ERROR]: [_process_update:315] - Cause exception while process update id=583428079 by bot id=6103311971
+TypeError: issubclass() arg 1 must be a class
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 201, in user_qr_code
+    await bot.send_photo(chat_id=message.chat.id, photo=qr.make_image(message.chat.id))
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/qrcode/main.py", line 356, in make_image
+    assert issubclass(image_factory, BaseImage)
+TypeError: issubclass() arg 1 must be a class
+2024-04-13 23:26:42,988 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-13 23:26:42,991 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:26:42,991 [INFO]: [start_polling:554] - Polling stopped
+2024-04-13 23:26:46,612 [INFO]: [start_polling:527] - Start polling
+2024-04-13 23:26:46,879 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:26:53,415 [INFO]: [feed_update:172] - Update id=583428080 is not handled. Duration 268 ms by bot id=6103311971
+2024-04-13 23:26:53,415 [ERROR]: [_process_update:315] - Cause exception while process update id=583428080 by bot id=6103311971
+TypeError: issubclass() arg 1 must be a class
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 201, in user_qr_code
+    await bot.send_photo(chat_id=message.chat.id, photo=qr.make_image(message.chat.id, back_color=(255, 195, 235), fill_color=(55, 95, 35)))
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/qrcode/main.py", line 356, in make_image
+    assert issubclass(image_factory, BaseImage)
+TypeError: issubclass() arg 1 must be a class
+2024-04-13 23:30:50,932 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-13 23:30:50,936 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:30:50,937 [INFO]: [start_polling:554] - Polling stopped
+2024-04-13 23:30:55,031 [INFO]: [start_polling:527] - Start polling
+2024-04-13 23:30:55,294 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:30:56,242 [INFO]: [feed_update:172] - Update id=583428081 is not handled. Duration 9 ms by bot id=6103311971
+2024-04-13 23:30:56,242 [ERROR]: [_process_update:315] - Cause exception while process update id=583428081 by bot id=6103311971
+ValidationError: 2 validation errors for SendPhoto
+photo.is-instance[InputFile]
+  Input should be an instance of InputFile [type=is_instance_of, input_value=<qrcode.image.pil.PilImage object at 0x113207370>, input_type=PilImage]
+    For further information visit https://errors.pydantic.dev/2.5/v/is_instance_of
+photo.str
+  Input should be a valid string [type=string_type, input_value=<qrcode.image.pil.PilImage object at 0x113207370>, input_type=PilImage]
+    For further information visit https://errors.pydantic.dev/2.5/v/string_type
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 201, in user_qr_code
+    await bot.send_photo(chat_id=message.chat.id, photo=qrcode.make('Some data here'))
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/client/bot.py", line 2866, in send_photo
+    call = SendPhoto(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/pydantic/main.py", line 164, in __init__
+    __pydantic_self__.__pydantic_validator__.validate_python(data, self_instance=__pydantic_self__)
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for SendPhoto
+photo.is-instance[InputFile]
+  Input should be an instance of InputFile [type=is_instance_of, input_value=<qrcode.image.pil.PilImage object at 0x113207370>, input_type=PilImage]
+    For further information visit https://errors.pydantic.dev/2.5/v/is_instance_of
+photo.str
+  Input should be a valid string [type=string_type, input_value=<qrcode.image.pil.PilImage object at 0x113207370>, input_type=PilImage]
+    For further information visit https://errors.pydantic.dev/2.5/v/string_type
+2024-04-13 23:36:12,353 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-13 23:36:12,356 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:36:12,356 [INFO]: [start_polling:554] - Polling stopped
+2024-04-13 23:36:16,007 [INFO]: [start_polling:527] - Start polling
+2024-04-13 23:36:16,307 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:36:17,616 [INFO]: [feed_update:172] - Update id=583428082 is not handled. Duration 10 ms by bot id=6103311971
+2024-04-13 23:36:17,616 [ERROR]: [_process_update:315] - Cause exception while process update id=583428082 by bot id=6103311971
+ValidationError: 2 validation errors for SendPhoto
+photo.is-instance[InputFile]
+  Input should be an instance of InputFile [type=is_instance_of, input_value=<qrcode.image.svg.SvgImage object at 0x110846290>, input_type=SvgImage]
+    For further information visit https://errors.pydantic.dev/2.5/v/is_instance_of
+photo.str
+  Input should be a valid string [type=string_type, input_value=<qrcode.image.svg.SvgImage object at 0x110846290>, input_type=SvgImage]
+    For further information visit https://errors.pydantic.dev/2.5/v/string_type
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 202, in user_qr_code
+    await bot.send_photo(chat_id=message.chat.id, photo=qrcode.make('Some data here', image_factory=qrcode.image.svg.SvgImage))
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/client/bot.py", line 2866, in send_photo
+    call = SendPhoto(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/pydantic/main.py", line 164, in __init__
+    __pydantic_self__.__pydantic_validator__.validate_python(data, self_instance=__pydantic_self__)
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for SendPhoto
+photo.is-instance[InputFile]
+  Input should be an instance of InputFile [type=is_instance_of, input_value=<qrcode.image.svg.SvgImage object at 0x110846290>, input_type=SvgImage]
+    For further information visit https://errors.pydantic.dev/2.5/v/is_instance_of
+photo.str
+  Input should be a valid string [type=string_type, input_value=<qrcode.image.svg.SvgImage object at 0x110846290>, input_type=SvgImage]
+    For further information visit https://errors.pydantic.dev/2.5/v/string_type
+2024-04-13 23:38:47,161 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-13 23:38:47,164 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:38:47,165 [INFO]: [start_polling:554] - Polling stopped
+2024-04-13 23:38:50,749 [INFO]: [start_polling:527] - Start polling
+2024-04-13 23:38:51,001 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:38:54,098 [INFO]: [feed_update:172] - Update id=583428083 is not handled. Duration 11 ms by bot id=6103311971
+2024-04-13 23:38:54,099 [ERROR]: [_process_update:315] - Cause exception while process update id=583428083 by bot id=6103311971
+TypeError: Can't instantiate abstract class InputFile with abstract method read
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 204, in user_qr_code
+    await bot.send_photo(chat_id=message.chat.id, photo=types.InputFile(img))
+TypeError: Can't instantiate abstract class InputFile with abstract method read
+2024-04-13 23:40:21,755 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-13 23:40:21,758 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:40:21,758 [INFO]: [start_polling:554] - Polling stopped
+2024-04-13 23:40:25,155 [INFO]: [start_polling:527] - Start polling
+2024-04-13 23:40:25,423 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:40:27,902 [INFO]: [feed_update:172] - Update id=583428084 is not handled. Duration 554 ms by bot id=6103311971
+2024-04-13 23:40:27,902 [ERROR]: [_process_update:315] - Cause exception while process update id=583428084 by bot id=6103311971
+TypeError: Can't instantiate abstract class InputFile with abstract method read
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 204, in user_qr_code
+    await bot.send_photo(chat_id=message.chat.id, photo=types.InputFile("some_file.png"))
+TypeError: Can't instantiate abstract class InputFile with abstract method read
+2024-04-13 23:41:14,176 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-13 23:41:14,178 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:41:14,179 [INFO]: [start_polling:554] - Polling stopped
+2024-04-13 23:41:17,759 [INFO]: [start_polling:527] - Start polling
+2024-04-13 23:41:18,037 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:41:19,304 [INFO]: [feed_update:172] - Update id=583428085 is not handled. Duration 18 ms by bot id=6103311971
+2024-04-13 23:41:19,304 [ERROR]: [_process_update:315] - Cause exception while process update id=583428085 by bot id=6103311971
+TypeError: Can't instantiate abstract class InputFile with abstract method read
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 204, in user_qr_code
+    await bot.send_photo(chat_id=message.chat.id, photo=types.InputFile("some_file.png"))
+TypeError: Can't instantiate abstract class InputFile with abstract method read
+2024-04-13 23:50:54,392 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-13 23:50:54,396 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:50:54,397 [INFO]: [start_polling:554] - Polling stopped
+2024-04-13 23:50:58,118 [INFO]: [start_polling:527] - Start polling
+2024-04-13 23:50:58,361 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:51:00,584 [INFO]: [feed_update:172] - Update id=583428086 is not handled. Duration 167 ms by bot id=6103311971
+2024-04-13 23:51:00,584 [ERROR]: [_process_update:315] - Cause exception while process update id=583428086 by bot id=6103311971
+TypeError: a bytes-like object is required, not 'PilImage'
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 202, in user_qr_code
+    await message.answer_photo(types.BufferedInputFile(qrcode.make('Some data here'), filename='qr_code.png'))
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/client/session/aiohttp.py", line 170, in make_request
+    async with session.post(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/client.py", line 1194, in __aenter__
+    self._resp = await self._coro
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/client.py", line 605, in _request
+    await resp.start(conn)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/client_reqrep.py", line 966, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/streams.py", line 622, in read
+    await self._waiter
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/client_reqrep.py", line 626, in write_bytes
+    await self.body.write(writer)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/multipart.py", line 906, in write
+    await part.write(writer)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiohttp/payload.py", line 441, in write
+    chunk = await self._iter.__anext__()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/types/input_file.py", line 76, in read
+    buffer = io.BytesIO(self.data)
+TypeError: a bytes-like object is required, not 'PilImage'
+2024-04-13 23:52:36,049 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-13 23:52:36,052 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:52:36,052 [INFO]: [start_polling:554] - Polling stopped
+2024-04-13 23:52:39,496 [INFO]: [start_polling:527] - Start polling
+2024-04-13 23:52:39,766 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:52:42,739 [INFO]: [feed_update:172] - Update id=583428087 is not handled. Duration 0 ms by bot id=6103311971
+2024-04-13 23:52:42,739 [ERROR]: [_process_update:315] - Cause exception while process update id=583428087 by bot id=6103311971
+AttributeError: module 'qrcode' has no attribute 'make_image'
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 202, in user_qr_code
+    await message.answer_photo(types.BufferedInputFile(qrcode.make_image('Some data here'), filename='qr_code.png'))
+AttributeError: module 'qrcode' has no attribute 'make_image'
+2024-04-13 23:59:08,234 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-13 23:59:08,238 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:59:08,238 [INFO]: [start_polling:554] - Polling stopped
+2024-04-13 23:59:11,756 [INFO]: [start_polling:527] - Start polling
+2024-04-13 23:59:12,053 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-13 23:59:15,036 [INFO]: [feed_update:172] - Update id=583428088 is handled. Duration 530 ms by bot id=6103311971
+2024-04-14 00:01:39,334 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-14 00:01:39,337 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-14 00:01:39,337 [INFO]: [start_polling:554] - Polling stopped
+2024-04-14 00:01:42,965 [INFO]: [start_polling:527] - Start polling
+2024-04-14 00:01:43,209 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-14 00:01:46,949 [INFO]: [feed_update:172] - Update id=583428089 is handled. Duration 351 ms by bot id=6103311971
+2024-04-14 00:01:51,398 [INFO]: [feed_update:172] - Update id=583428090 is handled. Duration 185 ms by bot id=6103311971
+2024-04-14 00:06:49,359 [INFO]: [feed_update:172] - Update id=583428091 is handled. Duration 973 ms by bot id=6103311971
+2024-04-14 00:06:55,481 [INFO]: [feed_update:172] - Update id=583428092 is handled. Duration 556 ms by bot id=6103311971
+2024-04-14 00:07:08,623 [INFO]: [feed_update:172] - Update id=583428093 is handled. Duration 582 ms by bot id=6103311971
+2024-04-14 00:07:44,771 [INFO]: [feed_update:172] - Update id=583428094 is handled. Duration 859 ms by bot id=6103311971
+2024-04-14 00:07:47,057 [INFO]: [feed_update:172] - Update id=583428095 is handled. Duration 451 ms by bot id=6103311971
+2024-04-14 00:07:50,231 [INFO]: [feed_update:172] - Update id=583428096 is handled. Duration 805 ms by bot id=6103311971
+2024-04-14 00:07:52,540 [INFO]: [feed_update:172] - Update id=583428097 is handled. Duration 190 ms by bot id=6103311971
+2024-04-14 01:02:19,733 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 01:02:19,737 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-14 01:02:31,041 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-14 01:39:57,973 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 01:39:58,077 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-14 02:15:11,728 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 02:15:11,730 [WARNING]: [_listen_updates:221] - Sleep for 1.490709 seconds and try again... (tryings = 1, bot id = 6103311971)
+2024-04-14 02:49:49,642 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 02:49:49,644 [WARNING]: [_listen_updates:221] - Sleep for 2.017894 seconds and try again... (tryings = 2, bot id = 6103311971)
+2024-04-14 03:12:35,258 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 03:12:35,261 [WARNING]: [_listen_updates:221] - Sleep for 2.595907 seconds and try again... (tryings = 3, bot id = 6103311971)
+2024-04-14 03:51:16,470 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 03:51:16,472 [WARNING]: [_listen_updates:221] - Sleep for 3.326755 seconds and try again... (tryings = 4, bot id = 6103311971)
+2024-04-14 04:33:27,492 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 04:33:27,494 [WARNING]: [_listen_updates:221] - Sleep for 4.535653 seconds and try again... (tryings = 5, bot id = 6103311971)
+2024-04-14 05:12:35,602 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 05:12:35,603 [WARNING]: [_listen_updates:221] - Sleep for 5.098419 seconds and try again... (tryings = 6, bot id = 6103311971)
+2024-04-14 05:35:43,413 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 05:35:43,416 [WARNING]: [_listen_updates:221] - Sleep for 4.979891 seconds and try again... (tryings = 7, bot id = 6103311971)
+2024-04-14 06:14:52,977 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 06:14:53,073 [WARNING]: [_listen_updates:221] - Sleep for 5.173320 seconds and try again... (tryings = 8, bot id = 6103311971)
+2024-04-14 06:52:30,213 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 06:52:30,215 [WARNING]: [_listen_updates:221] - Sleep for 5.108650 seconds and try again... (tryings = 9, bot id = 6103311971)
+2024-04-14 06:53:29,136 [INFO]: [_listen_updates:233] - Connection established (tryings = 10, bot id = 6103311971)
+2024-04-14 07:18:27,461 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 07:18:27,464 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-14 07:57:04,239 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 07:57:04,240 [WARNING]: [_listen_updates:221] - Sleep for 1.233231 seconds and try again... (tryings = 1, bot id = 6103311971)
+2024-04-14 07:57:34,654 [INFO]: [_listen_updates:233] - Connection established (tryings = 2, bot id = 6103311971)
+2024-04-14 08:37:54,119 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 08:37:54,122 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-14 08:38:23,946 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-14 09:14:59,005 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 09:14:59,006 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-14 09:38:27,570 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 09:38:27,572 [WARNING]: [_listen_updates:221] - Sleep for 1.378213 seconds and try again... (tryings = 1, bot id = 6103311971)
+2024-04-14 10:13:41,565 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 10:13:41,568 [WARNING]: [_listen_updates:221] - Sleep for 1.810348 seconds and try again... (tryings = 2, bot id = 6103311971)
+2024-04-14 10:14:12,606 [INFO]: [_listen_updates:233] - Connection established (tryings = 3, bot id = 6103311971)
+2024-04-14 10:59:50,903 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 10:59:50,906 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-14 11:00:20,307 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-14 11:22:35,068 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 11:22:35,070 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-14 11:58:06,916 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 11:58:06,920 [WARNING]: [_listen_updates:221] - Sleep for 1.350215 seconds and try again... (tryings = 1, bot id = 6103311971)
+2024-04-14 12:17:45,474 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 12:17:45,586 [WARNING]: [_listen_updates:221] - Sleep for 1.727574 seconds and try again... (tryings = 2, bot id = 6103311971)
+2024-04-14 12:27:42,634 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 12:27:42,641 [WARNING]: [_listen_updates:221] - Sleep for 2.317148 seconds and try again... (tryings = 3, bot id = 6103311971)
+2024-04-14 12:27:55,422 [INFO]: [_listen_updates:233] - Connection established (tryings = 4, bot id = 6103311971)
+2024-04-14 12:59:16,516 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 12:59:16,523 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-14 13:36:06,290 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 13:36:06,293 [WARNING]: [_listen_updates:221] - Sleep for 1.326585 seconds and try again... (tryings = 1, bot id = 6103311971)
+2024-04-14 13:49:14,846 [INFO]: [_listen_updates:233] - Connection established (tryings = 2, bot id = 6103311971)
+2024-04-14 14:05:24,388 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2024-04-14 14:05:24,389 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-14 14:05:53,943 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-14 14:39:06,423 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 14:39:06,425 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-14 14:39:36,343 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-14 15:18:15,607 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 15:18:15,609 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-14 15:38:42,788 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 15:38:42,791 [WARNING]: [_listen_updates:221] - Sleep for 1.131447 seconds and try again... (tryings = 1, bot id = 6103311971)
+2024-04-14 16:32:51,781 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 16:32:51,784 [WARNING]: [_listen_updates:221] - Sleep for 1.476947 seconds and try again... (tryings = 2, bot id = 6103311971)
+2024-04-14 16:33:22,106 [INFO]: [_listen_updates:233] - Connection established (tryings = 3, bot id = 6103311971)
+2024-04-14 17:03:01,976 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 17:03:01,979 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-14 17:03:13,270 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-14 18:20:11,373 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 18:20:11,382 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-14 18:20:22,691 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-14 20:06:42,477 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-14 20:06:42,487 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-14 20:06:42,488 [INFO]: [start_polling:554] - Polling stopped
+2024-04-14 20:06:46,208 [INFO]: [start_polling:527] - Start polling
+2024-04-14 20:06:46,485 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-14 20:07:04,110 [INFO]: [feed_update:172] - Update id=583428098 is handled. Duration 895 ms by bot id=6103311971
+2024-04-14 20:07:07,755 [INFO]: [feed_update:172] - Update id=583428099 is handled. Duration 338 ms by bot id=6103311971
+2024-04-14 20:14:19,156 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-14 20:14:19,161 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-14 20:14:19,162 [INFO]: [start_polling:554] - Polling stopped
+2024-04-14 20:14:23,483 [INFO]: [start_polling:527] - Start polling
+2024-04-14 20:14:23,780 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-14 20:14:34,564 [INFO]: [feed_update:172] - Update id=583428100 is not handled. Duration 452 ms by bot id=6103311971
+2024-04-14 20:14:34,565 [ERROR]: [_process_update:315] - Cause exception while process update id=583428100 by bot id=6103311971
+TypeError: 'coroutine' object is not subscriptable
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 225, in loyality_points
+    if not response.json()['count'] else
+TypeError: 'coroutine' object is not subscriptable
+2024-04-14 20:15:28,835 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-14 20:15:28,838 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-14 20:15:28,839 [INFO]: [start_polling:554] - Polling stopped
+2024-04-14 20:15:33,378 [INFO]: [start_polling:527] - Start polling
+2024-04-14 20:15:33,646 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-14 20:15:35,979 [INFO]: [feed_update:172] - Update id=583428101 is not handled. Duration 378 ms by bot id=6103311971
+2024-04-14 20:15:35,980 [ERROR]: [_process_update:315] - Cause exception while process update id=583428101 by bot id=6103311971
+TypeError: 'coroutine' object is not subscriptable
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 225, in loyality_points
+    if not await response.json()['count'] else
+TypeError: 'coroutine' object is not subscriptable
+2024-04-14 20:18:34,003 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-14 20:18:34,007 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-14 20:18:34,007 [INFO]: [start_polling:554] - Polling stopped
+2024-04-14 20:18:37,668 [INFO]: [start_polling:527] - Start polling
+2024-04-14 20:18:37,944 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-14 20:18:40,431 [INFO]: [feed_update:172] - Update id=583428102 is not handled. Duration 351 ms by bot id=6103311971
+2024-04-14 20:18:40,431 [ERROR]: [_process_update:315] - Cause exception while process update id=583428102 by bot id=6103311971
+TypeError: list indices must be integers or slices, not str
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 226, in loyality_points
+    if not data['count'] else
+TypeError: list indices must be integers or slices, not str
+2024-04-14 20:20:13,986 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-14 20:20:13,993 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-14 20:20:13,993 [INFO]: [start_polling:554] - Polling stopped
+2024-04-14 20:20:18,424 [INFO]: [start_polling:527] - Start polling
+2024-04-14 20:20:18,709 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-14 20:20:20,398 [INFO]: [feed_update:172] - Update id=583428103 is handled. Duration 840 ms by bot id=6103311971
+2024-04-14 20:22:18,859 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-14 20:22:18,862 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-14 20:22:18,862 [INFO]: [start_polling:554] - Polling stopped
+2024-04-14 20:22:22,399 [INFO]: [start_polling:527] - Start polling
+2024-04-14 20:22:22,658 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-14 20:22:26,793 [INFO]: [feed_update:172] - Update id=583428104 is handled. Duration 758 ms by bot id=6103311971
+2024-04-14 20:23:33,153 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-14 20:23:33,158 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-14 20:23:33,159 [INFO]: [start_polling:554] - Polling stopped
+2024-04-14 20:23:37,527 [INFO]: [start_polling:527] - Start polling
+2024-04-14 20:23:37,823 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-14 20:23:40,664 [INFO]: [feed_update:172] - Update id=583428105 is handled. Duration 782 ms by bot id=6103311971
+2024-04-14 20:23:43,075 [INFO]: [feed_update:172] - Update id=583428106 is handled. Duration 505 ms by bot id=6103311971
+2024-04-14 21:47:01,354 [INFO]: [feed_update:172] - Update id=583428107 is handled. Duration 1566 ms by bot id=6103311971
+2024-04-14 22:03:21,370 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-14 22:03:21,375 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-14 22:03:32,702 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-14 23:10:06,194 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-14 23:10:06,205 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-14 23:10:06,206 [INFO]: [start_polling:554] - Polling stopped
+2024-04-14 23:10:10,389 [INFO]: [start_polling:527] - Start polling
+2024-04-14 23:10:10,698 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-14 23:10:29,197 [INFO]: [feed_update:172] - Update id=583428108 is handled. Duration 943 ms by bot id=6103311971
+2024-04-14 23:10:33,637 [INFO]: [feed_update:172] - Update id=583428109 is not handled. Duration 4 ms by bot id=6103311971
+2024-04-14 23:11:02,273 [INFO]: [feed_update:172] - Update id=583428110 is not handled. Duration 3 ms by bot id=6103311971
+2024-04-15 00:30:01,111 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 00:30:01,117 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-15 00:30:30,772 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-15 01:10:34,940 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 01:10:34,943 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-15 01:11:04,779 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-15 01:31:02,622 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 01:31:02,624 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-15 02:15:24,085 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 02:15:24,087 [WARNING]: [_listen_updates:221] - Sleep for 1.260162 seconds and try again... (tryings = 1, bot id = 6103311971)
+2024-04-15 02:15:53,707 [INFO]: [_listen_updates:233] - Connection established (tryings = 2, bot id = 6103311971)
+2024-04-15 02:36:50,771 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 02:36:50,772 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-15 03:21:29,347 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 03:21:29,350 [WARNING]: [_listen_updates:221] - Sleep for 1.343484 seconds and try again... (tryings = 1, bot id = 6103311971)
+2024-04-15 03:21:41,747 [INFO]: [_listen_updates:233] - Connection established (tryings = 2, bot id = 6103311971)
+2024-04-15 03:57:32,351 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 03:57:32,353 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-15 03:58:02,020 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-15 04:37:33,874 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 04:37:33,969 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-15 04:59:08,912 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 04:59:08,915 [WARNING]: [_listen_updates:221] - Sleep for 1.293946 seconds and try again... (tryings = 1, bot id = 6103311971)
+2024-04-15 05:21:13,755 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 05:21:13,756 [WARNING]: [_listen_updates:221] - Sleep for 1.706193 seconds and try again... (tryings = 2, bot id = 6103311971)
+2024-04-15 05:58:43,602 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 05:58:43,605 [WARNING]: [_listen_updates:221] - Sleep for 2.118910 seconds and try again... (tryings = 3, bot id = 6103311971)
+2024-04-15 06:34:43,853 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 06:34:43,856 [WARNING]: [_listen_updates:221] - Sleep for 2.599110 seconds and try again... (tryings = 4, bot id = 6103311971)
+2024-04-15 06:35:15,832 [INFO]: [_listen_updates:233] - Connection established (tryings = 5, bot id = 6103311971)
+2024-04-15 07:14:22,679 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 07:14:22,682 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-15 07:14:52,499 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-15 07:37:15,184 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 07:37:15,186 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-15 08:15:28,071 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 08:15:28,073 [WARNING]: [_listen_updates:221] - Sleep for 1.216838 seconds and try again... (tryings = 1, bot id = 6103311971)
+2024-04-15 08:36:53,574 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 08:36:53,577 [WARNING]: [_listen_updates:221] - Sleep for 1.687304 seconds and try again... (tryings = 2, bot id = 6103311971)
+2024-04-15 08:40:42,885 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [Connection reset by peer]
+2024-04-15 08:40:42,886 [WARNING]: [_listen_updates:221] - Sleep for 2.358126 seconds and try again... (tryings = 3, bot id = 6103311971)
+2024-04-15 09:30:12,139 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 09:30:12,142 [WARNING]: [_listen_updates:221] - Sleep for 3.010210 seconds and try again... (tryings = 4, bot id = 6103311971)
+2024-04-15 10:03:16,455 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 10:03:16,466 [WARNING]: [_listen_updates:221] - Sleep for 3.810603 seconds and try again... (tryings = 5, bot id = 6103311971)
+2024-04-15 10:03:49,222 [INFO]: [_listen_updates:233] - Connection established (tryings = 6, bot id = 6103311971)
+2024-04-15 10:40:59,593 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 10:40:59,595 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-15 11:25:11,778 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 11:25:11,780 [WARNING]: [_listen_updates:221] - Sleep for 1.350742 seconds and try again... (tryings = 1, bot id = 6103311971)
+2024-04-15 11:44:42,381 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 11:44:42,382 [WARNING]: [_listen_updates:221] - Sleep for 1.867413 seconds and try again... (tryings = 2, bot id = 6103311971)
+2024-04-15 11:45:13,146 [INFO]: [_listen_updates:233] - Connection established (tryings = 3, bot id = 6103311971)
+2024-04-15 12:23:14,776 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 12:23:14,780 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-15 12:23:16,051 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-15 12:23:16,060 [INFO]: [feed_update:172] - Update id=583428111 is not handled. Duration 6 ms by bot id=6103311971
+2024-04-15 12:23:16,881 [INFO]: [feed_update:172] - Update id=583428112 is handled. Duration 825 ms by bot id=6103311971
+2024-04-15 12:45:36,339 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 12:45:36,340 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-15 13:22:38,434 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 13:22:38,438 [WARNING]: [_listen_updates:221] - Sleep for 1.338156 seconds and try again... (tryings = 1, bot id = 6103311971)
+2024-04-15 13:23:08,647 [INFO]: [_listen_updates:233] - Connection established (tryings = 2, bot id = 6103311971)
+2024-04-15 13:41:26,731 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 13:41:26,736 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-15 13:41:38,035 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-15 14:20:09,017 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 14:20:09,019 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-15 14:20:38,911 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-15 14:45:33,229 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 14:45:33,233 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-15 15:25:32,603 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 15:25:32,607 [WARNING]: [_listen_updates:221] - Sleep for 1.247331 seconds and try again... (tryings = 1, bot id = 6103311971)
+2024-04-15 15:27:22,683 [INFO]: [_listen_updates:233] - Connection established (tryings = 2, bot id = 6103311971)
+2024-04-15 16:06:26,869 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 16:06:26,871 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-15 16:27:26,518 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 16:27:26,521 [WARNING]: [_listen_updates:221] - Sleep for 1.060763 seconds and try again... (tryings = 1, bot id = 6103311971)
+2024-04-15 17:04:30,436 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 17:04:30,439 [WARNING]: [_listen_updates:221] - Sleep for 1.477400 seconds and try again... (tryings = 2, bot id = 6103311971)
+2024-04-15 17:26:37,168 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 17:26:37,170 [WARNING]: [_listen_updates:221] - Sleep for 1.770905 seconds and try again... (tryings = 3, bot id = 6103311971)
+2024-04-15 17:26:49,218 [INFO]: [_listen_updates:233] - Connection established (tryings = 4, bot id = 6103311971)
+2024-04-15 18:14:33,826 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 18:14:33,830 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-15 18:15:03,157 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-15 18:39:34,348 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 18:39:34,351 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-15 19:06:48,106 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 19:06:48,108 [WARNING]: [_listen_updates:221] - Sleep for 1.391515 seconds and try again... (tryings = 1, bot id = 6103311971)
+2024-04-15 19:39:12,738 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 19:39:12,741 [WARNING]: [_listen_updates:221] - Sleep for 1.572349 seconds and try again... (tryings = 2, bot id = 6103311971)
+2024-04-15 19:39:24,607 [INFO]: [_listen_updates:233] - Connection established (tryings = 3, bot id = 6103311971)
+2024-04-15 20:26:18,195 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 20:26:18,201 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-15 20:26:29,784 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-15 21:22:10,905 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 21:22:10,911 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-15 21:22:22,235 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-15 21:44:15,359 [ERROR]: [_listen_updates:219] - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-04-15 21:44:15,369 [WARNING]: [_listen_updates:221] - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6103311971)
+2024-04-15 21:44:26,678 [INFO]: [_listen_updates:233] - Connection established (tryings = 1, bot id = 6103311971)
+2024-04-17 20:35:25,299 [INFO]: [start_polling:527] - Start polling
+2024-04-17 20:35:25,606 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-17 20:35:51,602 [INFO]: [feed_update:172] - Update id=583428113 is handled. Duration 545 ms by bot id=6103311971
+2024-04-17 20:37:10,829 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-17 20:37:10,832 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-17 20:37:10,832 [INFO]: [start_polling:554] - Polling stopped
+2024-04-17 20:37:14,218 [INFO]: [start_polling:527] - Start polling
+2024-04-17 20:37:14,470 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-17 20:37:19,174 [INFO]: [feed_update:172] - Update id=583428114 is not handled. Duration 400 ms by bot id=6103311971
+2024-04-17 20:37:19,174 [ERROR]: [_process_update:315] - Cause exception while process update id=583428114 by bot id=6103311971
+ValidationError: 2 validation errors for ReplyKeyboardMarkup
+keyboard.0.0
+  Input should be a valid dictionary or instance of KeyboardButton [type=model_type, input_value=<coroutine object univers...d_button at 0x110f29c40>, input_type=coroutine]
+    For further information visit https://errors.pydantic.dev/2.5/v/model_type
+keyboard.0.1
+  Input should be a valid dictionary or instance of KeyboardButton [type=model_type, input_value=<coroutine object univers...d_button at 0x110f29d20>, input_type=coroutine]
+    For further information visit https://errors.pydantic.dev/2.5/v/model_type
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 100, in starting
+    reply_markup=types.ReplyKeyboardMarkup(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/pydantic/main.py", line 164, in __init__
+    __pydantic_self__.__pydantic_validator__.validate_python(data, self_instance=__pydantic_self__)
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for ReplyKeyboardMarkup
+keyboard.0.0
+  Input should be a valid dictionary or instance of KeyboardButton [type=model_type, input_value=<coroutine object univers...d_button at 0x110f29c40>, input_type=coroutine]
+    For further information visit https://errors.pydantic.dev/2.5/v/model_type
+keyboard.0.1
+  Input should be a valid dictionary or instance of KeyboardButton [type=model_type, input_value=<coroutine object univers...d_button at 0x110f29d20>, input_type=coroutine]
+    For further information visit https://errors.pydantic.dev/2.5/v/model_type
+2024-04-17 20:38:45,358 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-17 20:38:45,360 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-17 20:38:45,360 [INFO]: [start_polling:554] - Polling stopped
+2024-04-17 20:38:48,659 [INFO]: [start_polling:527] - Start polling
+2024-04-17 20:38:48,936 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-17 20:38:51,538 [INFO]: [feed_update:172] - Update id=583428115 is not handled. Duration 335 ms by bot id=6103311971
+2024-04-17 20:38:51,538 [ERROR]: [_process_update:315] - Cause exception while process update id=583428115 by bot id=6103311971
+TypeError: BaseModel.__init__() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/.venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/main.py", line 103, in starting
+    await universal_web_app_keyboard_button(
+  File "/Users/valerijgugucidze/dev/avaprodetailing_bot_1/bot/keyboards.py", line 25, in universal_web_app_keyboard_button
+    return KeyboardButton(text, url=url)
+TypeError: BaseModel.__init__() takes 1 positional argument but 2 were given
+2024-04-17 20:40:16,705 [WARNING]: [_signal_stop_polling:455] - Received SIGINT signal
+2024-04-17 20:40:16,707 [INFO]: [_polling:359] - Polling stopped for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-17 20:40:16,708 [INFO]: [start_polling:554] - Polling stopped
+2024-04-17 20:40:20,167 [INFO]: [start_polling:527] - Start polling
+2024-04-17 20:40:20,421 [INFO]: [_polling:341] - Run polling for bot @valera_gugutsidze_kittybot id=6103311971 - 'valera_gugutsidze_kittybot'
+2024-04-17 20:40:26,390 [INFO]: [feed_update:172] - Update id=583428116 is not handled. Duration 356 ms by bot id=6103311971

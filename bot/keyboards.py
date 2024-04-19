@@ -85,3 +85,44 @@ async def create_payment_button(
             )
         ),
     )
+
+
+async def get_admin_buttons(site_url: str, telegram_id: str):
+    return [
+        [
+            await universal_web_app_keyboard_button(
+                text='Регистрация нового клиента',
+                url=(f'{site_url}/users/admin/' f'{telegram_id}/add_user'),
+            ),
+            await universal_web_app_keyboard_button(
+                text='Просмотр/редактирование аккаунта клиента',
+                url=(f'{site_url}/users/admin/' f'{telegram_id}/user_info'),
+            ),
+        ],
+        [
+            await create_payment_button(site_url, telegram_id),
+            await universal_web_app_keyboard_button(
+                text='Начислить/списать баллы',
+                url=(
+                    f'{site_url}/loyality/admin/'
+                    f'{telegram_id}/'
+                    'loyality_form'
+                ),
+            ),
+        ],
+    ]
+
+
+async def get_superuser_buttons(site_url: str, telegram_id: str):
+    return [
+        [
+            await universal_web_app_keyboard_button(
+                'Регистрация нового пользователя',
+                url=(f'{site_url}/users/admin/' f'{telegram_id}/add_user'),
+            ),
+            await universal_web_app_keyboard_button(
+                'Просмотр/редактирование аккаунта пользователя',
+                url=(f'{site_url}/users/admin/' f'{telegram_id}/user_info'),
+            ),
+        ],
+    ]

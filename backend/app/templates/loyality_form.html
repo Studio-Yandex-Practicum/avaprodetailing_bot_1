@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block title %}Бонусная система AVAPRODETAILING{% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="row align-items-center justify-content-center">
+        <div class="col-md-6">
+            <h1 class="text-center">Бонусная система AVAPRODETAILING</h1>
+            <form id="loyality_form" class="form-control">
+                <div class="mb-3">
+                    <label for="user_id" class="form-label">Номер телефона клиента</label>
+                    <input type="text" name="user_id" class="form-control" list="user_list" required>
+                    <datalist id="user_list"></datalist>
+                    <div class="mb-3" id="loyality_amount_div" style="display: none;">
+                        <span id="loyality_amount"></span>
+                    </div>
+                    <button type="button" id="scan_qr_button" style="background-color: transparent; border: none; margin-top: 10px;">
+                        <img src="/static/img/scanner.png" width="40" height="40" style="filter: invert(100%);">
+                        <span style="margin-left: 5px; color: white;">Сканировать карту лояльности</span>
+                    </button>
+                </div>
+                    <div class="mb-3">
+                        <label for="loyality_action" class="form-label">Действие</label>
+                        <select name="loyality_action" class="form-control" required>
+                            <option disabled selected>Выберите действие с бонусами</option>
+                            <option value="начислено">Начислить</option>
+                            <option value="списано">Списать</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="loyality_points" class="form-label">Количество бонусов</label>
+                        <input type="number"  min="0" name="loyality_points" max="{{ max_amount }}" class="form-control" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <input type="hidden" name="admin_id" value="{{ admin_telegram_id }}">
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <input type="button" id="add_loyality_button" value="Подтвердить">
+                </div>
+            </form>
+            <script>
+                $(document).ready(function() {
+                    function getLoyalityAmount(phoneNumber) {
+                        $.get(`/loyality/admin/{{ admin_telegram_id }}/${phoneNumber}/`, function(data) {
+                            $('#loyality_amount').text(data.count);
+                        });
+                    }
+                    function updateLoyalityPoints() {
+                        var selectedValue = $('select[name="loyality_action"]').val();
+                        if (selectedValue == 'списано') {
+                            var maxAmount = parseInt($('#loyality_amount').text());
+                            $('input[name="loyality_points"]').attr('max', maxAmount);
+                            $('input[name="loyality_points"]').on('input', function() {
+                                if (parseInt($(this).val()) > maxAmount) {
+                                    $(this).val(maxAmount);
+                                }
+                            });
+                        }
+                    }
+                    $('input[name="user_id"]').on('input', function() {
+                        var substring = $(this).val();
+                        $.get(`/users/admin/{{ admin_telegram_id }}/search_user?user=${substring}`, function(data) {
+                            $('#user_list').empty();
+                            data.forEach(function(user) {
+                                $('#user_list').append(`<option value="${user}">${user}</option>`);
+                            });
+                        });
+                        var phoneNumber = $(this).val();
+                        getLoyalityAmount(phoneNumber);
+                    });
+                    $('#scan_qr_button').on('click', function(){
+                        Telegram.WebApp.showScanQrPopup({
+                            text: 'with any link'
+                        }, function (text) {
+                            $('input[name="user_id"]').val(text);
+                            getLoyalityAmount(text);
+                            return true;
+                        });
+                    });
+                    $('select[name="loyality_action"]').on('change', updateLoyalityPoints);
+                });
+            </script>
+            <script>
+                $(document).ready(function(){
+                    Telegram.WebApp.ready()
+                    var WebApp = window.Telegram.WebApp
+                    WebApp.expand()
+                    $('#add_loyality_button').on('click', function(event){
+                        event.preventDefault()
+                        $.ajax({
+                            url: '/loyality/admin/{{ admin_telegram_id }}/',
+                            method: 'post',
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            data: JSON.stringify(
+                                {
+                                    user_id: $('input[name="user_id"]').val(),
+                                    action: $('select[name="loyality_action"]').val(),
+                                    amount: $('input[name="loyality_points"]').val()
+                                }
+                            ),
+                            statusCode: {
+                                200: function () {
+                                    WebApp.close();
+                                }
+                            }
+                        })
+                    })
+                })
+            </script>
+        </div>
+    </div>
+</div>
+{% endblock content %}

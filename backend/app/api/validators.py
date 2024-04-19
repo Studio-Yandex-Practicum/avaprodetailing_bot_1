@@ -76,6 +76,15 @@ async def check_user_exists(telegram_id: str, session: AsyncSession) -> None:
         )
 
 
+async def check_user_exists_by_phone_number(
+    phone_number: str, session: AsyncSession
+) -> None:
+    if not await user_crud.get_user_by_phone_number(phone_number, session):
+        raise HTTPException(
+            status_code=HTTPStatus.NOT_FOUND, detail=USER_NOT_FOUND
+        )
+
+
 async def check_admin_user(telegram_id: str, session: AsyncSession) -> None:
     await check_user_exists(telegram_id, session)
     await check_user_is_admin_or_superuser(telegram_id, session)

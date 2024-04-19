@@ -317,7 +317,7 @@ async def main():
     )
     webhook_requests_handler.register(app, path=WEBHOOK_PATH)
     setup_application(app, dp, bot=bot)
-    await web.run_app(app, host=WEB_SERVER_HOST, port=WEB_SERVER_PORT)
+    await web._run_app(app, host=WEB_SERVER_HOST, port=WEB_SERVER_PORT)
 
 
 if __name__ == '__main__':

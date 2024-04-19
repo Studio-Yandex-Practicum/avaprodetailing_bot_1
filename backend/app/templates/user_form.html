@@ -17,29 +17,6 @@
         Telegram.WebApp.ready()
         var WebApp = window.Telegram.WebApp
         WebApp.expand()
-        
-            Telegram.WebApp.showScanQrPopup({
-                text: 'with any link'
-            }, function (text) {
-                if ('with any link') {
-                    const lowerText = text.toString().toLowerCase();
-                    if (lowerText.substring(0, 7) === 'http://' ||
-                        lowerText.substring(0, 8) === 'https://'
-                    ) {
-                        setTimeout(function () {
-                            Telegram.WebApp.showAlert(lowerText);
-                        }, 50);
-
-                        return true;
-                    }
-                } else {
-                    WebApp.showAlert(text);
-
-                    return true;
-                }
-            });
-        
-        
         $('#registration_btn').on('click', function (event) {
             event.preventDefault()
             $('.form-errors').html('')
@@ -52,7 +29,33 @@
                     201: function () {
                     WebApp.sendData("Registartion Success")
                     WebApp.close()
-                },
+                    },
+                    422: function(data){
+                        var jsonResponse = JSON.parse(data);
+                        var errors = ''
+                        $.each(jsonResponse['detail'], function(message, value){
+                            var field = value['loc'].toString().split(',')[1]
+                            switch (field) {
+                                case 'phone_number':
+                                    $('.form-errors').append('<p>Обязаетльное поле: Номер телефона</p>')
+                                    break
+                                case 'first_name':
+                                    $('.form-errors').append('<p>Обязаетльное поле: Имя</p>')
+                                    break
+                                case 'second_name':
+                                    $('.form-errors').append('<p>Обязаетльное поле: Отчество</p>')
+                                    break
+                                case 'last_name':
+                                    $('.form-errors').append('<p>Обязаетльное поле: Фамилия</p>')
+                                    break
+                                case 'birth_date':
+                                    $('.form-errors').append('<p>Обязаетльное поле: Дата Рождения</p>')
+                                    break
+                            }
+                        })
+                    }
+
+                    }
                 }
                 // success: function () {
                 //     alert('ssssssss')

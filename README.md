@@ -69,7 +69,7 @@ SHOP_TOKEN=<api_token_yookassa>
 # connection string for sqlite
 SQLITE_DATABASE_URL = sqlite+aiosqlite:///./<name>
 # string for test/prod service mode
-TEST_MODE = True
+TEST_MODE = False
 
 PGADMIN_DEFAULT_EMAIL=admin@example.com
 PGADMIN_DEFAULT_PASSWORD=admin
@@ -80,12 +80,11 @@ POSTGRES_USER=username
 POSTGRES_DB=database
 POSTGRES_HOST=db
 
-SITE_URL=https://ava-detailing.ru:8081
-WEBHOOK_HOST=<webhook_host>
-BASE_WEBHOOK_URL=<base_webhook_url>
+SITE_URL=<имя домена>
+
 WEBHOOK_SECRET=webhook_secret
-WEB_SERVER_PORT=8081
-WEB_SERVER_HOST=https://ava-detailing.ru
+WEB_SERVER_PORT=8080
+WEB_SERVER_HOST=127.0.0.1
 ```
 Скопируйте следующие файлы на ваш сервер в директорию, где будет храниться ваш проект:
 
@@ -131,6 +130,11 @@ qrcode [Документация](https://github.com/lincolnloop/python-qrcode)
 
 Telegram Mini Apps [Документация](https://core.telegram.org/bots/webapps)
 
+Docker [Документация](https://docs.docker.com/)
+
+Alembic [Документация](https://alembic.sqlalchemy.org/en/latest/index.html)
+
+SQLALchemy [Документация](https://www.sqlalchemy.org/)
 
 ## Команда
 1. Балашов Валерий [GitHub](https://github.com/elValeron)

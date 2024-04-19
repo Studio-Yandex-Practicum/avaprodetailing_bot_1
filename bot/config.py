@@ -1,0 +1,3 @@
+
+FONT_STYLE = 'FreeSans'
+LINE_SPACING = 24

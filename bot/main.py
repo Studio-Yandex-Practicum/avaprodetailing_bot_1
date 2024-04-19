@@ -7,7 +7,8 @@ from logging.handlers import RotatingFileHandler
 import aiohttp
 import qrcode.image.svg
 from aiogram import Bot, Dispatcher, F, types
-from aiogram.filters.command import Command
+from aiogram.filters.command import Command, CommandObject
+from aiogram.types import BufferedInputFile
 from dotenv import load_dotenv
 
 from keyboards import (
@@ -21,9 +22,11 @@ from keyboards import (
     user_qr_code_button,
     loyality_points_button,
     loyality_points_history_button,
-    universal_web_app_keyboard_button
+    universal_web_app_keyboard_button,
+    period_report_button
 )
 from messages import WECLOME_NEW_USER
+from pdf import generate_pdf
 
 load_dotenv()
 
@@ -43,8 +46,8 @@ kb = types.ReplyKeyboardMarkup(
     resize_keyboard=True
 )
 # Для тестов
-SITE_URL = 'https://d10e-95-25-72-15.ngrok-free.app'
-SITE_URLs = 'https://d10e-95-25-72-15.ngrok-free.app'
+SITE_URL = 'https://78bf-45-94-119-48.ngrok-free.app'
+SITE_URLs = 'https://78bf-45-94-119-48.ngrok-free.app'
 
 # Для тестов
 
@@ -59,7 +62,6 @@ async def starting(message: types.Message):
             if response.status == HTTPStatus.NOT_FOUND:
                 await message.answer(
                     WECLOME_NEW_USER,
-                    print(await registration_button(SITE_URL, telegram_id)),
                     reply_markup=types.ReplyKeyboardMarkup(
                         keyboard=[
                             [await registration_button(SITE_URLs, telegram_id)]
@@ -100,16 +102,29 @@ async def starting(message: types.Message):
                         reply_markup=types.ReplyKeyboardMarkup(
                             keyboard=[
                                 [
-                                    universal_web_app_keyboard_button(
-                                        'Регистрация ноавого клиента',
-                                        url=''
+                                    await universal_web_app_keyboard_button(
+                                        text='Регистрация нового клиента',
+                                        url=(
+                                            f'{SITE_URL}'
+                                            f'/users/admin/'
+                                            f'{telegram_id}/add_user/'
+                                            )
+                                    ),
+                                    await universal_web_app_keyboard_button(
+                                        text=period_report_button.text,
+                                        url=(
+                                            f'{SITE_URL}'
+                                            f'/users/admin/'
+                                            f'{message.from_user.id}'
+                                            '/period_report/'
+                                        )
                                     )
                                 ]
                             ]
                         )
                     )
             else:
-                logging.ERROR('Problem: server returned %s', response.status)
+                logging.error('Problem: server returned %s', response.status)
                 await message.answer(
                     'У нас проводятся технические работы, попробуйте позже'
                 )
@@ -262,6 +277,42 @@ async def loyality_points(message: types.Message):
 #         async with session.get(f'{SITE_URL}/loyality/user/{message.from_user.id}/history') as response:
 #             data = await response.json()
 #             if len(data) > 0:
+
+
+@dp.message(Command('report_all'))
+async def users_report(message: types.Message):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(
+            f'{SITE_URL}/users/admin/{message.from_user.id}/report_for_all'
+        ) as response:
+            data = await response.json()
+            await bot.send_document(
+                chat_id=message.from_user.id,
+                document=BufferedInputFile(
+                    generate_pdf(data).getvalue(),
+                    filename='report.pdf'
+                )
+            )
+
+
+@dp.message(Command('report_user'))
+async def user_report(
+    message: types.Message,
+    command: CommandObject
+):
+    if command.args is None:
+        await message.answer('Укажите id пользователя')
+    async with aiohttp.ClientSession() as session:
+        async with session.get(
+            f'{SITE_URL}/users/admin/'
+            f'{message.from_user.id}/get_user/{command.args}'
+        ) as response:
+            data = await response.json()
+            await message.answer_document(
+                BufferedInputFile(
+                    generate_pdf(data, single_user=True).getvalue(),
+                    filename='user_report.pdf')
+                )
 
 
 async def main():

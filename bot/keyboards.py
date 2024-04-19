@@ -16,13 +16,14 @@ loyality_points_button = KeyboardButton(text='Накоплено баллов')
 loyality_points_history_button = KeyboardButton(
     text='История по баллам лояльности'
 )
+period_report_button = KeyboardButton(text='Форма отчёта')
 
 
 async def universal_web_app_keyboard_button(
     text: str,
     url: str
 ) -> KeyboardButton:
-    return KeyboardButton(text, url=url)
+    return KeyboardButton(text=text, web_app=WebAppInfo(url=url))
 
 
 async def registration_button(

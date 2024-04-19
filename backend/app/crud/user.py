@@ -68,6 +68,31 @@ class CRUDUser(CRUDBase):
         user.payments.sort(key=lambda x: x.date, reverse=True)
         return user
 
+    async def get_all_users_as_admin(
+        self, session: AsyncSession
+    ):
+        user = (
+            (
+                await session.execute(
+                    select(self.model)
+                    .where(self.model.telegram_id != None)
+                    .options(
+                        selectinload(self.model.loyality),
+                        selectinload(self.model.cars),
+                        selectinload(self.model.payments),
+                        selectinload(self.model.changes),
+                    )
+                )
+            )
+            .scalars()
+            .all()
+        )
+        for i in user:
+            i.loyality_balance = sum(
+                [loyality.amount for loyality in i.loyality]
+            )
+        return user
+
     async def get_user_by_phone_number(
         self, phone_number: str, session: AsyncSession
     ) -> Optional[User]:

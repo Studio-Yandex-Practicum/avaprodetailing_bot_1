@@ -1,6 +1,7 @@
 import asyncio
 import logging
 import os
+from datetime import datetime as dt
 from http import HTTPStatus
 from logging.handlers import RotatingFileHandler
 
@@ -44,6 +45,9 @@ WEB_SERVER_PORT = int(os.getenv('WEB_SERVER_PORT'))
 
 WEBHOOK_PATH = '/webhook'
 WEBHOOK_SECRET = os.getenv('WEBHOOK_SECRET')
+
+DT_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
+FORMAT = '%d.%m.%Y'
 
 
 @router.message(CommandStart())
@@ -213,7 +217,16 @@ async def delete_car(call: types.CallbackQuery, callback_data: Cars):
             )
         ) as response:
             if response.status == HTTPStatus.OK:
-                await call.message.answer('Машина удалена')
+                response = await response.json()
+                await call.message.answer(
+                    'Машина {} {} {} успешно удалена.'.format(
+                        response['brand'],
+                        response['model'],
+                        response['number_plate'],
+                    )
+                )
+            else:
+                await call.message.answer((await response.json())['detail'])
 
 
 @router.message(F.text == user_qr_code_button.text)
@@ -247,6 +260,33 @@ async def loyality_points(message: types.Message):
                 )
             elif response.status == HTTPStatus.NOT_FOUND:
                 await message.answer(data['count'])
+            else:
+                await message.answer('Что-то пошло не так. Попробуйте позже')
+
+
+@router.message(F.text == loyality_points_history_button.text)
+async def loyality_points_history(message: types.Message):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(
+            f'{SITE_URL}/loyality/user/{message.from_user.id}/history'
+        ) as response:
+            data = await response.json()
+            if response.status == HTTPStatus.OK:
+                if not data:
+                    return await message.answer(
+                        'История по баллам лояльности отсутствует.'
+                    )
+                for loyality in data:
+                    date = loyality['date']
+                    exp_date = loyality['exp_date']
+                    await message.answer(
+                        f'{loyality["action"].capitalize()} баллов: '
+                        f'{abs(loyality["amount"])}'
+                        '\nДата начисления: '
+                        f'{dt.strptime(date, DT_FORMAT).strftime(FORMAT)}'
+                        '\nДата сгорания: '
+                        f'{dt.strptime(exp_date, DT_FORMAT).strftime(FORMAT)}'
+                    )
             else:
                 await message.answer('Что-то пошло не так. Попробуйте позже')
 

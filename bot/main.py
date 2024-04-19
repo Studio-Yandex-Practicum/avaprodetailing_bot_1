@@ -10,10 +10,11 @@ from aiohttp import web
 import qrcode.image.svg
 from aiogram import Bot, Dispatcher, F, Router, types
 from aiogram.filters import CommandStart
+from aiogram.filters.command import Command, CommandObject
+from aiogram.types import BufferedInputFile
 from aiogram.types import Message
 from aiogram.webhook.aiohttp_server import (SimpleRequestHandler,
                                             setup_application)
-
 from dotenv import load_dotenv
 
 from keyboards import (
@@ -31,6 +32,8 @@ from keyboards import (
     user_qr_code_button,
 )
 from messages import WELCOME_NEW_USER
+from pdf import generate_pdf
+
 
 load_dotenv()
 
@@ -307,6 +310,42 @@ async def get_user_list(message: types.Message):
                     )
                     for user in await response.json()
                 ]
+
+
+@dp.message(Command('report_all'))
+async def users_report(message: types.Message):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(
+            f'{SITE_URL}/users/admin/{message.from_user.id}/report_for_all'
+        ) as response:
+            data = await response.json()
+            await bot.send_document(
+                chat_id=message.from_user.id,
+                document=BufferedInputFile(
+                    generate_pdf(data).getvalue(),
+                    filename='report.pdf'
+                )
+            )
+
+
+@dp.message(Command('report_user'))
+async def user_report(
+    message: types.Message,
+    command: CommandObject
+):
+    if command.args is None:
+        await message.answer('Укажите id пользователя')
+    async with aiohttp.ClientSession() as session:
+        async with session.get(
+            f'{SITE_URL}/users/admin/'
+            f'{message.from_user.id}/get_user/{command.args}'
+        ) as response:
+            data = await response.json()
+            await message.answer_document(
+                BufferedInputFile(
+                    generate_pdf(data, single_user=True).getvalue(),
+                    filename='user_report.pdf')
+                )
 
 
 async def on_startup(bot: Bot) -> None:

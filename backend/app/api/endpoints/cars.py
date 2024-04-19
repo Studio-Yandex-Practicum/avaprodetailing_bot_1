@@ -126,10 +126,10 @@ async def get_my_cars(
 
 @router.post('/{telegram_id}/add_car', response_model=CarDB)
 async def add_car(
-    car_data: CarCreateUser,
+    #car_data: CarCreateUser,
     telegram_id: str,
     session: AsyncSession = Depends(get_async_session),
-    # form_data: CarCreateUser = Depends(CarCreateUser.as_form),
+    car_data: CarCreateUser = Depends(CarCreateUser.as_form),
 
 ):
     await check_user_exists(telegram_id, session)

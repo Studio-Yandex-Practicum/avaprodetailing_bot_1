@@ -17,7 +17,7 @@
                 <div class="mb-3">
                     <label for="number_plate" class="form-label">Гос. номер</label>
                     <input type="text" name="number_plate" class="form-control" value="{% if form_data %}{{ form_data.number_plate }}{% endif %}" required>
-                    <input type="hidden" name="owner_telegram_id" value="{{request.path_params.telegram_id}}">
+                    <input type="hidden" name="telegram_id" value="{{request.path_params.telegram_id}}">
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <input type="button" id="add_car_button" value="{% if form_data %}Редактировать{% else %}Добавить{% endif %}">

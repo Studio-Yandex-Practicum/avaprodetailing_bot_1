@@ -149,7 +149,7 @@ async def user_update(
 @router.get('/admin/{telegram_id}', response_model=list[UserFromDB])
 async def get_all_users_as_admin(
     telegram_id: str,
-    session: AsyncSession = Depends(get_async_session),
+    session: AsyncSession = Depends(get_async_session)
 ):
     await check_admin_user(telegram_id, session)
     return await user_crud.get_all(session)
@@ -263,3 +263,18 @@ async def search_user(
 ):
     await check_admin_user(telegram_id, session)
     return await user_crud.get_user_by_substring_phone_number(user, session)
+
+
+""" ADMIN REPORT """
+
+
+@router.get(
+        '/admin/{telegram_id}/report_for_all',
+        response_model=list[UserDBAdmin]
+)
+async def create_report_for_all_users(
+    telegram_id: str,
+    session: AsyncSession = Depends(get_async_session)
+):
+    await check_admin_user(telegram_id, session)
+    return await user_crud.get_all_users_as_admin(session)

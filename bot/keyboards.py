@@ -11,7 +11,6 @@ class Cars(CallbackData, prefix='car'):
 
 
 car_list = KeyboardButton(text='Список автомобилей')
-user_list = KeyboardButton(text='Список пользователей')
 user_qr_code_button = KeyboardButton(text='Показать QR-код')
 loyality_points_button = KeyboardButton(text='Накоплено баллов')
 loyality_points_history_button = KeyboardButton(
@@ -39,19 +38,6 @@ async def personal_acount_button(
 ) -> KeyboardButton:
     return KeyboardButton(
         text='Личный кабинет',
-        web_app=WebAppInfo(
-            url=f'{site_url}/users/{telegram_id}/patch/{phone}'
-        ),
-    )
-
-
-#  эту кнопку администратора надо доработать для корректной работы
-# возможно, дописать эндпойнт
-async def edit_user_admin_button(
-    site_url: str, admin_id, telegram_id: str, phone: str
-) -> InlineKeyboardButton:
-    return InlineKeyboardButton(
-        text='Редактировать',
         web_app=WebAppInfo(
             url=f'{site_url}/users/{telegram_id}/patch/{phone}'
         ),

@@ -57,10 +57,10 @@
           Telegram.WebApp.showScanQrPopup({
             text: 'QR Code'
           }, function(text){
-            const tg_id = text.toString().toLowerCase()
+            const phone_number = text.toString().toLowerCase()
             setTimeout(function(){
               $.ajax({
-                url: '/users/admin/{{ request.path_params.telegram_id }}/user_data/' + tg_id,
+                url: '/users/admin/{{ request.path_params.telegram_id }}/user_data/' + phone_number,
                 method: 'get',
                 dataType: 'json',
                 contentType: 'application/json',

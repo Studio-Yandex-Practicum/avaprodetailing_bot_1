@@ -81,5 +81,20 @@ class CRUDUser(CRUDBase):
             .first()
         )
 
+    async def get_user_by_substring_phone_number(
+        self, value: str, session: AsyncSession
+    ):
+        return (
+            (
+                await session.execute(
+                    select(User.phone_number).filter(
+                        User.phone_number.startswith(f'{value}')
+                    )
+                )
+            )
+            .scalars()
+            .all()
+        )
+
 
 user_crud = CRUDUser(User)

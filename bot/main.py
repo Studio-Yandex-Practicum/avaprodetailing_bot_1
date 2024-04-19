@@ -1,19 +1,18 @@
 import asyncio
 import logging
-
 import os
 from http import HTTPStatus
 from logging.handlers import RotatingFileHandler
 
 import aiohttp
-from aiohttp import web
 import qrcode.image.svg
+from aiohttp import web
 from aiogram import Bot, Dispatcher, F, Router, types
-from aiogram.filters import CommandStart
-from aiogram.types import Message
-from aiogram.webhook.aiohttp_server import (SimpleRequestHandler,
-                                            setup_application)
-
+from aiogram.filters.command import CommandStart
+from aiogram.webhook.aiohttp_server import (
+    setup_application,
+    SimpleRequestHandler,
+)
 from dotenv import load_dotenv
 
 from keyboards import (
@@ -22,12 +21,12 @@ from keyboards import (
     create_car_user_button,
     delete_car_user_button,
     edit_car_user_button,
+    get_admin_buttons,
+    get_superuser_buttons,
     personal_acount_button,
     registration_button,
-    user_qr_code_button,
     loyality_points_button,
     loyality_points_history_button,
-    universal_web_app_keyboard_button,
     user_qr_code_button,
 )
 from messages import WELCOME_NEW_USER
@@ -36,20 +35,19 @@ load_dotenv()
 
 bot = Bot(token=os.getenv('BOT_TOKEN'))
 dp = Dispatcher()
+router = Router()
 
 SITE_URL = os.getenv('SITE_URL')
+
 WEB_SERVER_HOST = os.getenv('WEB_SERVER_HOST')
 WEB_SERVER_PORT = int(os.getenv('WEB_SERVER_PORT'))
 
-WEBHOOK_PATH = "/webhook"
+WEBHOOK_PATH = '/webhook'
 WEBHOOK_SECRET = os.getenv('WEBHOOK_SECRET')
 
 
-router = Router()
-
-
 @router.message(CommandStart())
-async def command_start_handler(message: Message) -> None:
+async def command_start_handler(message: types.Message):
     telegram_id = message.from_user.id
     async with aiohttp.ClientSession() as session:
         async with session.get(
@@ -89,41 +87,23 @@ async def command_start_handler(message: Message) -> None:
                         ),
                         resize_keyboard=True,
                     )
-                elif response['is_admin'] and response['is_superuser']:
+                elif response['is_admin'] and not response['is_superuser']:
                     await message.answer(
-                        'Добро пожаловать.',
+                        'Добро пожаловать!',
                         reply_markup=types.ReplyKeyboardMarkup(
-                            keyboard=[
-                                [
-                                    await universal_web_app_keyboard_button(
-                                        'Регистрация нового клиента',
-                                        url=(
-                                            f'{SITE_URL}/users/admin/'
-                                            f'{message.from_user.id}/add_user'
-                                        ),
-                                    ),
-                                    await universal_web_app_keyboard_button(
-                                        'Просмотр/редактирование клиента',
-                                        url=(
-                                            f'{SITE_URL}/users/admin/'
-                                            f'{message.from_user.id}/user_info'
-                                        ),
-                                    ),
-                                ],
-                                [
-                                    await create_payment_button(
-                                        SITE_URL, telegram_id
-                                    ),
-                                    await universal_web_app_keyboard_button(
-                                        text='Начислить/списать баллы',
-                                        url=(
-                                            f'{SITE_URL}/loyality/admin/'
-                                            f'{message.from_user.id}/'
-                                            'loyality_form'
-                                        ),
-                                    ),
-                                ],
-                            ]
+                            keyboard=await get_admin_buttons(
+                                SITE_URL, message.from_user.id
+                            )
+                        ),
+                        resize_keyboard=True,
+                    )
+                elif not response['is_admin'] and response['is_superuser']:
+                    await message.answer(
+                        'Добро пожаловать!',
+                        reply_markup=types.ReplyKeyboardMarkup(
+                            keyboard=await get_superuser_buttons(
+                                SITE_URL, message.from_user.id
+                            )
                         ),
                         resize_keyboard=True,
                     )
@@ -274,44 +254,10 @@ async def loyality_points(message: types.Message):
                 await message.answer('Что-то пошло не так. Попробуйте позже')
 
 
-@router.message(F.text == 'Список пользователей')
-async def get_user_list(message: types.Message):
-    async with aiohttp.ClientSession() as session:
-        async with session.get(
-            f'{SITE_URL}/users/admin/{message.from_user.id}'
-        ) as response:
-            if (
-                response.status == HTTPStatus.OK
-                and len(await response.json()) > 0
-            ):
-                [
-                    await message.answer(
-                        (
-                            f'ФИО: {user["last_name"]} {user["first_name"]} '
-                            f'{user["second_name"]}\n'
-                            f'Дата рождения: {user["birth_date"]}\n'
-                            f'Номер телефона: {user["phone_number"]}'
-                        ),
-                        reply_markup=types.InlineKeyboardMarkup(
-                            inline_keyboard=[
-                                [
-                                    await edit_user_admin_button(
-                                        SITE_URL,
-                                        message.from_user.id,
-                                        user['telegram_id'],
-                                        user['phone_number'],
-                                    )
-                                ]
-                            ]
-                        ),
-                    )
-                    for user in await response.json()
-                ]
-
-
 async def on_startup(bot: Bot) -> None:
-    await bot.set_webhook(f"{SITE_URL}{WEBHOOK_PATH}",
-                          secret_token=WEBHOOK_SECRET)
+    await bot.set_webhook(
+        f'{SITE_URL}{WEBHOOK_PATH}', secret_token=WEBHOOK_SECRET
+    )
 
 
 async def main():

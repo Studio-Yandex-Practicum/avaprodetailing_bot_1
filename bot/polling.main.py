@@ -10,21 +10,18 @@ from aiogram import Bot, Dispatcher, F, types
 from aiogram.filters.command import Command
 from dotenv import load_dotenv
 
-
 from keyboards import (
     Cars,
     car_list,
     create_car_user_button,
-    create_payment_button,
     delete_car_user_button,
     edit_car_user_button,
-    edit_user_admin_button,
+    get_admin_buttons,
+    get_superuser_buttons,
     personal_acount_button,
     registration_button,
     loyality_points_button,
     loyality_points_history_button,
-    universal_web_app_keyboard_button,
-    user_list,
     user_qr_code_button,
 )
 from messages import WELCOME_NEW_USER
@@ -33,17 +30,6 @@ load_dotenv()
 
 bot = Bot(token=os.getenv('BOT_TOKEN'))
 dp = Dispatcher()
-
-test_button = types.KeyboardButton(
-    text='ya.ru', web_app=types.WebAppInfo(url='https://ya.ru')
-)
-test_button_1 = types.KeyboardButton(
-    text='translate',
-    web_app=types.WebAppInfo(url='https://translate.yandex.ru'),
-)
-kb = types.ReplyKeyboardMarkup(
-    keyboard=[[test_button, test_button_1]], resize_keyboard=True
-)
 
 SITE_URL = os.getenv('SITE_URL')
 
@@ -89,31 +75,26 @@ async def starting(message: types.Message):
                         ),
                         resize_keyboard=True,
                     )
-            elif response['is_admin'] and response['is_superuser']:
-                await message.answer(
-                    'Добро пожаловать.',
-                    reply_markup=types.ReplyKeyboardMarkup(
-                        keyboard=[
-                            [
-                                await universal_web_app_keyboard_button(
-                                    'Регистрация нового клиента',
-                                    url=(
-                                        f'{SITE_URL}/users/admin/'
-                                        f'{message.from_user.id}/add_user'
-                                    )
-                                ),
-                                await universal_web_app_keyboard_button(
-                                    'Просмотр/редактирование клиента',
-                                    url=(
-                                        f'{SITE_URL}/users/admin/'
-                                        f'{message.from_user.id}/user_info'
-                                    )
-                                )
-                            ]
-                        ]
-                    ),
-                    resize_keyboard=True,
-                )
+                elif response['is_admin'] and not response['is_superuser']:
+                    await message.answer(
+                        'Добро пожаловать!',
+                        reply_markup=types.ReplyKeyboardMarkup(
+                            keyboard=await get_admin_buttons(
+                                SITE_URL, message.from_user.id
+                            )
+                        ),
+                        resize_keyboard=True,
+                    )
+                elif not response['is_admin'] and response['is_superuser']:
+                    await message.answer(
+                        'Добро пожаловать!',
+                        reply_markup=types.ReplyKeyboardMarkup(
+                            keyboard=await get_superuser_buttons(
+                                SITE_URL, message.from_user.id
+                            )
+                        ),
+                        resize_keyboard=True,
+                    )
             else:
                 logging.error('Problem: server returned %s', response.status)
                 await message.answer(
@@ -228,13 +209,20 @@ async def delete_car(call: types.CallbackQuery, callback_data: Cars):
 
 @dp.message(F.text == user_qr_code_button.text)
 async def user_qr_code(message: types.Message):
-    img = qrcode.make(message.from_user.id)
-    img.save(f'{message.from_user.id}.png')
-    with open(f'{message.from_user.id}.png', 'rb') as file:
-        await message.answer_photo(
-            types.BufferedInputFile(file.read(), filename='qr_code.png')
-        )
-    os.remove(f'{message.from_user.id}.png')
+    async with aiohttp.ClientSession() as session:
+        async with session.get(
+            f'{SITE_URL}/users/check_user/{message.from_user.id}'
+        ) as response:
+            phone_number = (await response.json())['phone_number']
+            img = qrcode.make(phone_number)
+            img.save(f'{phone_number}.png')
+            with open(f'{phone_number}.png', 'rb') as file:
+                await message.answer_photo(
+                    types.BufferedInputFile(
+                        file.read(), filename='qr_code.png'
+                    )
+                )
+            os.remove(f'{phone_number}.png')
 
 
 @dp.message(F.text == loyality_points_button.text)
@@ -252,41 +240,6 @@ async def loyality_points(message: types.Message):
                 await message.answer(data['count'])
             else:
                 await message.answer('Что-то пошло не так. Попробуйте позже')
-
-
-@dp.message(F.text == 'Список пользователей')
-async def get_user_list(message: types.Message):
-    async with aiohttp.ClientSession() as session:
-        async with session.get(
-            f'{SITE_URL}/users/admin/{message.from_user.id}'
-        ) as response:
-            if (
-                response.status == HTTPStatus.OK
-                and len(await response.json()) > 0
-            ):
-                [
-                    await message.answer(
-                        (
-                            f'ФИО: {user["last_name"]} {user["first_name"]} '
-                            f'{user["second_name"]}\n'
-                            f'Дата рождения: {user["birth_date"]}\n'
-                            f'Номер телефона: {user["phone_number"]}'
-                        ),
-                        reply_markup=types.InlineKeyboardMarkup(
-                            inline_keyboard=[
-                                [
-                                    await edit_user_admin_button(
-                                        SITE_URL,
-                                        message.from_user.id,
-                                        user['telegram_id'],
-                                        user['phone_number'],
-                                    )
-                                ]
-                            ]
-                        ),
-                    )
-                    for user in await response.json()
-                ]
 
 
 async def main():

@@ -317,7 +317,7 @@ async def main():
     )
     webhook_requests_handler.register(app, path=WEBHOOK_PATH)
     setup_application(app, dp, bot=bot)
-    await web._run_app(app, host=WEB_SERVER_HOST, port=WEB_SERVER_PORT)
+    await web.run_app(app, host=WEB_SERVER_HOST, port=WEB_SERVER_PORT)
 
 
 if __name__ == '__main__':
@@ -326,7 +326,7 @@ if __name__ == '__main__':
         maxBytes=100000,
         backupCount=10,
         encoding='utf-8',
-        mode='w'
+        mode='w',
     )
     logging.basicConfig(
         handlers=[file_handler],
@@ -334,6 +334,6 @@ if __name__ == '__main__':
         format=(
             '%(asctime)s [%(levelname)s]: '
             '[%(funcName)s:%(lineno)d] - %(message)s'
-        )
+        ),
     )
     asyncio.run(main())

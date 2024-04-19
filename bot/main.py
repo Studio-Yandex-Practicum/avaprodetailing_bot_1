@@ -116,8 +116,6 @@ async def command_start_handler(message: types.Message):
 
 @router.message(F.web_app_data.data)
 async def web_app2(message: types.Message):
-    if message.web_app_data.data == 'Car added':
-        await message.answer('Машина добавлена')
     if message.web_app_data.data == 'Registartion Success':
         async with aiohttp.ClientSession() as session:
             async with session.get(
@@ -151,7 +149,6 @@ async def web_app2(message: types.Message):
                             resize_keyboard=True,
                         )
 
-                    await message.answer(str(response))
                 else:
                     logging.error(
                         'Problem: server returned %s', response.status

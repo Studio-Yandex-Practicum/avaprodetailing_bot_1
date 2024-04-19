@@ -1,4 +1,4 @@
-from aiogram.types import KeyboardButton, WebAppInfo, InlineKeyboardButton
+from aiogram.types import InlineKeyboardButton, KeyboardButton, WebAppInfo
 from aiogram.filters.callback_data import CallbackData
 from dotenv import load_dotenv
 

@@ -53,8 +53,11 @@
                                     break
                             }
                         })
+                    },
+                    400: function(){
+                        var jsonResponse = JSON.parse(data);
+                        alert(jsonResponse['detail'])
                     }
-
                     }
                 }
                 // success: function () {

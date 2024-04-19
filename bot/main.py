@@ -299,7 +299,7 @@ async def get_user_list(message: types.Message):
 
 
 async def on_startup(bot: Bot) -> None:
-    await bot.set_webhook(f"{SITE_URL}:{WEB_SERVER_PORT}{WEBHOOK_PATH}",
+    await bot.set_webhook(f"{SITE_URL}{WEBHOOK_PATH}",
                           secret_token=WEBHOOK_SECRET)
 
 

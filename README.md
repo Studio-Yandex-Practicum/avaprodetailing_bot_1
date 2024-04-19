@@ -43,7 +43,20 @@
 ### Подготовка сервера
 #### Установка Docker
 Ниже рассматривается установка Docker на Ubuntu версии 20.04 и выше.
-
+* Если у вас не установлен **curl**, то выполните следующие команды:
+```
+sudo apt update
+sudo apt install curl
+```
+* Далее выполните последовательно оставшиеся команды:
+```
+curl -fSL https://get.docker.com -o get-docker.sh 
+sudo sh ./get-docker.sh
+sudo apt install docker-compose-plugin 
+sudo systemctl status docker
+```
+После последней команды у вас в терминале должекн быть примерно такой вывод:
+![Docker running](img_md/docker_running.png)
 
 Создайте файл .env в корневой директории проекта, используя файл env.example в качестве шаблона.
 
@@ -74,14 +87,53 @@ WEBHOOK_SECRET=webhook_secret
 WEB_SERVER_PORT=8081
 WEB_SERVER_HOST=https://ava-detailing.ru
 ```
+Скопируйте следующие файлы на ваш сервер в директорию, где будет храниться ваш проект:
+
+* infra/docker-compose.yaml
+* infra/nginx.conf (в директорию nginx)
+* .env
+
+Это можно сделать через Панель управления сервером, если таковая имеется или через терминал командой:
+```
+scp /home/test.txt root@123.123.123.123:/directory
+```
+Файл test.txt будет скопирован на хост 123.123.123.123 в директорию «/directory».
+
+Если у вас ОС Windws, то используйте ПО [Putty](https://www.putty.org/) и команду pscp
+
+### Запуск проекта:
+
+После переноса файлов на сервер проект будет автоматически запущен при отправке (push) изменений в вашем репозитории на GitHub. или вы можете запустить его командой в ssh сессим подключения в терминале в директории проекта:
+```
+sudo docker compose -f docker-compose.yml up -d
+```
+Остановить можно вручную
+```
+sudo docker compose -f docker-compose.yml down
+```
+### Использование PGAdmin
+Для доступа к таблицам бд на 8088 порту через веб-интерфейс можно получить длоступ к веб-интерфейсу для просмотра и редактирования БД. Так же при знании языка SQL можно подготовить запросы для дополнительных отчетов, которые не учтены в проекте.
+доступ по почте и паролю из .env файла
+```
+PGADMIN_DEFAULT_EMAIL=admin@example.com
+PGADMIN_DEFAULT_PASSWORD=admin
+```
+## Документация используемых библиотек
+Aiogram [Документация](https://docs.aiogram.dev/en/latest/)
+
+Fast Api [Документация](https://fastapi.tiangolo.com/)
+
+Pydantic [Документация](https://docs.pydantic.dev/latest/)
+
+Pydantic-settings [Документация](https://pydantic-settings.readthedocs.io/en/latest/)
+
+qrcode [Документация](https://github.com/lincolnloop/python-qrcode)
+
+Telegram Mini Apps [Документация](https://core.telegram.org/bots/webapps)
+
 
 ## Команда
 1. Балашов Валерий [GitHub](https://github.com/elValeron)
 2. Корняков Никита [GitHub](https://github.com/nonamebroski)
 3. Ламберт Елена [GitHub](https://github.com/ElenaL1)
 4. Гугуцидзе Валерий [GitHub](https://github.com/gugutsidze-vv)
-
-
-3. Инструкция по сборке и запуску
-4. 
-5. Ссылки на сторонние фреймворки, библиотеки, иконки и шрифты если использовались.

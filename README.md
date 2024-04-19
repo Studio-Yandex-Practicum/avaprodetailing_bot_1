@@ -136,6 +136,8 @@ Alembic [Документация](https://alembic.sqlalchemy.org/en/latest/inde
 
 SQLALchemy [Документация](https://www.sqlalchemy.org/)
 
+Poetry [Документация](https://python-poetry.org/)
+
 ## Команда
 1. Балашов Валерий [GitHub](https://github.com/elValeron)
 2. Корняков Никита [GitHub](https://github.com/nonamebroski)

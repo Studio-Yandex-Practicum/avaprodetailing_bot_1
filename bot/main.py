@@ -15,7 +15,6 @@ from aiogram.types import BufferedInputFile
 from aiogram.types import Message
 from aiogram.webhook.aiohttp_server import (SimpleRequestHandler,
                                             setup_application)
-
 from dotenv import load_dotenv
 
 from keyboards import (
@@ -31,11 +30,10 @@ from keyboards import (
     loyality_points_history_button,
     universal_web_app_keyboard_button,
     user_qr_code_button,
-    universal_web_app_keyboard_button,
-    period_report_button
 )
 from messages import WELCOME_NEW_USER
 from pdf import generate_pdf
+
 
 load_dotenv()
 
@@ -128,30 +126,11 @@ async def command_start_handler(message: Message) -> None:
                                         ),
                                     ),
                                 ],
-                                    await universal_web_app_keyboard_button(
-                                        text='Регистрация нового клиента',
-                                        url=(
-                                            f'{SITE_URL}'
-                                            f'/users/admin/'
-                                            f'{telegram_id}/add_user/'
-                                            )
-                                    ),
-                                    await universal_web_app_keyboard_button(
-                                        text=period_report_button.text,
-                                        url=(
-                                            f'{SITE_URL}'
-                                            f'/users/admin/'
-                                            f'{message.from_user.id}'
-                                            '/period_report/'
-                                        )
-                                    )
-                                ]
                             ]
                         ),
                         resize_keyboard=True,
                     )
             else:
-                logging.error('Problem: server returned %s', response.status)
                 logging.error('Problem: server returned %s', response.status)
                 await message.answer(
                     'У нас проводятся технические работы, попробуйте позже'
@@ -333,7 +312,6 @@ async def get_user_list(message: types.Message):
                 ]
 
 
-
 @dp.message(Command('report_all'))
 async def users_report(message: types.Message):
     async with aiohttp.ClientSession() as session:
@@ -369,10 +347,10 @@ async def user_report(
                     filename='user_report.pdf')
                 )
 
+
 async def on_startup(bot: Bot) -> None:
     await bot.set_webhook(f"{SITE_URL}{WEBHOOK_PATH}",
                           secret_token=WEBHOOK_SECRET)
-
 
 
 async def main():

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>AVA detealing</title>
+        <script src="https://telegram.org/js/telegram-web-app.js?1"></script>
+        <link href="{{ url_for('static', path='/main.css') }}?1" rel="stylesheet" crossorigin="anonymous">
+        
+        <style>
+          body {
+            background-color: black;
+            color: azure;
+          }
+          .page {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .container {
+            background: #000;
+            width: 30%;
+            color: #fff;
+          }
+        </style>
+    </head>
+    <body class="page">
+      <div class="container"><img src="{{ url_for('static', path='/ava_pro.jpeg') }}?1" crossorigin="anonymous" width="100px"><h1 id="test">Test</h1></div> 
+        
+        <script>
+          window.Telegram.WebApp.ready();
+          window.Telegram.WebApp.expand();
+            // initData is empty object
+          let initData = window.Telegram.WebApp.initData;
+             // initDataUnsafe is empty object,too
+          let initDataUnsafe = window.Telegram.WebApp.initDataUnsafe;
+      </script>
+    </body>
+</html>

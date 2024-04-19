@@ -1,0 +1,65 @@
+
+<input type="text" id="telegram_id" name="telegram_id" hidden value="{{ request.path_params.telegram_id }}">
+<label for="phone_number">Номер телефона</label><br>
+<input type="text" id="phone_number" name="phone_number" {% if user%} value="{{user.phone_number}}" {% endif %}required>
+<label for="first_name">Имя</label><br>
+<input type="text" id="first_name" name="first_name"{% if user%} value='{{ user.first_name }}' {% endif %}>
+<label for="second_name">Отчество</label><br>
+<input type="text" id="second_name" name="second_name"{% if user%} value='{{ user.second_name }}' {% endif %}>
+<label for="last_name">Фамилия</label><br>
+<input type="text" id="last_name" name="last_name"{% if user%} value='{{ user.last_name }}' {% endif %}>
+<label for="birth_date">Дата рождения</label><br>
+<input type="date" id="birth_date" name="birth_date"{% if user%} value='{{ user.birth_date }}' {% endif %}>
+<input type="button" id="registration_btn" {% if user %} value='Редактировать'{% else %}value="Зарегистрироваться" {% endif %}>
+<div class="form-errors"></div>
+<script>
+    $(document).ready(function () {
+        Telegram.WebApp.ready()
+        var WebApp = window.Telegram.WebApp
+        WebApp.expand()
+        $('#registration_btn').on('click', function (event) {
+            event.preventDefault()
+            $('.form-errors').html('')
+            $.ajax({
+                url:'/users/',
+                method: 'post',
+                dataType: 'json',
+                data: $('#registration').serialize(),
+                statusCode:{
+                    201: function () {
+                    WebApp.sendData("Registartion Success")
+                    WebApp.close()
+                    },
+                    422: function(data){
+                        var jsonResponse = JSON.parse(data);
+                        var errors = ''
+                        $.each(jsonResponse['detail'], function(message, value){
+                            var field = value['loc'].toString().split(',')[1]
+                            switch (field) {
+                                case 'phone_number':
+                                    $('.form-errors').append('<p>Обязаетльное поле: Номер телефона</p>')
+                                    break
+                                case 'first_name':
+                                    $('.form-errors').append('<p>Обязаетльное поле: Имя</p>')
+                                    break
+                                case 'second_name':
+                                    $('.form-errors').append('<p>Обязаетльное поле: Отчество</p>')
+                                    break
+                                case 'last_name':
+                                    $('.form-errors').append('<p>Обязаетльное поле: Фамилия</p>')
+                                    break
+                                case 'birth_date':
+                                    $('.form-errors').append('<p>Обязаетльное поле: Дата Рождения</p>')
+                                    break
+                            }
+                        })
+                    },
+                    400: function(){
+                        var jsonResponse = JSON.parse(data);
+                        alert(jsonResponse['detail'])
+                    }
+                }
+        })
+    })
+})
+</script>

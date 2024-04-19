@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}Информация о пользователе{% endblock title %}
+{% block content %}
+<div class="container">
+  <div class="row align-items-center justify-content-center">
+    <div class="col-md-6">
+      <h1 class="text-center">Информация о пользователе</h1>
+      <button type="button" id="search_by_qr">Сканировать QR-code</button>
+      <button type="button" id="serch_by_phone">Искать по номеру телефона</button>
+      <div>
+        <form id="update_user" class="form-control" style="display:none">
+          <label for="phone_number">Номер телефона</label><br>
+          <input type="text" id="phone_number" name="phone_number" {% if user%} value="{{user.phone_number}}" {% endif %}required>
+          <label for="first_name">Имя</label><br>
+          <input type="text" id="first_name" name="first_name"{% if user%} value='{{ user.first_name }}' {% endif %}>
+          <label for="second_name">Отчество</label><br>
+          <input type="text" id="second_name" name="second_name"{% if user%} value='{{ user.second_name }}' {% endif %}>
+          <label for="last_name">Фамилия</label><br>
+          <input type="text" id="last_name" name="last_name"{% if user%} value='{{ user.last_name }}' {% endif %}>
+          <label for="birth_date">Дата рождения</label><br>
+          <input type="date" id="birth_date" name="birth_date"{% if user%} value='{{ user.birth_date }}' {% endif %}>
+          <input type="text" id="telegram_id" name="telegram_id" hidden>
+          <button type="button" id="update">Обновить</button>
+        </form>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function(){
+        Telegram.WebApp.ready()
+        var WebApp = window.Telegram.WebApp
+        WebApp.expand()
+        $('#update').on('click', function(event){
+          event.preventDefault()
+          $.ajax({
+            url: '/users/admin/{{ request.path_params.telegram_id }}/edit_user',
+            method: 'patch',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify({
+              phone_number: $('input[name="phone_number"]').val(),
+              first_name: $('input[name="first_name"]').val(),
+              second_name: $('input[name="second_name"]').val(),
+              last_name: $('input[name="last_name"]').val(),
+              birth_date: $('input[name="birth_date"]').val(),
+              telegram_id: $('input[name="telegram_id"]').val()
+            }),
+            success: function(data){
+              alert('Данные обновлены')
+            },
+            error: function(data){
+              alert(data['detail'])
+            }
+          })
+        })
+        $('#search_by_qr').on('click', function(event){
+          event.preventDefault
+          Telegram.WebApp.showScanQrPopup({
+            text: 'QR Code'
+          }, function(text){
+            const phone_number = text.toString().toLowerCase()
+            setTimeout(function(){
+              $.ajax({
+                url: '/users/admin/{{ request.path_params.telegram_id }}/user_data/' + phone_number,
+                method: 'get',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function(data){
+                  $('#phone_number').val(data["phone_number"])
+                  $('#first_name').val(data["first_name"])
+                  $('#second_name').val(data["second_name"])
+                  $('#last_name').val(data["last_name"])
+                  $('#birth_date').val(data["birth_date"])
+                  $('#telegram_id').val(data["telegram_id"])
+                  $('#update_user').show()
+                },
+                error: function(data){
+                  alert(data['detail'])
+                }
+              })
+            }, 50)
+            return true
+          })
+        })
+      })
+    </script>
+  </div>
+</div>
+{% endblock content %}

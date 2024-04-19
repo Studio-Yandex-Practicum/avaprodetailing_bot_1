@@ -114,10 +114,10 @@ async def command_start_handler(message: types.Message):
                 )
 
 
-@router.message(F.web_app_data.via_bot)
+@router.message(F.web_app_data.data)
 async def web_app2(message: types.Message):
     if message.web_app_data.data == 'Car added':
-        await message.answer('Car added')
+        await message.answer('Машина добавлена')
     if message.web_app_data.data == 'Registartion Success':
         async with aiohttp.ClientSession() as session:
             async with session.get(

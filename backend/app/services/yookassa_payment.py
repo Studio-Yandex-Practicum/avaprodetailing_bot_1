@@ -16,7 +16,7 @@ BOT_URL = os.getenv('BOT_URL')
 CHECKOUT_TIME = 600  # время на оплату, установленное ЮКассой
 
 
-async def create_payment(db_payment, payer_telegram_id) -> tuple[str, str]:
+async def create_payment(db_payment, payer_telegram_id):
     payment = yookassa.Payment.create(
         dict(
             amount=dict(value=db_payment.price, currency='RUB'),
@@ -28,10 +28,14 @@ async def create_payment(db_payment, payer_telegram_id) -> tuple[str, str]:
         ),
         idempotency_key=uuid4().__str__(),
     )
-    return payment.id, payment.confirmation.confirmation_url
+    return (
+        payment.id,
+        payment.confirmation.confirmation_url,
+        payment.amount.value,
+    )
 
 
-async def check_payment(payment_id: str) -> tuple[bool, yookassa.Payment]:
+async def check_payment(payment_id: str):
     start_time = time.time()
     while time.time() - start_time < CHECKOUT_TIME:
         payment = yookassa.Payment.find_one(payment_id)

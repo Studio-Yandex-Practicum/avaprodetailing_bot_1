@@ -57,11 +57,14 @@ class CRUDLoyality(CRUDBase):
         session: AsyncSession,
     ):
         new_object_data = data.dict()
-        new_object = self.model(
-            **new_object_data,
-            exp_date=datetime.now()
-            + timedelta(days=LIFETIME_OF_BONUSES_IN_DAYS)
-        )
+        if data.action == 'начисление':
+            new_object = self.model(
+                **new_object_data,
+                exp_date=datetime.now()
+                + timedelta(days=LIFETIME_OF_BONUSES_IN_DAYS)
+            )
+        elif data.action == 'списание':
+            new_object = self.model(**new_object_data)
         session.add(new_object)
         await session.commit()
         await session.refresh(new_object)

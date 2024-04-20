@@ -22,8 +22,8 @@
                         <label for="loyality_action" class="form-label">Действие</label>
                         <select name="loyality_action" class="form-control" required>
                             <option disabled selected>Выберите действие с бонусами</option>
-                            <option value="начислено">Начислить</option>
-                            <option value="списано">Списать</option>
+                            <option value="начисление">Начисление</option>
+                            <option value="списание">Списание</option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -47,7 +47,7 @@
                     }
                     function updateLoyalityPoints() {
                         var selectedValue = $('select[name="loyality_action"]').val();
-                        if (selectedValue == 'списано') {
+                        if (selectedValue == 'списание') {
                             var maxAmount = parseInt($('#loyality_amount').text());
                             $('input[name="loyality_points"]').attr('max', maxAmount);
                             $('input[name="loyality_points"]').on('input', function() {

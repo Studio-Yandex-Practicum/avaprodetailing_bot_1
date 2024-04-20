@@ -92,3 +92,8 @@ class UserByAdmin(BaseModel):
     second_name: str
     last_name: str
     birth_date: date
+
+
+class UserToAdmin(BaseModel):
+    phone_number: str
+    is_admin: bool

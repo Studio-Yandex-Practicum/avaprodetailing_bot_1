@@ -72,7 +72,7 @@ async def add_payment(
         await user_crud.get_user_by_telegram_id(admin_telegram_id, session)
     ).id
     client = await user_crud.get_user_by_phone_number(
-        payment.payer_id, session
+        str(payment.payer_id), session
     )
     payer_id, payer_telegram_id = client.id, client.telegram_id
     loyality_action = payment.action

@@ -35,7 +35,6 @@
                         WebApp.close()
                     },
                     422: function(data){
-                        console.log(data.responseJSON)
                         var errors = ''
                         $.each(data.responseJSON['detail'], function(message, value){
                             var field = value['loc'].toString().split(',')[1]

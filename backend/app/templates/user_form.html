@@ -25,6 +25,10 @@
                 method: 'post',
                 dataType: 'json',
                 data: $('#registration').serialize(),
+                success: function (data) {
+                    WebApp.sendData("Registartion Success")
+                    WebApp.close()
+                },
                 statusCode:{
                     201: function (data) {
                         alert('ok')

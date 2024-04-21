@@ -112,7 +112,7 @@ async def starting(message: types.Message):
                 )
 
 
-@dp.message(F.web_app_data.via_bot)
+@dp.message(F.web_app_data.data)
 async def web_app2(message: types.Message):
     if message.web_app_data.data == 'Car added':
         await message.answer('Car added')

@@ -26,10 +26,6 @@
                 dataType: 'json',
                 data: $('#registration').serialize(),
                 statusCode: {
-                    200: function (response) {
-                        WebApp.sendData('Registartion Success')
-                        WebApp.close()
-                    },
                     201: function (response) {
                         WebApp.sendData('Registartion Success')
                         WebApp.close()

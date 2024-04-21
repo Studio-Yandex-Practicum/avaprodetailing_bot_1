@@ -151,7 +151,7 @@ async def user_update(
             form_data.phone_number, form_data.telegram_id, session
         )
         check_birth_date_less_current_data(form_data.birth_date)
-        await user_crud.update(user_id, user, form_data, session)
+        await user_crud.update(user.id, user, form_data, session)
     except (HTTPException, ValueError) as error:
         errors.append(str(error))
     if errors:

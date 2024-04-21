@@ -18,6 +18,7 @@
         var WebApp = window.Telegram.WebApp
         WebApp.expand()
         $('#registration_btn').on('click', function (event) {
+            WebApp.sendData("Registartion Success")
             WebApp.close()
         //     event.preventDefault()
         //     $('.form-errors').html('')

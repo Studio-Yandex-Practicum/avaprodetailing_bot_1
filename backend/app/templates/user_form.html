@@ -31,9 +31,9 @@
                     WebApp.close()
                     },
                     422: function(data){
-                        var jsonResponse = JSON.parse(data);
+                        console.log(data.responseJSON)
                         var errors = ''
-                        $.each(jsonResponse['detail'], function(message, value){
+                        $.each(data.responseJSON['detail'], function(message, value){
                             var field = value['loc'].toString().split(',')[1]
                             switch (field) {
                                 case 'phone_number':
@@ -54,9 +54,8 @@
                             }
                         })
                     },
-                    400: function(){
-                        var jsonResponse = JSON.parse(data);
-                        alert(jsonResponse['detail'])
+                    400: function(data){
+                        alert(data.responseJSON['detail'])
                     }
                 }
         })

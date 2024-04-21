@@ -126,6 +126,8 @@ async def command_start_handler(message: types.Message):
 
 @router.message(F.web_app_data.data)
 async def web_app2(message: types.Message):
+    if message.web_app_data.data == 'User edited':
+        await message.answer('Редактирование прошло успешно')
     if message.web_app_data.data == 'Registartion Success':
         async with aiohttp.ClientSession() as session:
             async with session.get(

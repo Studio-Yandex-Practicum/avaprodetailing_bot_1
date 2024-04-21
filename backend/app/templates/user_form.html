@@ -21,11 +21,15 @@
             event.preventDefault()
             $('.form-errors').html('')
             $.ajax({
-                url:'/users/',
-                method: 'post',
+                url:'{% if user %}/users/update/{{ request.path_params.telegram_id }}{% else %}/users/{% endif %}',
+                method: '{% if user %}patch{% else %}post{% endif %}',
                 dataType: 'json',
                 data: $('#registration').serialize(),
                 statusCode: {
+                    200: function (response) {
+                        WebApp.sendData('User edited')
+                        WebApp.close()
+                    },
                     201: function (response) {
                         WebApp.sendData('Registartion Success')
                         WebApp.close()

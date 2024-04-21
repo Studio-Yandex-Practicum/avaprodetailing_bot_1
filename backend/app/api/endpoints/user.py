@@ -132,7 +132,7 @@ async def get_update_form(
     return templates.TemplateResponse('update_user.html', context=context)
 
 
-@router.post('/update/{user_id}')
+@router.patch('/update/{user_id}')
 async def user_update(
     request: Request,
     user_id: str,

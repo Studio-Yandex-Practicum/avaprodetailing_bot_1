@@ -21,7 +21,7 @@ class CRUDUser(CRUDBase):
             if field in update_data:
                 setattr(object, field, update_data[field])
         await user_history_crud.create(
-            user_id, object.id, old_object_data, object.__repr__(), session
+            int(user_id), object.id, old_object_data, object.__repr__(), session
         )
         session.add(object)
         await session.commit()

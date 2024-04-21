@@ -28,6 +28,7 @@ CAR_WITH_NUMBER_EXISTS = 'Автомобиль с таким номером уж
 USER_NOT_FOUND = 'Пользователь не найден.'
 
 NOT_ADMIN_OR_SUPERUSER = 'Действие доступно только администратору.'
+NOT_SUPERUSER = 'Действие доступно только руководителю.'
 FOREIGN_CAR_ERROR = (
     'Вы не можете добавить, изменить или удалить чужой автомобиль.'
 )
@@ -119,6 +120,19 @@ async def check_user_is_admin_or_superuser(
     if not (user.is_superuser or user.is_admin):
         raise HTTPException(
             status_code=HTTPStatus.FORBIDDEN, detail=NOT_ADMIN_OR_SUPERUSER
+        )
+
+
+async def check_user_is_superuser(
+    telegram_id: str, session: AsyncSession
+) -> None:
+    if not (
+        (
+            await user_crud.get_user_by_telegram_id(telegram_id, session)
+        ).is_superuser
+    ):
+        raise HTTPException(
+            status_code=HTTPStatus.FORBIDDEN, detail=NOT_SUPERUSER
         )
 
 

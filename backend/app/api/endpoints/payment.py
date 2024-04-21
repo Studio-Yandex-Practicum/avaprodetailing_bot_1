@@ -78,7 +78,7 @@ async def add_payment(
     loyality_action = payment.action
     loyality_amount = payment.loyality_points
     price = payment.price
-    if loyality_action == 'списано':
+    if loyality_action == 'списание':
         price = price - loyality_amount
         loyality_amount = -(loyality_amount)
     match payment.payment_method:

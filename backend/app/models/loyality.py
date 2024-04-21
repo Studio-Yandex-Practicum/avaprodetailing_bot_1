@@ -9,8 +9,8 @@ from app.core.db import Base
 
 
 class LoyalityAction(str, enum.Enum):
-    charge = 'начислено'
-    write_off = 'списано'
+    charge = 'начисление'
+    write_off = 'списание'
 
 
 class LoyalitySettings(Base):
@@ -44,14 +44,14 @@ class Loyality(Base):
     amount: int = Column(Integer, nullable=False)
     edited: bool = Column(Boolean, nullable=False, default=False)
     date: DateTime = Column(DateTime, nullable=False, default=datetime.now)
-    exp_date: DateTime = Column(DateTime, nullable=False)
+    exp_date: DateTime = Column(DateTime, nullable=True)
     changes = relationship('LoyalityHistory', backref='loyality')
 
     def __repr__(self):
         return (
-            f'{self.action.capitalize()} {abs(self.amount)} баллов.\n'
-            f'Пользователю {self.user_id} {self.action} '
-            f'баллов: {abs(self.amount)}. '
-            f'Дата начисления: {self.date.strftime("%d-%m-%Y")}. '
-            f'Срок действия: {self.exp_date.strftime("%d-%m-%Y")}'
+            f'{type(self).__name__}('
+            f'user_id={self.user_id}, payment_id={self.payment_id}, '
+            f'action={self.action}, amount={self.amount}, '
+            f'edited={self.edited}, date={self.date}, '
+            f'exp_date={self.exp_date})'
         )

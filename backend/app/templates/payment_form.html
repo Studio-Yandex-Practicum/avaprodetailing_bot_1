@@ -33,16 +33,18 @@
                             У пользователя бонусов: <span id="loyality_amount"></span>. Оплатить бонусами можно до 99% от суммы заказа.
                         </div>
                         <div class="mb-3">
-                            <label for="loyality_action" class="form-label">Действие</label>
                             <select name="loyality_action" class="form-control" required>
                                 <option disabled selected>Выберите действие с бонусами</option>
-                                <option value="начислено">Начислить</option>
-                                <option value="списано">Списать</option>
+                                <option value="начисление">Начисление</option>
+                                <option value="списание">Списание</option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="loyality_points" class="form-label">Количество бонусов</label>
                             <input type="number"  min="0" name="loyality_points" max="{{ max_amount }}" class="form-control" required>
+                        </div>
+                        <div class="mb-3" id="total_price_div" style="display: none;">
+                            К оплате: <span id="total_price"></span> RUB
                         </div>
                     </div>
                 </div>
@@ -60,21 +62,33 @@
                             $('#loyality_amount').text(data.count);
                             $('#loyality_form').show();
                             $('#loyality_amount_div').show();
+                            $('#total_price_div').show();
+                            $('#total_price').text($('input[name="price"]').val());
                         });
                     }
                     function updateLoyalityPoints() {
                         var selectedValue = $('select[name="loyality_action"]').val();
                         $.get(`/loyality/admin/{{ admin_telegram_id }}`, function(data) {
                             var paymentAmount = parseInt($('input[name="price"]').val());
-                            if (selectedValue == 'начислено') {
+                            if (selectedValue == 'начисление') {
+                                $('#total_price').text(paymentAmount);
                                 $('input[name="loyality_points"]').val(Math.floor(paymentAmount / parseInt(data.default_value)));
-                            } else if (selectedValue == 'списано') {
+                            } else if (selectedValue == 'списание') {
                                 var maxAmount = Math.floor(Math.min(paymentAmount * 0.99, parseInt($('#loyality_amount').text())));
+                                $('#total_price').text(paymentAmount - maxAmount);
                                 $('input[name="loyality_points"]').attr('max', maxAmount);
                                 $('input[name="loyality_points"]').val(maxAmount);
                                 $('input[name="loyality_points"]').on('input', function() {
-                                    if (parseInt($(this).val()) > maxAmount) {
+                                    var loyalityPoints = parseInt($(this).val());
+                                    if (loyalityPoints >= maxAmount) {
                                         $(this).val(maxAmount);
+                                        $('#total_price').text(paymentAmount - maxAmount)
+                                    } else if (loyalityPoints < maxAmount) {
+                                        $('#total_price').text(paymentAmount - parseInt($(this).val()));
+                                    } else {
+                                        if (isNaN(loyalityPoints)) {
+                                            $('#total_price').text(paymentAmount)
+                                        }
                                     }
                                 });
                             }

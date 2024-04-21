@@ -16,6 +16,7 @@ from app.api.validators import (
     check_telegram_id_dublicate,
     check_user_exists,
     check_user_exists_by_phone_number,
+    check_user_is_superuser,
     check_user_registered,
     valid_phone_number,
     check_mobile_phone_nuber_is_exists,
@@ -24,11 +25,12 @@ from app.core.db import get_async_session
 from app.crud.user import user_crud
 from app.schemas.user import (
     CheckedUser,
+    UserByAdmin,
     UserCreate,
     UserDBAdmin,
     UserFromDB,
+    UserToAdmin,
     UserUpdate,
-    UserByAdmin,
 )
 
 router = APIRouter()
@@ -263,3 +265,37 @@ async def search_user(
 ):
     await check_admin_user(telegram_id, session)
     return await user_crud.get_user_by_substring_phone_number(user, session)
+
+
+@router.get('/superuser/{telegram_id}/hire_admin')
+async def get_hire_admin_form(
+    request: Request,
+    telegram_id: str,
+    session: AsyncSession = Depends(get_async_session),
+):
+    await check_user_exists(telegram_id, session)
+    await check_user_is_superuser(telegram_id, session)
+    context = {'request': request}
+    context['superuser_telegram_id'] = telegram_id
+    return templates.TemplateResponse(
+        'hire_admin_form.html', context, status_code=HTTPStatus.OK
+    )
+
+
+@router.patch(
+    '/superuser/{telegram_id}/hire_admin', response_model=CheckedUser
+)
+async def hire_admin(
+    telegram_id: str,
+    data: UserToAdmin,
+    session: AsyncSession = Depends(get_async_session),
+):
+    await check_user_exists(telegram_id, session)
+    await check_user_is_superuser(telegram_id, session)
+    await check_user_exists_by_phone_number(data.phone_number, session)
+    return await user_crud.update(
+        telegram_id,
+        await user_crud.get_user_by_phone_number(data.phone_number, session),
+        data,
+        session,
+    )

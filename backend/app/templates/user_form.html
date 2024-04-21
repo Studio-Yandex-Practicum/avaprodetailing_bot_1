@@ -25,39 +25,41 @@
                 method: 'post',
                 dataType: 'json',
                 data: $('#registration').serialize(),
-                statusCode:{
-                    201: function () {
-                        alert('ddd')
-                        WebApp.sendData("Registartion Success")
-                        WebApp.close()}
-                        
-                    // },
-                    // 422: function(data){
-                    //     var errors = ''
-                    //     $.each(data.responseJSON['detail'], function(message, value){
-                    //         var field = value['loc'].toString().split(',')[1]
-                    //         switch (field) {
-                    //             case 'phone_number':
-                    //                 $('.form-errors').append('<p>Обязаетльное поле: Номер телефона</p>')
-                    //                 break
-                    //             case 'first_name':
-                    //                 $('.form-errors').append('<p>Обязаетльное поле: Имя</p>')
-                    //                 break
-                    //             case 'second_name':
-                    //                 $('.form-errors').append('<p>Обязаетльное поле: Отчество</p>')
-                    //                 break
-                    //             case 'last_name':
-                    //                 $('.form-errors').append('<p>Обязаетльное поле: Фамилия</p>')
-                    //                 break
-                    //             case 'birth_date':
-                    //                 $('.form-errors').append('<p>Обязаетльное поле: Дата Рождения</p>')
-                    //                 break
-                    //         }
-                    //     })
-                    // },
-                    // 400: function(data){
-                    //     alert(data.responseJSON['detail'])
-                    // }
+                statusCode: {
+                    200: function (response) {
+                        WebApp.sendData('Registartion Success')
+                        WebApp.close()
+                    },
+                    201: function (response) {
+                        WebApp.sendData('Registartion Success')
+                        WebApp.close()
+                    },
+                    422: function(data){
+                        var errors = ''
+                        $.each(data.responseJSON['detail'], function(message, value){
+                            var field = value['loc'].toString().split(',')[1]
+                            switch (field) {
+                                case 'phone_number':
+                                    $('.form-errors').append('<p>Обязаетльное поле: Номер телефона</p>')
+                                    break
+                                case 'first_name':
+                                    $('.form-errors').append('<p>Обязаетльное поле: Имя</p>')
+                                    break
+                                case 'second_name':
+                                    $('.form-errors').append('<p>Обязаетльное поле: Отчество</p>')
+                                    break
+                                case 'last_name':
+                                    $('.form-errors').append('<p>Обязаетльное поле: Фамилия</p>')
+                                    break
+                                case 'birth_date':
+                                    $('.form-errors').append('<p>Обязаетльное поле: Дата Рождения</p>')
+                                    break
+                            }
+                        })
+                    },
+                    400: function(data){
+                        alert(data.responseJSON['detail'])
+                    }
                 }
             })
         })

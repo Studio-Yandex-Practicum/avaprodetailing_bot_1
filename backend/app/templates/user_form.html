@@ -26,9 +26,10 @@
                 dataType: 'json',
                 data: $('#registration').serialize(),
                 statusCode:{
-                    201: function () {
-                    WebApp.sendData("Registartion Success")
-                    WebApp.close()
+                    201: function (data) {
+                        alert('ok')
+                        WebApp.sendData("Registartion Success")
+                        WebApp.close()
                     },
                     422: function(data){
                         console.log(data.responseJSON)
@@ -58,7 +59,7 @@
                         alert(data.responseJSON['detail'])
                     }
                 }
+            })
         })
     })
-})
 </script>

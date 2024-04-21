@@ -23,6 +23,8 @@ from app.api.validators import (
 )
 from app.core.db import get_async_session
 from app.crud.user import user_crud
+from app.crud.loyality import loyality_crud
+from app.schemas.loyality import Loyality
 from app.schemas.user import (
     CheckedUser,
     UserByAdmin,
@@ -32,6 +34,7 @@ from app.schemas.user import (
     UserToAdmin,
     UserUpdate,
 )
+from app.models.loyality import LoyalityAction
 
 router = APIRouter()
 
@@ -77,6 +80,22 @@ async def process_registration(
         )
         check_birth_date_less_current_data(form_data.birth_date)
         await user_crud.create(form_data, session)
+        user_id = (
+            await user_crud.get_user_by_telegram_id(
+                form_data.telegram_id,
+                session
+            )
+        ).id
+        await loyality_crud.create(
+            admin_id=0,
+            user_id=user_id,
+            data=Loyality(
+                action=LoyalityAction.charge,
+                amount=100,
+                user_id=user_id
+            ),
+            session=session
+        )
         status_code = HTTPStatus.CREATED
     except ValueError as error:
         context['errors'].append(str(error))

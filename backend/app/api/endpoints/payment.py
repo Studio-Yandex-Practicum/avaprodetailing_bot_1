@@ -67,7 +67,7 @@ async def add_payment(
     session: AsyncSession = Depends(get_async_session),
 ):
     await check_admin_user(admin_telegram_id, session)
-    await check_user_exists_by_phone_number(payment.payer_id, session)
+    await check_user_exists_by_phone_number(str(payment.payer_id), session)
     admin_id = (
         await user_crud.get_user_by_telegram_id(admin_telegram_id, session)
     ).id

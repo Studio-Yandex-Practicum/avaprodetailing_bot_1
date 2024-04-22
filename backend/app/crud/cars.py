@@ -3,6 +3,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
+from app.crud.user import user_crud
 from app.crud.base import CRUDBase
 from app.crud.history import cars_history_crud
 from app.models import Car
@@ -15,11 +16,17 @@ class CRUDCars(CRUDBase):
     ):
         old_object_data = object.__repr__()
         update_data = new_data.dict(exclude_unset=True)
+        user = await user_crud.get_user_by_telegram_id(user_id, session)
+
         for field in jsonable_encoder(object):
             if field in update_data:
                 setattr(object, field, update_data[field])
         await cars_history_crud.create(
-            user_id, object.id, old_object_data, object.__repr__(), session
+            user.id,
+            object.id,
+            old_object_data,
+            object.__repr__(),
+            session
         )
         session.add(object)
         await session.commit()

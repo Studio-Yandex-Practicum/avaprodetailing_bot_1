@@ -11,6 +11,15 @@ from aiogram import Bot, Dispatcher, F, types
 from aiogram.filters.command import Command
 from dotenv import load_dotenv
 
+from constants import (
+    DT_FORMAT,
+    FORMAT,
+    LOYALITY_CHARGE_MESSAGE,
+    LOYALITY_HISTORY_EMPTY,
+    LOYALITY_WRITE_OFF_MESSAGE,
+    SOMETHING_WENT_WRONG,
+    TOTAL_HISTORY_OBJECTS,
+)
 from keyboards import (
     Cars,
     car_list,
@@ -33,9 +42,6 @@ bot = Bot(token=os.getenv('BOT_TOKEN'))
 dp = Dispatcher()
 
 SITE_URL = os.getenv('SITE_URL')
-
-DT_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
-FORMAT = '%d.%m.%Y'
 
 
 @dp.message(Command('start'))
@@ -106,7 +112,7 @@ async def starting(message: types.Message):
                 )
 
 
-@dp.message(F.web_app_data.via_bot)
+@dp.message(F.web_app_data.data)
 async def web_app2(message: types.Message):
     if message.web_app_data.data == 'Car added':
         await message.answer('Car added')
@@ -264,22 +270,32 @@ async def loyality_points_history(message: types.Message):
             data = await response.json()
             if response.status == HTTPStatus.OK:
                 if not data:
-                    return await message.answer(
-                        'История по баллам лояльности отсутствует.'
-                    )
-                for loyality in data:
-                    date = loyality['date']
-                    exp_date = loyality['exp_date']
-                    await message.answer(
-                        f'{loyality["action"].capitalize()} баллов: '
-                        f'{abs(loyality["amount"])}'
-                        '\nДата начисления: '
-                        f'{dt.strptime(date, DT_FORMAT).strftime(FORMAT)}'
-                        '\nДата сгорания: '
-                        f'{dt.strptime(exp_date, DT_FORMAT).strftime(FORMAT)}'
-                    )
+                    return await message.answer(LOYALITY_HISTORY_EMPTY)
+                data.sort(key=lambda x: x['date'], reverse=True)
+                for loyality in data[:TOTAL_HISTORY_OBJECTS]:
+                    if loyality['action'] == 'списание':
+                        await message.answer(
+                            LOYALITY_WRITE_OFF_MESSAGE.format(
+                                abs(loyality['amount']),
+                                dt.strptime(
+                                    loyality['date'], DT_FORMAT
+                                ).strftime(FORMAT),
+                            )
+                        )
+                    else:
+                        await message.answer(
+                            LOYALITY_CHARGE_MESSAGE.format(
+                                loyality['amount'],
+                                dt.strptime(
+                                    loyality['date'], DT_FORMAT
+                                ).strftime(FORMAT),
+                                dt.strptime(
+                                    loyality['exp_date'], DT_FORMAT
+                                ).strftime(FORMAT),
+                            )
+                        )
             else:
-                await message.answer('Что-то пошло не так. Попробуйте позже')
+                await message.answer(SOMETHING_WENT_WRONG)
 
 
 async def main():

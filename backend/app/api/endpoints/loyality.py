@@ -105,7 +105,7 @@ async def add_loyality(
     user_telegram_id = user.telegram_id
     await check_user_exists(user_telegram_id, session)
     await check_loyality_balance(data, user_telegram_id, session)
-    if data.action == 'списано':
+    if data.action == 'списание':
         data.amount = -(data.amount)
     background_tasks.add_task(
         loyality_background_tasks,

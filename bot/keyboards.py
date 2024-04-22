@@ -80,9 +80,44 @@ async def create_payment_button(
         text='Создать платеж',
         web_app=WebAppInfo(
             url=(
-                f'{site_url}/payments/admin/{admin_telegram_id}'
-                '/create_payment'
+                f'{site_url}/payments/admin/{admin_telegram_id}/create_payment'
             )
+        ),
+    )
+
+
+async def create_new_user_button(site_url: str, telegram_id: str):
+    return KeyboardButton(
+        text='Регистрация нового пользователя',
+        web_app=WebAppInfo(
+            url=(f'{site_url}/users/admin/{telegram_id}/add_user')
+        ),
+    )
+
+
+async def edit_user_as_admin_button(site_url: str, telegram_id: str):
+    return KeyboardButton(
+        text='Просмотр/редактирование профиля клиента',
+        web_app=WebAppInfo(
+            url=(f'{site_url}/users/admin/{telegram_id}/user_info')
+        ),
+    )
+
+
+async def loyalty_action_admin_button(site_url: str, telegram_id: str):
+    return KeyboardButton(
+        text='Начислить/списать бонусы',
+        web_app=WebAppInfo(
+            url=(f'{site_url}/loyality/admin/{telegram_id}/loyality_form')
+        ),
+    )
+
+
+async def hire_fire_admin_button(site_url: str, telegram_id: str):
+    return KeyboardButton(
+        text='Назначить администратора',
+        web_app=WebAppInfo(
+            url=(f'{site_url}/users/superuser/{telegram_id}/hire_admin')
         ),
     )
 
@@ -90,25 +125,12 @@ async def create_payment_button(
 async def get_admin_buttons(site_url: str, telegram_id: str):
     return [
         [
-            await universal_web_app_keyboard_button(
-                text='Регистрация нового клиента',
-                url=(f'{site_url}/users/admin/' f'{telegram_id}/add_user'),
-            ),
-            await universal_web_app_keyboard_button(
-                text='Просмотр/редактирование аккаунта клиента',
-                url=(f'{site_url}/users/admin/' f'{telegram_id}/user_info'),
-            ),
+            await create_new_user_button(site_url, telegram_id),
+            await edit_user_as_admin_button(site_url, telegram_id),
         ],
         [
             await create_payment_button(site_url, telegram_id),
-            await universal_web_app_keyboard_button(
-                text='Начислить/списать баллы',
-                url=(
-                    f'{site_url}/loyality/admin/'
-                    f'{telegram_id}/'
-                    'loyality_form'
-                ),
-            ),
+            await loyalty_action_admin_button(site_url, telegram_id),
         ],
     ]
 
@@ -116,13 +138,14 @@ async def get_admin_buttons(site_url: str, telegram_id: str):
 async def get_superuser_buttons(site_url: str, telegram_id: str):
     return [
         [
-            await universal_web_app_keyboard_button(
-                'Регистрация нового пользователя',
-                url=(f'{site_url}/users/admin/' f'{telegram_id}/add_user'),
-            ),
-            await universal_web_app_keyboard_button(
-                'Просмотр/редактирование аккаунта пользователя',
-                url=(f'{site_url}/users/admin/' f'{telegram_id}/user_info'),
-            ),
+            await create_new_user_button(site_url, telegram_id),
+            await edit_user_as_admin_button(site_url, telegram_id),
+        ],
+        [
+            await hire_fire_admin_button(site_url, telegram_id),
+        ],
+        [
+            await create_payment_button(site_url, telegram_id),
+            await loyalty_action_admin_button(site_url, telegram_id),
         ],
     ]

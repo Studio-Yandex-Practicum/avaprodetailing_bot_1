@@ -24,9 +24,9 @@ load_dotenv()
 bot = Bot(token=os.getenv('BOT_TOKEN'))
 
 PAYMENT_WAS_CREATED = (
-    'По Вашему заказу сформирован платежный документ № {}.\n'
-    'Для оплаты перейдите по <a href="{}">ссылке</a> '
-    'или нажмите на кнопку:'
+    'По Вашему заказу сформирован платежный документ № {}'
+    'на сумму <b>{} RUB</b>.\nДля оплаты перейдите по '
+    '<a href="{}">ссылке</a> или нажмите на кнопку:'
 )
 PAYMENT_TIME_EXPIRED = (
     'Платеж № {} не был выполнен. Истекло время ожидания оплаты.'
@@ -37,7 +37,7 @@ ONLINE_PAYMENT_ADMIN_CONFIRMATION = (
     '\nКлиенту {} баллов: {}.'
 )
 ONLINE_PAYMENT_CLIENT_CONFIRMATION = (
-    'Оплата по счету № {} на сумму {} {} прошла успешно.\n{} баллов: {}.'
+    'Оплата на сумму {} {} прошла успешно.\n{} баллов: {}.'
     '\nБлагодарим Вас за визит!'
 )
 
@@ -53,6 +53,8 @@ LOYALITY_ACTION_ADMIN_CONFIRMATION = (
     'Клиенту с номером телефона {} {} баллов: {}.'
 )
 LOYALITY_ACTION_CLIENT_CONFIRMATION = 'Вам {} баллов: {}.'
+
+LOYALTY_ACTIONS = {'начисление': 'начислено', 'списание': 'списано'}
 
 
 async def update_payment(
@@ -80,8 +82,8 @@ async def payment_background_tasks(
     loyality_amount,
     session,
 ):
-    yookassa_payment_id, yookassa_payment_url = await create_payment(
-        payment, payer_telegram_id
+    yookassa_payment_id, yookassa_payment_url, yookassa_payment_amount = (
+        await create_payment(payment, payer_telegram_id)
     )
     await update_payment(
         PaymentUpdateGeneratedPaymentId(
@@ -96,6 +98,7 @@ async def payment_background_tasks(
         payment.id,
         yookassa_payment_id,
         yookassa_payment_url,
+        yookassa_payment_amount,
         admin_id,
         payer_id,
         loyality_action,
@@ -110,6 +113,7 @@ async def send_payment_message(
     db_payment_id,
     yookassa_payment_id,
     yookassa_payment_url,
+    yookassa_payment_amount,
     admin_id,
     payer_id,
     loyality_action,
@@ -119,7 +123,7 @@ async def send_payment_message(
     await bot.send_message(
         payer_telegram_id,
         text=PAYMENT_WAS_CREATED.format(
-            yookassa_payment_id, yookassa_payment_url
+            yookassa_payment_id, yookassa_payment_amount, yookassa_payment_url
         ),
         parse_mode='HTML',
         reply_markup=types.InlineKeyboardMarkup(
@@ -176,17 +180,16 @@ async def send_successful_online_payment_message(
             payment.id,
             payment.amount.value,
             payment.amount.currency,
-            loyality_action,
+            LOYALTY_ACTIONS[loyality_action],
             abs(loyality_amount),
         ),
     )
     await bot.send_message(
         payer_telegram_id,
         text=ONLINE_PAYMENT_CLIENT_CONFIRMATION.format(
-            payment.id,
             payment.amount.value,
             payment.amount.currency,
-            loyality_action.capitalize(),
+            LOYALTY_ACTIONS[loyality_action].capitalize(),
             abs(loyality_amount),
         ),
     )
@@ -203,7 +206,7 @@ async def send_successful_cash_payment_message(
         admin_telegram_id,
         text=CASH_PAYMENT_ADMIN_CONFIRMATION.format(
             price,
-            loyality_action,
+            LOYALTY_ACTIONS[loyality_action],
             abs(loyality_amount),
         ),
     )
@@ -211,7 +214,7 @@ async def send_successful_cash_payment_message(
         payer_telegram_id,
         text=CASH_PAYMENT_CLIENT_CONFIRMATION.format(
             price,
-            loyality_action.capitalize(),
+            LOYALTY_ACTIONS[loyality_action].capitalize(),
             abs(loyality_amount),
         ),
     )
@@ -231,14 +234,14 @@ async def send_successful_loyality_action(
         admin_telegram_id,
         text=LOYALITY_ACTION_ADMIN_CONFIRMATION.format(
             phone_number,
-            action,
+            LOYALTY_ACTIONS[action],
             abs(amount),
         ),
     )
     await bot.send_message(
         user_telegram_id,
         text=LOYALITY_ACTION_CLIENT_CONFIRMATION.format(
-            action,
+            LOYALTY_ACTIONS[action],
             abs(amount),
         ),
     )

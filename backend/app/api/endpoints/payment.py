@@ -67,18 +67,18 @@ async def add_payment(
     session: AsyncSession = Depends(get_async_session),
 ):
     await check_admin_user(admin_telegram_id, session)
-    await check_user_exists_by_phone_number(payment.payer_id, session)
+    await check_user_exists_by_phone_number(str(payment.payer_id), session)
     admin_id = (
         await user_crud.get_user_by_telegram_id(admin_telegram_id, session)
     ).id
     client = await user_crud.get_user_by_phone_number(
-        payment.payer_id, session
+        str(payment.payer_id), session
     )
     payer_id, payer_telegram_id = client.id, client.telegram_id
     loyality_action = payment.action
     loyality_amount = payment.loyality_points
     price = payment.price
-    if loyality_action == 'списано':
+    if loyality_action == 'списание':
         price = price - loyality_amount
         loyality_amount = -(loyality_amount)
     match payment.payment_method:

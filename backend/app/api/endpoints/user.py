@@ -16,20 +16,25 @@ from app.api.validators import (
     check_telegram_id_dublicate,
     check_user_exists,
     check_user_exists_by_phone_number,
+    check_user_is_superuser,
     check_user_registered,
     valid_phone_number,
     check_mobile_phone_nuber_is_exists,
 )
 from app.core.db import get_async_session
 from app.crud.user import user_crud
+from app.crud.loyality import loyality_crud
+from app.schemas.loyality import Loyality
 from app.schemas.user import (
     CheckedUser,
+    UserByAdmin,
     UserCreate,
     UserDBAdmin,
     UserFromDB,
+    UserToAdmin,
     UserUpdate,
-    UserByAdmin,
 )
+from app.models.loyality import LoyalityAction
 
 router = APIRouter()
 
@@ -75,6 +80,22 @@ async def process_registration(
         )
         check_birth_date_less_current_data(form_data.birth_date)
         await user_crud.create(form_data, session)
+        user_id = (
+            await user_crud.get_user_by_telegram_id(
+                form_data.telegram_id,
+                session
+            )
+        ).id
+        await loyality_crud.create(
+            admin_id=0,
+            user_id=user_id,
+            data=Loyality(
+                action=LoyalityAction.charge,
+                amount=100,
+                user_id=user_id
+            ),
+            session=session
+        )
         status_code = HTTPStatus.CREATED
     except ValueError as error:
         context['errors'].append(str(error))
@@ -111,7 +132,7 @@ async def get_update_form(
     return templates.TemplateResponse('update_user.html', context=context)
 
 
-@router.post('/update/{user_id}')
+@router.patch('/update/{user_id}')
 async def user_update(
     request: Request,
     user_id: str,
@@ -130,7 +151,7 @@ async def user_update(
             form_data.phone_number, form_data.telegram_id, session
         )
         check_birth_date_less_current_data(form_data.birth_date)
-        await user_crud.update(user_id, user, form_data, session)
+        await user_crud.update(user.id, user, form_data, session)
     except (HTTPException, ValueError) as error:
         errors.append(str(error))
     if errors:
@@ -263,3 +284,37 @@ async def search_user(
 ):
     await check_admin_user(telegram_id, session)
     return await user_crud.get_user_by_substring_phone_number(user, session)
+
+
+@router.get('/superuser/{telegram_id}/hire_admin')
+async def get_hire_admin_form(
+    request: Request,
+    telegram_id: str,
+    session: AsyncSession = Depends(get_async_session),
+):
+    await check_user_exists(telegram_id, session)
+    await check_user_is_superuser(telegram_id, session)
+    context = {'request': request}
+    context['superuser_telegram_id'] = telegram_id
+    return templates.TemplateResponse(
+        'hire_admin_form.html', context, status_code=HTTPStatus.OK
+    )
+
+
+@router.patch(
+    '/superuser/{telegram_id}/hire_admin', response_model=CheckedUser
+)
+async def hire_admin(
+    telegram_id: str,
+    data: UserToAdmin,
+    session: AsyncSession = Depends(get_async_session),
+):
+    await check_user_exists(telegram_id, session)
+    await check_user_is_superuser(telegram_id, session)
+    await check_user_exists_by_phone_number(data.phone_number, session)
+    return await user_crud.update(
+        telegram_id,
+        await user_crud.get_user_by_phone_number(data.phone_number, session),
+        data,
+        session,
+    )

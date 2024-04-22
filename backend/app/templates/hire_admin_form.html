@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %}Назначить администратора AVAPRODETAILING{% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="row align-items-center justify-content-center">
+        <div class="col-md-6">
+            <h1 class="text-center">Назначить администратора AVAPRODETAILING</h1>
+            <form id="loyality_form" class="form-control">
+                <div class="mb-3">
+                    <label for="phone_number" class="form-label">Номер телефона пользователя</label>
+                    <input type="text" name="phone_number" class="form-control" list="user_list" required>
+                    <datalist id="user_list"></datalist>
+                    <button type="button" id="scan_qr_button" style="background-color: transparent; border: none; margin-top: 10px;">
+                        <img src="/static/img/scanner.png" width="40" height="40" style="filter: invert(100%);">
+                        <span style="margin-left: 5px; color: white;">Сканировать карту</span>
+                    </button>
+                </div>
+                    <div class="mb-3">
+                        <select name="is_admin" class="form-control" required>
+                            <option disabled selected>Выберите действие</option>
+                            <option value="True">Назначить администратором</option>
+                            <option value="False">Снять с должности администратора</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <input type="hidden" name="superuser_id" value="{{ superuser_telegram_id }}">
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <input type="button" id="add_loyality_button" value="Подтвердить">
+                </div>
+            </form>
+            <script>
+                $(document).ready(function() {
+                    $('input[name="phone_number"]').on('input', function() {
+                        var substring = $(this).val();
+                        $.get(`/users/admin/{{ superuser_telegram_id }}/search_user?user=${substring}`, function(data) {
+                            $('#user_list').empty();
+                            data.forEach(function(user) {
+                                $('#user_list').append(`<option value="${user}">${user}</option>`);
+                            });
+                        });
+                    });
+                    $('#scan_qr_button').on('click', function(){
+                        Telegram.WebApp.showScanQrPopup({
+                            text: 'with any link'
+                        }, function (text) {
+                            $('input[name="phone_number"]').val(text);
+                            return true;
+                        });
+                    });
+                });
+            </script>
+            <script>
+                $(document).ready(function(){
+                    Telegram.WebApp.ready()
+                    var WebApp = window.Telegram.WebApp
+                    WebApp.expand()
+                    $('#add_loyality_button').on('click', function(event){
+                        event.preventDefault()
+                        $.ajax({
+                            url: '/users/superuser/{{ superuser_telegram_id }}/hire_admin',
+                            method: 'patch',
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            data: JSON.stringify(
+                                {
+                                    phone_number: $('input[name="phone_number"]').val(),
+                                    is_admin: $('select[name="is_admin"]').val(),
+                                }
+                            ),
+                            statusCode: {
+                                200: function () {
+                                    WebApp.close();
+                                }
+                            }
+                        })
+                    })
+                })
+            </script>
+        </div>
+    </div>
+</div>
+{% endblock content %}

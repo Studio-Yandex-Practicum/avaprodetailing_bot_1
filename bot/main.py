@@ -16,6 +16,15 @@ from aiogram.webhook.aiohttp_server import (
 )
 from dotenv import load_dotenv
 
+from constants import (
+    DT_FORMAT,
+    FORMAT,
+    LOYALITY_CHARGE_MESSAGE,
+    LOYALITY_HISTORY_EMPTY,
+    LOYALITY_WRITE_OFF_MESSAGE,
+    SOMETHING_WENT_WRONG,
+    TOTAL_HISTORY_OBJECTS,
+)
 from keyboards import (
     Cars,
     car_list,
@@ -45,9 +54,6 @@ WEB_SERVER_PORT = int(os.getenv('WEB_SERVER_PORT'))
 
 WEBHOOK_PATH = '/webhook'
 WEBHOOK_SECRET = os.getenv('WEBHOOK_SECRET')
-
-DT_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
-FORMAT = '%d.%m.%Y'
 
 
 @router.message(CommandStart())
@@ -120,6 +126,8 @@ async def command_start_handler(message: types.Message):
 
 @router.message(F.web_app_data.data)
 async def web_app2(message: types.Message):
+    if message.web_app_data.data == 'User edited':
+        await message.answer('Редактирование прошло успешно')
     if message.web_app_data.data == 'Registartion Success':
         async with aiohttp.ClientSession() as session:
             async with session.get(
@@ -261,7 +269,7 @@ async def loyality_points(message: types.Message):
             elif response.status == HTTPStatus.NOT_FOUND:
                 await message.answer(data['count'])
             else:
-                await message.answer('Что-то пошло не так. Попробуйте позже')
+                await message.answer(SOMETHING_WENT_WRONG)
 
 
 @router.message(F.text == loyality_points_history_button.text)
@@ -273,22 +281,32 @@ async def loyality_points_history(message: types.Message):
             data = await response.json()
             if response.status == HTTPStatus.OK:
                 if not data:
-                    return await message.answer(
-                        'История по баллам лояльности отсутствует.'
-                    )
-                for loyality in data:
-                    date = loyality['date']
-                    exp_date = loyality['exp_date']
-                    await message.answer(
-                        f'{loyality["action"].capitalize()} баллов: '
-                        f'{abs(loyality["amount"])}'
-                        '\nДата начисления: '
-                        f'{dt.strptime(date, DT_FORMAT).strftime(FORMAT)}'
-                        '\nДата сгорания: '
-                        f'{dt.strptime(exp_date, DT_FORMAT).strftime(FORMAT)}'
-                    )
+                    return await message.answer(LOYALITY_HISTORY_EMPTY)
+                data.sort(key=lambda x: x['date'], reverse=True)
+                for loyality in data[:TOTAL_HISTORY_OBJECTS]:
+                    if loyality['action'] == 'списание':
+                        await message.answer(
+                            LOYALITY_WRITE_OFF_MESSAGE.format(
+                                abs(loyality['amount']),
+                                dt.strptime(
+                                    loyality['date'], DT_FORMAT
+                                ).strftime(FORMAT),
+                            )
+                        )
+                    else:
+                        await message.answer(
+                            LOYALITY_CHARGE_MESSAGE.format(
+                                loyality['amount'],
+                                dt.strptime(
+                                    loyality['date'], DT_FORMAT
+                                ).strftime(FORMAT),
+                                dt.strptime(
+                                    loyality['exp_date'], DT_FORMAT
+                                ).strftime(FORMAT),
+                            )
+                        )
             else:
-                await message.answer('Что-то пошло не так. Попробуйте позже')
+                await message.answer(SOMETHING_WENT_WRONG)
 
 
 async def on_startup(bot: Bot) -> None:
